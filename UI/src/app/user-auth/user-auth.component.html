@@ -1,0 +1,54 @@
+<body>
+  <div></div>
+  <div class="login-page text-center">
+    <div class="box">
+      <input type="checkbox" id="toggle" class="box__toggle" hidden />
+      <div class="box__image">
+        <img src="../../assets/images/final-finance.png" class="" />
+      </div>
+      <form class="form form--register" action=""></form>
+      <form class="form form--login" [formGroup]="authForm" (ngSubmit)="onSubmit()">
+        <h3 class="form__title">Change your password</h3>
+
+        <div class="form__helper">
+          <label class="" for="NewPassword">New password (6 characters minimum)</label>
+          <input type="password" name="user" id="user" placeholder="User" formControlName="password"
+            class="form__input form-control" [ngClass]="{ 'is-invalid': submitted && f.password.errors }" />
+          <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
+            <div *ngIf="f.password.errors.required">Password is required</div>
+            <div *ngIf="f.password.errors.minlength">
+              Password must be at least 6 characters
+            </div>
+          </div>
+        </div>
+        <div class="form__helper">
+          <label class="" for="confirmPassword">Confirm new password</label>
+          <input type="password" name="user" id="user" placeholder="User" formControlName="passwordConfirmation"
+            class="form__input form-control" [ngClass]="{
+                'is-invalid': submitted && f.passwordConfirmation.errors
+              }" />
+          <div *ngIf="submitted && f.passwordConfirmation.errors" class="invalid-feedback">
+            <div *ngIf="f.passwordConfirmation.errors.required">
+              Password confirmation is required
+            </div>
+          </div>
+          <div [ngClass]="{
+                'is-invalid': authForm.errors?.mismatch
+              }">
+            <div *ngIf="authForm.errors?.mismatch" class="alert-danger">
+              Passwords do not match
+            </div>
+          </div>
+        </div>
+        <div class="actions">
+          <button type="submit" class="button button3">Change my password</button>
+        </div>
+        <p class="form__text">
+          Have an account?
+          <label for="toggle" class="form__link"><a [routerLink]="['/']">Log in</a></label>
+        </p>
+        <div class="hidden" id="notice-container"></div>
+      </form>
+    </div>
+  </div>
+</body>

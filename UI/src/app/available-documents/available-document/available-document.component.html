@@ -1,0 +1,46 @@
+<div class="WhiteBg ptb_40 plr_16 mb_24">
+  <h3 class="dash_heading mb_24">Application</h3>
+
+  <div class="row">
+    <div class="col-lg-6 col-md-12 mob_space_mb_24 mb_24" *ngFor="let document of data">
+      <div class="documents_application">
+        <ul class="rightTab_bar">
+          <li>
+            <a (click)="editDocument(document.id)">Edit <img src="../../../assets/images/edit_tab.svg" /></a>
+          </li>
+          <li (click)="downloadFile(document.Document_Link,document.id)">
+            <a class="download_bg"><img src="../../../assets/images/application_download.svg" /></a>
+          </li>
+        </ul>
+        <div class="media" data-toggle="modal" [attr.data-target]="'#document-preview-' + document.id">
+          <img [src]="document.thumbnail" />
+          <div class="media-body">
+            <h5 class="mt-0">{{ document.title }}</h5>
+            <p>-{{ document.description }}</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Modal -->
+      <div class="pdf_popup">
+        <div class="modal fade" [id]="'document-preview-' + document.id" tabindex="-1" role="dialog"
+          aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+              <div class="modal-body">
+                <div class="watermarked">
+                  <iframe [src]="document.documentUrl" width="100%" height="650px">
+                  </iframe>
+                </div>
+                <p class="centered">Finance Agent</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<confirm-payment [message]='"You will be charged " + gettingPrice + "$. Are you sure you want to continue?"'
+  [onConfirm]="onYes"></confirm-payment>
+<card-modal [onSubmit]="onSubmit"></card-modal>

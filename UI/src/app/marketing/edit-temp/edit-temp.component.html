@@ -1,0 +1,57 @@
+
+<ul class="wvu-breadcrumbs mb_16">
+    <li><a href="#">Email Templates</a></li>
+    <li><a href="#" class="current">Edit Email Templates</a></li>
+  </ul>
+  
+  <h1 class="heading_one mb_51">Email Templates</h1>
+
+  <a class="back_to_page mb_48"  (click)="back()"
+    ><img src="../../assets/images/back_page.svg" /><span
+      >Back to overview</span
+    ></a
+  >
+    <form [formGroup]="AddDocuments" (ngSubmit)="onSubmit()" novalidate>
+  <div class="WhiteBg plr_48 ptb_40">
+<div class="form-group">
+    <div class="row align_item_Center">
+        <div class="col-md-2">
+              <p class="sub_paragraph_text">Title</p>
+        </div>
+        <div class="col-md-10">
+            <input
+            type="text"
+            class="form-control"
+            formControlName="title"
+            placeholder="Title"
+          />
+  
+        </div>
+      </div>
+</div>
+          <div class="form-group">
+               <p class="sub_paragraph_text pb_16">Description</p>
+            <textarea
+              type="text-area"
+              class="textarea"
+              formControlName="description"
+              id="description"
+              placeholder="Description"
+            ></textarea>
+          </div>
+       
+ <p class="sub_paragraph_text pb_16">PDF Document</p>
+    <div class="document_dragdrop mb_40">
+      <img class="pb_16" src="../.././assets/images/add_documents.svg" />
+      <input type="file" name="add_documents" id="add_documents" name="add_documents" hidden
+        formControlName="OfficeLogo" accept="application/pdf" (change)="onFileChanged($event)"  />
+      <label for="add_documents">Click or Drag a Banner Image, or Browes</label>
+      <h6 class="Filename">{{pdfName}}</h6>
+    </div>
+      <button class="btn main_btn width_411" type="submit">SUBMIT</button>
+
+  </div>
+
+ 
+</form>
+

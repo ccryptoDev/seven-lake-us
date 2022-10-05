@@ -1,0 +1,47 @@
+<ng-template #pageForm>
+	<form [formGroup]="form" class="mat-dialog-title border-top dialog-container">
+		<div class="displayFlex align_item_Center jcsb plr_16_ptb_24 ">
+			<div>
+				<h3 *ngIf="!page" class="dash_heading">Add Landing Page</h3>
+				<h3 *ngIf="page" class="dash_heading">Edit Landing Page</h3>
+			</div>
+		</div>
+		<hr class="horizontal_border">
+		<div class="addLandingPageDetails">
+			<div class="form-group">
+				<input formControlName="name" placeholder="Name" type="text" class="form-control" />
+			</div>
+			<div class="form-group">
+				<input formControlName="usedBy" placeholder="Used By" type="text" class="form-control" />
+			</div>
+			<div class="form-group file-input">
+				<div class="label_title">
+					<p>Thumbnail:</p>
+				</div>
+				<input type="file" accept="image/png, image/jpeg" class="form-control" placeholder="Thumbnail"
+					(change)="onFileChanged($event)">
+			</div>
+			<div class="form-group file-input">
+				<div class="label_title">
+					<p>Preview (leave empty to show thumbnail by default):</p>
+				</div>
+				<input type="file" accept="image/gif" class="form-control" placeholder="Preview"
+					(change)="onPreviewChanged($event)">
+			</div>
+			<div class="form-group">
+				<select formControlName="status" class="form-control landingInput">
+					<option value="">Select Status</option>
+					<option value="Active">Active</option>
+					<option value="InActive">In Active</option>
+				</select>
+			</div>
+			<div class="checkbox_Tick">
+				<input formControlName="random" id="isRandom" type="checkbox">
+				<label for="isRandom">Use in random</label>
+			</div>
+			<div class="textAlignCenter mt_32">
+				<button type="submit" (click)="submit()" class="btn mainsmall_btn"> Save </button>
+			</div>
+		</div>
+	</form>
+</ng-template>

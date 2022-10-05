@@ -1,0 +1,177 @@
+<div mat-raised class="WhiteBg plr_16_ptb_24">
+
+   
+<h3 class="dash_heading mb_24">Videos</h3>
+ <hr class="horizontal_border mb_16">
+    <div class="row mb_24">
+      <p class="video_length" *ngIf="data == '' || data == undefined || data.length == 0" >No Video Available </p>
+
+      <div class="col-md-3 mb_24" *ngFor="let document of data">
+          <div class="sales_item">
+        <div>
+
+          <div class="mb_16" data-toggle="modal" data-target="#exampleModalCenter" (mouseover)="getsingleVideo(document.id)"  >
+  
+               <img [src]="document.thumbnail">
+          </div>
+  
+            <div class="displayFlex align_item_Center justifycontent_space_bw">
+              <div>
+                <h3 class="video_Title">{{ document.title }} </h3>
+              </div>
+              <div>
+                <p class="video_length">{{document.VideoUrl}}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        </div>
+        <div class="Video_popup">
+          <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
+            aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="selectData">
+              <div class="modal-content">
+                <div class="modal-body" *ngIf="selectData !=''&& selectData!=undefined">
+                  <!-- <img [poster]="selectData[0].thumbnail"   style="max-width: 100%;"> -->
+                  <!-- <video [poster]="selectData[0].thumbnail" *ngIf="watingcondition == false"></video> -->
+                  <div class="Video_content" style="text-align: center;">
+                    <h2 class="mb_24"  *ngIf="watingcondition == false">Pay To Continue</h2>  
+                    <button class="btn btn-success"  *ngIf="watingcondition == false" (click)="openConfirmationDialog()" data-dismiss="modal" >Go To Payment</button>
+                  </div>
+                  <video [poster]="selectData[0].thumbnail" (timeupdate)="setCurrentTime($event)" controls [src]="selectData[0].VideoUrl" #videoPlayer id="my_video_1" *ngIf='watingcondition == true'
+                    style="max-width: 100%;"></video>
+                </div>
+                <!-- <div class="modal-footer">
+                  <button (click)="playPause()">Play/Pause</button>
+                </div> -->
+  
+                <div class="Video_content" *ngIf="selectData !=''&& selectData!=undefined">
+                           <h2 class="mb_24">{{selectData[0].title}}</h2>
+                    <ul class="emptyList mb_24">
+                          <li class="mr_12"><a href="#" class="optional_btn"><span>{{selectData[0].tag}}</span><img src="../../../assets/images/graycircle_close.svg"></a></li>
+                    </ul>
+  
+                    <p class="mb_24">{{selectData[0].description}}</p>
+                    
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+  </div>
+  <!-- <div class="WhiteBg pt_35_pb_24 plr_16 mb_24"> -->
+  
+    <h3 class="dash_heading mb_24">Documents</h3>
+     <hr class="horizontal_border mb_16">
+    <div>
+      <p class="no_document_available" *ngIf="documentData == '' || documentData == undefined || documentData.length == 0" >No Document Available </p>
+      <div class="col-md-6 mob_space_mb_24" *ngFor="let document of documentData">
+        <div class="documents_application">
+          <ul class="rightTab_bar">
+            <li>
+              <a (click)="editdata(document.id)" [routerLink]="['/edittemplates']">Edit <img src="../../../assets/images/edit_tab.svg" /></a>
+            </li>
+            <li (click)="downloadFile(document.Document_Link,document.id)">
+              <a class="download_bg"><img src="../../../assets/images/application_download.svg" /></a>
+            </li>
+          </ul>
+          <div class="media" data-toggle="modal" data-target="#exampleModalCenter">
+            <img [src]="document.thumbnail" />
+            <div class="media-body">
+              <h5 class="mt-0"> {{ document.title }}</h5>
+              <p>
+                {{ document.description }}
+              </p>
+            </div>
+          </div>
+        </div>
+  
+         <!-- Modal -->
+         <div class="Video_popup">
+          <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
+            aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+              <div class="modal-content">
+  
+                <div class="modal-body">
+                  <div class="container">
+                    
+                    <iframe [src]="document.documentUrl"  width="100%" height="100%">
+                    </iframe>
+                    <p class="centered">Finance&nbsp;Agent</p>
+  
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+  
+      </div>
+    </div>
+  <!-- </div> -->
+          <ng-template #confirmationPopupManual>
+            <div class="confirmationPopup">
+            <div class="mat-dialog- border-top" style="padding: 10px;">
+              <h2 mat-dialog-title class="mb-0">Payment Confirmation</h2>
+            </div>
+            <hr style="margin-top: 0 !important; margin-bottom: 0 !important;">
+            <div class="mat-dialog-content" style="margin-left: 10px;">
+                <div class="row" style="margin-top: 10px;font-size: 15px;">
+                    <p>Are you sure, You want to pay?</p>
+                </div>
+                <div class="row" style="margin-top: 10px;">
+                  <div class="col-md-2">
+                    &nbsp;
+                  </div>
+                  <div class="col-md-2">
+                    <button class="btn popupbtn" (click)="onYes()">Yes</button>
+                  </div>
+                  <div class="col-md-1">
+                    &nbsp;
+                  </div>
+                  <div class="col-md-2">
+                   <button class="btn popupbtn" (click)="closeConfirmationpoup()">No</button>
+                  </div>
+                </div>
+               </div>
+            </div>
+          </ng-template>
+  
+          <ng-template #addCardDetails>
+            <div class="landingpagePopup" style="overflow: hidden;height:50vh;">
+            <div class="mat-dialog- border-top" style="padding: 10px; width: 600px">
+              <h2 mat-dialog-title class="mb-0">Card Details</h2>
+            </div>
+            <hr style="margin-top: 0 !important; margin-bottom: 0 !important;">
+            <div class="mat-dialog-content" style="margin-left: 10px;">
+                <div class="row" style="margin-top: 10px;">
+                  <label class="col-md-3 landingpagelabel" >Name</label>
+                  <input  type="text" style="height: 30px !important; font-size: 15px !important;" id="username" class="col-md-5 form-control" />
+                </div>
+                <div class="row" style="margin-top: 10px;">
+                  <label class="col-md-3 landingpagelabel">Card No  </label>
+                  <input type="text" class="col-md-5 form-control" id="cardNo"  style="height: 30px !important;font-size: 15px !important;"/>
+                </div>
+                <div class="row" style="margin-top: 10px;">
+                  <label class="col-md-3 landingpagelabel">CVV</label>
+                  <input type="text" class="col-md-2 form-control" id="cvv"  style="height: 30px !important;font-size: 15px !important;"/>
+                </div>
+                <div class="row" style="margin-top: 10px;">
+                  <label class="col-md-3 landingpagelabel">Expiry Date</label>    
+                  <input type="text" class="col-md-2 form-control" id="expdate"  style="height: 30px !important;font-size: 15px !important;"/>   
+                </div>
+                <div class="row" style="margin-top: 10px;">
+                  <div class="col-md-3">
+                    &nbsp;
+                  </div>
+                  <div class="col-md-3">
+                            <button type="submit" (click)="onSubmit()" class="btn main_btn" style="height: 30px !important;width:100% !important;"> Save </button> 
+                  </div>
+                </div>
+               </div>
+            </div>
+          </ng-template>
+  
+  
+        </div>

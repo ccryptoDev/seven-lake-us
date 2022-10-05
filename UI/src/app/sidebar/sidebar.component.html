@@ -1,0 +1,200 @@
+<div class="sidebar-wrapper" #sideBar>
+	<div class="sidebar_brand" *ngIf="officeName == null">
+		<span>
+			<img src="../../assets/images/logo.svg" />
+		</span>
+	</div>
+
+	<div class="sidebar_brand" *ngIf="officeName != null">
+		<span>
+			<img [src]="curOffice?.thumbnail" />
+		</span>
+	</div>
+	<div class="sidenavToggler">
+		<span (click)="closeNav()">
+			<img src="../../assets/images/Sidebar_arrow.svg" />
+		</span>
+	</div>
+	<div class="sidebar_menu" *ngIf="hasUser" [ngClass]="{ matdrawerCollapsed: isExpanded != true }">
+		<ul>
+			<li>
+				<a routerLinkActive="active" [routerLink]="['home']" (click)="closeAllMenu()">
+					<img src="../assets/images/dashboard.svg" /><span class="link_text">Dashboard</span>
+				</a>
+			</li>
+
+			<li class="dropdown" *ngIf="perms.leadVisible">
+				<a class="nav-link dropdown-toggle" role="button"
+					[ngClass]="{ 'open active': isOpen.leads || matchRoute(['input-leads', 'InformationLead']) }"
+					(click)="toggleMenu('leads')">
+					<img src="../assets/images/leads.svg" /><span class="link_text">Leads</span><i class="fa fa-angle-down"></i>
+				</a>
+				<div class="dropdown-menu" [ngClass]="{ show: isOpen.leads || matchRoute(['input-leads', 'InformationLead']) }"
+					*ngIf="perms.leadinputVisible">
+					<a class="dropdown-item" [routerLink]="['/input-leads']" routerLinkActive="active">
+						<img src="../assets/images/input_icon.svg" /><span class="link_text">Input</span>
+					</a>
+					<a class="dropdown-item" [routerLink]="['/lead/InformationLead']" *ngIf="perms.leadinfoVisile"
+						routerLinkActive="active">
+						<img src="../assets/images/info_circle.svg" /><span class="link_text">Information</span>
+					</a>
+				</div>
+			</li>
+			<li class="dropdown" *ngIf="perms.agentVisible">
+				<a class="nav-link dropdown-toggle" role="button"
+					[ngClass]="{ 'open active': isOpen.agents || matchRoute(['invite-agent', 'teaminformation']) }"
+					(click)="toggleMenu('agents')">
+					<img src="../assets/images/agents.svg" /><span class="link_text">Agents</span><i class="fa fa-angle-down"></i>
+				</a>
+				<div class="dropdown-menu"
+					[ngClass]="{ show: isOpen.agents || matchRoute(['invite-agent', 'teaminformation']) }">
+					<a class="dropdown-item" [routerLink]="['invite-agent']" *ngIf="perms.agentInviteVisible"
+						routerLinkActive="active">
+						<img src="../assets/images/input_icon.svg" /><span class="link_text">Invite</span>
+					</a>
+					<a class="dropdown-item" [routerLink]="['teaminformation']" *ngIf="perms.agentInfoVisible"
+						routerLinkActive="active">
+						<img src="../assets/images/info_circle.svg" /><span class="link_text">Information</span>
+					</a>
+				</div>
+			</li>
+			<li class="dropdown" routerLinkActive="active" *ngIf="perms.documentVisible">
+				<a class="nav-link dropdown-toggle" role="button"
+					[ngClass]="{ 'open active': isOpen.documents || matchRoute(['documents']) }"
+					(click)="toggleMenu('documents')">
+					<img src="../assets/images/documents.svg" /><span class="link_text">Documents</span><i
+						class="fa fa-angle-down"></i>
+				</a>
+				<div class="dropdown-menu" [ngClass]="{ show: isOpen.documents || matchRoute(['documents']) }">
+					<a class="dropdown-item" [routerLink]="['documents/application']" routerLinkActive="active">
+						<img src="../assets/images/application_icon.svg" /><span class="link_text">Application</span>
+					</a>
+					<a class="dropdown-item" [routerLink]="['documents/manualDocument']" routerLinkActive="active">
+						<img src="../assets/images/manual_icon.svg" /><span class="link_text">Manual</span>
+					</a>
+					<a *ngIf="perms.documentMemberVisible" class="dropdown-item" [routerLink]="['documents/member']"
+						routerLinkActive="active">
+						<img src="../assets/images/crm_icon.svg" /><span class="link_text">Member Office</span>
+					</a>
+				</div>
+			</li>
+			<li class="dropdown" *ngIf="perms.marketingVisible">
+				<a class="nav-link dropdown-toggle" role="button"
+					[ngClass]="{ 'open active': isOpen.marketing || matchRoute(['marketing']) }"
+					(click)="toggleMenu('marketing')">
+					<img src="../assets/images/marketing.svg" /><span class="link_text">Marketing</span><i
+						class="fa fa-angle-down"></i>
+				</a>
+				<div class="dropdown-menu" [ngClass]="{ show: isOpen.marketing || matchRoute(['marketing'])}">
+					<a class="dropdown-item" [routerLink]="['marketing/EmailTemplates']" routerLinkActive="active">
+						<img src="../assets/images/email_templates.svg" /><span class="link_text">Email Templates</span>
+					</a>
+					<a class="dropdown-item" [routerLink]="['marketing/SocialMedia']" routerLinkActive="active">
+						<img src="../assets/images/social_media.svg" /><span class="link_text">Social Media</span>
+					</a>
+					<a class="dropdown-item" [routerLink]="['marketing/Flyers']" routerLinkActive="active">
+						<img src="../assets/images/flyers.svg" /><span class="link_text">Flyers</span>
+					</a>
+					<a class="dropdown-item" [routerLink]="['marketing/MemberOffice']" routerLinkActive="active">
+						<img src="../assets/images/flyers.svg" /><span>Member Office</span>
+					</a>
+				</div>
+			</li>
+			<li class="dropdown" *ngIf="perms.trainingVisible">
+				<a class="nav-link dropdown-toggle" role="button"
+					[ngClass]="{ 'open active': isOpen.training || matchRoute(['training']) }" (click)="toggleMenu('training')">
+					<img src="../assets/images/training.svg" /><span class="link_text">Training</span><i
+						class="fa fa-angle-down"></i>
+				</a>
+				<div class="dropdown-menu" [ngClass]="{ show: isOpen.training || matchRoute(['training']) }">
+					<a class="dropdown-item" [routerLink]="['training/sale']" routerLinkActive="active">
+						<img src="../assets/images/sales.svg" /><span class="link_text">Sales</span>
+					</a>
+					<a class="dropdown-item" [routerLink]="['training/fundingprogram']" routerLinkActive="active">
+						<img src="../assets/images/funding_programs.svg" /><span class="link_text">Funding programs</span>
+					</a>
+					<a class="dropdown-item" [routerLink]="['training/crm']" routerLinkActive="active">
+						<img src="../assets/images/crm_icon.svg" /><span class="link_text">CRM</span>
+					</a>
+					<a class="dropdown-item" (click)="memberSelect()"
+						[ngClass]="{ active: matchRoute(['MemberOffice', 'ManageAccount']) }">
+						<img src="../assets/images/crm_icon.svg" /><span class="link_text">Member Office</span>
+					</a>
+				</div>
+			</li>
+			<li>
+				<a [routerLink]="['manageAccount']" routerLinkActive="active" (click)="closeAllMenu()">
+					<img src="../assets/images/dashboard.svg" /><span class="link_text">Manage Account</span>
+				</a>
+			</li>
+			<li class="dropdown" *ngIf="perms.managementVisible">
+				<a class="nav-link dropdown-toggle" role="button"
+					[ngClass]="{ 'open active': isOpen.management || matchRoute(['MasterAdmin']) }"
+					(click)="toggleMenu('management')">
+					<img src="../assets/images/management.svg" /><span class="link_text">Management</span><i
+						class="fa fa-angle-down"></i>
+				</a>
+				<div class="dropdown-menu" [ngClass]="{ show: isOpen.management || matchRoute(['MasterAdmin']) }">
+					<a class="dropdown-item" [routerLink]="['MasterAdmin/agentmanager']" *ngIf="perms.agentManagerVisible"
+						routerLinkActive="active">
+						<img src="../assets/images/agents_manager.svg" /><span class="link_text">Agents Manager</span>
+					</a>
+					<a class="dropdown-item" [routerLink]="['MasterAdmin/formmanager']" *ngIf="perms.formManagerVisible"
+						routerLinkActive="active">
+						<img src="../assets/images/form_manager.svg" /><span class="link_text">Form Manager</span>
+					</a>
+					<a class="dropdown-item" [routerLink]="['MasterAdmin/leadpageAdmin']" *ngIf="perms.landingVisible"
+						routerLinkActive="active">
+						<img src="../assets/images/landing_page.svg" /><span class="link_text">Landing Page</span>
+					</a>
+					<a class="dropdown-item" [routerLink]="['MasterAdmin/officeManager']" *ngIf="perms.offmanagerVisible"
+						routerLinkActive="active">
+						<img src="../assets/images/office_manager.svg" />
+						<span class="link_text">Office Manager</span>
+					</a>
+					<a class="dropdown-item" [routerLink]="['MasterAdmin/urlmanager']" *ngIf="perms.urlManagerVisible"
+						routerLinkActive="active">
+						<img src="../assets/images/url_manager.svg" /><span class="link_text">URL Manager</span>
+					</a>
+					<a class="dropdown-item" [routerLink]="['/MasterAdmin/ListOfDocument']" *ngIf="perms.docAdminVisible"
+						routerLinkActive="active">
+						<img src="../assets/images/document_admin.svg" /><span class="link_text">Document Admin</span>
+					</a>
+					<a class="dropdown-item" [routerLink]="['MasterAdmin/addVideos']" *ngIf="perms.docAdminVisible"
+						routerLinkActive="active">
+						<img src="../assets/images/document_admin.svg" /><span>Video Admin</span>
+					</a>
+				</div>
+			</li>
+		</ul>
+
+		<div class="profile_setting" *ngIf="perms.profileVisible">
+			<a class="active" [routerLink]="['profile']">
+				<div class="profile_setting_bg">
+					<img src="../assets/images/setting.svg" />
+				</div>
+				<span class="link_text">Profile</span>
+			</a>
+		</div>
+		<div [routerLink]="['/input-leads']" class="add_new_lead">
+			<div class="lead_align">
+				<img src="../assets/images/add_new_lead.svg" />
+				<h3 [ngStyle]="{ color: dash_heading }">Add New Lead</h3>
+			</div>
+		</div>
+
+		<div class="small_lead">
+			<div class="new_lead" [routerLink]="['/input-leads']">
+				<img src="../assets/images/add_new_lead.svg" />
+			</div>
+		</div>
+
+		<mat-sidenav #sidenav class="example-sidenav" [ngClass]="{ matdrawerCollapsed: isExpanded != true }" mode="side"
+			opened="true">
+			<div class="alignCenter"></div>
+			<div class="admininfo alignCenter">
+				{{ firstName }} {{ lastName }}
+			</div>
+		</mat-sidenav>
+	</div>
+</div>

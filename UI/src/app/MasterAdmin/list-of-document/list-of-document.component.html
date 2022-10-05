@@ -1,0 +1,97 @@
+<div class="WhiteBg plr_16_ptb_24 mb_24">
+  <div class="table_header">
+    <div>
+      <h3 class="dash_heading">Document Admin</h3>
+    </div>
+    <div>
+      <button class="btn main_btn width_206" (click)="resetForm()" [routerLink]="['/adddocument']">
+        <img src="../../../assets/images/add_icon.svg" />Add Document
+      </button>
+    </div>
+  </div>
+  <hr class="horizontal_border mb_16" />
+  <div class="displayFlex align_item_Center justifycontent_space_bw mb_56">
+    <div class="search_header">
+      <div class="input-group width_424">
+        <div class="input-group-prepend">
+          <span class="input-group-text"><i class="far fa-search"></i></span>
+        </div>
+        <input class="form-control" type="text" [(ngModel)]="searchText" placeholder="Search" aria-label="Search" />
+      </div>
+    </div>
+    <div class="overall">
+      <span>Sort by:</span>
+      <select [(ngModel)]="category">
+        <option *ngFor="let option of sortOptions; let i = index" [value]="option.value"
+          [attr.selected]="i == 0 ? true : null">
+          {{option.name}}
+        </option>
+      </select>
+    </div>
+  </div>
+  <div class="table_wrapper table_responsive">
+    <table>
+      <thead>
+        <tr>
+          <th>Thumbnail</th>
+          <th>Name</th>
+          <th>Category</th>
+          <th>Date Upload</th>
+          <th>Download</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr
+          *ngFor="let data of documentData | searchDocumentFilter: searchText | sortDocument: category | paginate: { itemsPerPage: 8, currentPage: page }">
+          <td>
+            <div class="thumbnail_img">
+              <img [src]="data.thumbnail" />
+            </div>
+          </td>
+          <td>{{data.title}}</td>
+          <td>{{data.category}}</td>
+          <td>{{data.createdAt | date: 'dd/MM/yyyy'}}</td>
+          <td>{{data.download}}</td>
+          <td>
+            <ul class="empty_list justifycontentCenter">
+              <li class="mr_32">
+                <a class="editBtn" (click)="editDocument(data.id)">Edit <img
+                    src="../../../assets/images/edit_tab.svg" /></a>
+              </li>
+              <li>
+                <a class="DeleteBtn" data-toggle="modal" data-target="#exampleModalCenter">Remove
+                  <img src="../../../assets/images/circle_close_icon.svg" />
+                </a>
+                <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
+                  aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                  <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLongTitle">Confirm Delete</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                      </div>
+                      <div class="modal-body">
+                        Are you sure you want to delete?
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-danger" data-dismiss="modal"
+                          (click)="deleteDocument(data.id)">Delete</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="pagination_control flex_end">
+    <pagination-controls (pageBoundsCorrection)="page = $event" (pageChange)="page = $event"></pagination-controls>
+  </div>
+</div>

@@ -1,0 +1,309 @@
+<ul class="wvu-breadcrumbs mb_16">
+  <li><a href="#">Master Admin</a></li>
+  <li><a href="#" class="current">Add Office</a></li>
+</ul>
+<h1 class="heading_one mb_51" *ngIf="!isEditForm">Add Office</h1>
+<h1 class="heading_one mb_51" *ngIf="isEditForm">Edit Office</h1>
+<a class="back_to_page mb_48" (click)="back()"><img src="../../assets/images/back_page.svg" /><span>Back to
+    overview</span></a>
+<form [formGroup]="form" (ngSubmit)="submit()">
+  <div class="WhiteBg plr_48 ptb_40 mb_24">
+    <h3 class="dash_heading pb_25">Add Office</h3>
+    <div class="document_dragdrop" (fileDropped)="onFileDropped($event)">
+      <img class="pb_16" src="../.././assets/images/add_documents.svg" />
+      <input type="file" name="add_documents" id="add_documents" name="add_documents" hidden
+        accept="image/png, image/gif, image/jpeg" (change)="onFileChanged($event)" />
+      <label for="add_documents">Click or Drag a Banner Image, or Browse</label>
+      <h6 class="Filename">{{bannerName}}</h6>
+    </div>
+    <div class="upload_image_only mb_24">
+      <img src="../.././assets/images/upload_office_logo.png" />
+    </div>
+    <p class="sub_paragraph_text pb_28">Upload Office Logo</p>
+    <hr class="horizontal_border mb_32" />
+
+    <div class="row">
+      <div class="col-md-6">
+        <div class="form-group">
+          <input class="form-control" type="text" placeholder="Name" formControlName="Name" />
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="form-group">
+          <select class="form-control" formControlName="AAMDefault">
+            <option value="">Choose your Category</option>
+            <option *ngFor="let category of AAMLevels; let i = index" [value]="category.name">
+              {{ category.name }}
+            </option>
+          </select>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-6">
+        <div class="form-group mb_0">
+          <select class="form-control" formControlName="LandingPageDefault">
+            <option value="">Choose your landing page</option>
+            <option *ngFor="let category of landingPages; let i = index" [value]="category.name">
+              {{ category.name }}
+            </option>
+          </select>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="form-group mb_0">
+          <select class="form-control" formControlName="WelcomeEmailTemplate">
+            <option value="">Choose your email template</option>
+            <option *ngFor="let category of emailTemplates" [value]="category.name">
+              {{ category.name }}
+            </option>
+          </select>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="WhiteBg plr_48 ptb_40 mb_24">
+    <h3 class="dash_heading pb_25">Company Information</h3>
+    <div class="row">
+      <div class="col-md-6">
+        <div class="form-group">
+          <input class="form-control" type="text" placeholder="Company Name" formControlName="CompanyInformation" />
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="form-group">
+          <input class="form-control" type="text" placeholder="Apply Path Domain" formControlName="ApplyPathDomain" />
+        </div>
+      </div>
+    </div>
+    <div class="form-group">
+      <input type="text" class="form-control" placeholder="Address" formControlName="Address" />
+    </div>
+    <div class="row">
+      <div class="col-md-6">
+        <div class="form-group mb_0">
+          <input class="form-control" type="text" placeholder="Office Phone" formControlName="OfficePhone" />
+        </div>
+      </div>
+      <div class="col-md-6 mb_0">
+        <div class="form-group">
+          <input class="form-control" type="text" placeholder="Mobile Phone" formControlName="MobilePhone" />
+        </div>
+      </div>
+    </div>
+    <div class="form-group">
+      <input type="text" class="form-control" placeholder="Single Question Header"
+        formControlName="SingleQuestionHeader" />
+    </div>
+    <div class="form-group">
+      <textarea class="textarea" placeholder="About Us" formControlName="OfficeDescription"></textarea>
+    </div>
+    <p class="sub_paragraph_text bullet-header">Bullet points</p>
+    <div class="row">
+      <div class="col-md-6 mb_24" *ngFor="let i of createRange()">
+        <div [attr.data-number]="i" class="form-group mb_0 bullet-field">
+          <input class="form-control" type="text" placeholder="" formControlName="bulletPoint-{{i}}" />
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="WhiteBg plr_48 ptb_40">
+    <h3 class="dash_heading pb_25">New Landing Page Colors</h3>
+    <p class="sub_paragraph_text pb_28">Landing Page Headers</p>
+
+    <div class="row">
+      <div class="col-md-6 form-group">
+        <div class="displayFlex justifycontent_space_bw align_item_Center height_100per div_textBox">
+          <div>
+            <h5 class="bold_fsize14 Primary_color">Text Color</h5>
+          </div>
+          <div><input class="datapicker_input" tabindex="9" type="text" placeholder="Text Color"
+              formControlName="landingPageTextColor" /></div>
+        </div>
+      </div>
+      <div class="col-md-6 form-group">
+        <div class="displayFlex justifycontent_space_bw align_item_Center height_100per div_textBox Greenbg">
+          <div>
+            <h5 class="bold_fsize14 white_black_color">LPSteps Color</h5>
+          </div>
+          <div>
+            <input class="datapicker_input" type="color" placeholder="LPStep Color"
+              formControlName="landingPageTextColor" />
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-6 form-group">
+        <div class="displayFlex justifycontent_space_bw align_item_Center height_100per div_textBox">
+          <div>
+            <h5 class="bold_fsize14 Primary_color">Sub Header - H2</h5>
+          </div>
+          <div>
+            <input class="datapicker_input" type="text" placeholder="Sub Header-H2" formControlName="subHeaderH2" />
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6 form-group">
+        <div class="displayFlex justifycontent_space_bw align_item_Center height_100per div_textBox BlackDarkbg">
+          <div>
+            <h5 class="bold_fsize14 white_black_color">Sub Header - H3</h5>
+          </div>
+          <div>
+            <input class="datapicker_input" type="color" placeholder="LPStep Color" formControlName="subHeaderH2" />
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-6 form-group">
+        <div class="displayFlex justifycontent_space_bw align_item_Center height_100per div_textBox ">
+          <div>
+            <h5 class="bold_fsize14 Primary_color">Term & Policy Agreements</h5>
+          </div>
+          <div>
+            <input class="datapicker_input" type="text" placeholder="Teams Pollicy Agrements"
+              formControlName="teamspollicyAgrements" />
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6 form-group">
+        <div class="displayFlex justifycontent_space_bw align_item_Center height_100per div_textBox Greenbg">
+          <div>
+            <h5 class="bold_fsize14 white_black_color">teamspollicyAgrements</h5>
+          </div>
+          <div>
+            <input class="datapicker_input" type="color" placeholder="LPStep Color"
+              formControlName="teamspollicyAgrements" />
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-6 form-group">
+        <div class="displayFlex justifycontent_space_bw align_item_Center height_100per div_textBox">
+          <div>
+            <h5 class="bold_fsize14 Primary_color">Banner Background Color</h5>
+          </div>
+          <div>
+            <input class="datapicker_input" type="text" placeholder="Banner Background Color"
+              formControlName="bannerBackgroundColor" />
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6 form-group">
+        <div class="displayFlex justifycontent_space_bw align_item_Center height_100per div_textBox BlackDarkbg">
+          <div>
+            <h5 class="bold_fsize14 white_black_color">bannerBackgroundColor</h5>
+          </div>
+          <div>
+            <input class="datapicker_input" type="color" placeholder="LPStep Color"
+              formControlName="bannerBackgroundColor" />
+          </div>
+        </div>
+      </div>
+    </div>
+    <hr class="horizontal_border mb_32">
+    <p class="sub_paragraph_text pb_28">Start Here</p>
+    <div class="row">
+      <div class="col-md-6 form-group">
+        <div class="displayFlex justifycontent_space_bw align_item_Center height_100per div_textBox">
+          <div>
+            <h5 class="bold_fsize14 Primary_color">Text Color</h5>
+          </div>
+          <div>
+            <input class="datapicker_input" type="text" placeholder="Text Color" formControlName="startHereTextColor" />
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6 form-group">
+        <div class="displayFlex justifycontent_space_bw align_item_Center height_100per div_textBox OrangeDarkbg">
+          <div>
+            <h5 class="bold_fsize14 white_black_color">Text Color</h5>
+          </div>
+          <div>
+            <input class="datapicker_input" type="color" placeholder="LPStep Color"
+              formControlName="startHereTextColor" />
+          </div>
+        </div>
+      </div>
+    </div>
+    <hr class="horizontal_border mb_32">
+    <p class="sub_paragraph_text pb_28">About Us</p>
+    <div class="row">
+      <div class="col-md-6 form-group">
+        <div class="displayFlex justifycontent_space_bw align_item_Center height_100per div_textBox">
+          <div>
+            <h5 class="bold_fsize14 Primary_color">Text Color</h5>
+          </div>
+          <div>
+            <input class="datapicker_input" type="text" placeholder="Text Color" formControlName="aboutUsTextColor" />
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6 form-group">
+        <div class="displayFlex justifycontent_space_bw align_item_Center height_100per div_textBox BlackDarkbg">
+          <div>
+            <h5 class="bold_fsize14 white_black_color">Graphic Backgroun</h5>
+          </div>
+          <div>
+            <input class="datapicker_input" formControlName="aboutUsTextColor" type="color"
+              placeholder="LPStep Color" />
+          </div>
+        </div>
+      </div>
+    </div>
+    <hr class="horizontal_border mb_32">
+    <p class="sub_paragraph_text pb_28">Footer</p>
+    <div class="row">
+      <div class="col-md-6 form-group">
+        <div class="displayFlex justifycontent_space_bw align_item_Center height_100per div_textBox">
+          <div>
+            <h5 class="bold_fsize14 Primary_color">Module Background</h5>
+          </div>
+          <div>
+            <input class="datapicker_input" type="text" placeholder="Module Background" formControlName="footer" />
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6 form-group">
+        <div class="displayFlex justifycontent_space_bw align_item_Center height_100per div_textBox Darkredbg">
+          <div>
+            <h5 class="bold_fsize14 white_black_color">Text Color</h5>
+          </div>
+          <div>
+            <input class="datapicker_input" type="color" placeholder="footer" formControlName="footer" />
+          </div>
+        </div>
+      </div>
+    </div>
+    <hr class="horizontal_border mb_32">
+    <p class="sub_paragraph_text pb_28">CTA Button</p>
+    <div class="row">
+      <div class="col-md-6 form-group">
+        <div class="displayFlex justifycontent_space_bw align_item_Center height_100per div_textBox modulebg_color">
+          <div>
+            <h5 class="bold_fsize14 Primary_color white_black_color">Text Color</h5>
+          </div>
+          <div>
+            <input class="datapicker_input" type="text" placeholder="Text Color" formControlName="footer" />
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6 form-group">
+        <div class="displayFlex justifycontent_space_bw align_item_Center height_100per div_textBox LightOrangebg">
+          <div>
+            <div>
+              <h5 class="bold_fsize14 white_black_color">Button Background</h5>
+            </div>
+          </div>
+          <div>
+            <input class="datapicker_input" type="color" placeholder="LPStep Color" formControlName="footer" />
+          </div>
+        </div>
+      </div>
+    </div>
+    <button type="submit" class="btn main_btn width_411 mt_48">Submit</button>
+  </div>
+</form>

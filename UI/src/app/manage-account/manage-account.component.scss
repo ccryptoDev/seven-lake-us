@@ -1,0 +1,44 @@
+.headeroutline {
+	background-color: #139EC7;
+	color: white;
+}
+
+.recruiter {
+	background-color: #E7F7FC;
+}
+
+.maincard {
+	margin-top: -60px;
+	margin-right: 10px;
+}
+
+h2.monthly {
+	line-height: normal;
+}
+
+.Offer_header {
+	min-height: 140px;
+}
+
+.offer_item {
+	display: flex;
+	flex-direction: column;
+
+	*:nth-child(2) {
+		flex-grow: 1;
+	}
+}
+
+.plans-container {
+	display: grid;
+	gap: 20px;
+	padding-left: 20px;
+	padding-right: 20px;
+	grid-template-columns: repeat(4, 1fr);
+}
+
+@media screen and (max-width: 1200px) {
+	.plans-container {
+		grid-template-columns: repeat(2, 1fr);
+	}
+}

@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<style>
+		p.text {
+			font-family: Arial, sans-serif;
+			font-size: 16px;
+			line-height: 24px;
+			margin-top: 0px;
+			margin-bottom: 16px;
+			color: #000;
+		}
+
+		table.inner-table {
+			width: 90%;
+			border-spacing: 0px 10px;
+			border: 1px solid #000;
+			padding: 30px;
+		}
+
+		table.parent-table {
+			width: 100%;
+			border: 0;
+			border-spacing: 0;
+			background: #ffffff
+		}
+
+		td.parent-cell {
+			padding: 0;
+		}
+
+		td.logo-cell {
+			text-align: center;
+			padding-bottom: 30px;
+		}
+
+		td.logo-cell>img {
+			width: 200px;
+		}
+
+		body {
+			margin: 0px;
+			padding: 0px
+		}
+	</style>
+</head>
+
+<body>
+	<table class="parent-table">
+		<tbody>
+			<tr>
+				<td class="parent-cell" align="center">
+					<table class="inner-table">
+						<tr>
+							<td class="logo-cell">
+								<img src="cid:logo">
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<p class="text">
+									Message from your sponsor </p>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<p class="text">
+									Hi, <span>
+										<%= agentName %>
+									</span></p>
+								<p class="text">
+									<span>Your sponsor,
+										<%= ownerName %>
+									</span> has just sent you an message:
+								</p>
+								<p class="text">
+										<%= message %>
+								</p>
+							</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+</body>
+
+</html>

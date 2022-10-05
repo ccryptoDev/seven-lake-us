@@ -1,0 +1,31 @@
+<ng-template #cardDetails>
+	<div class="addCardDetails_popup">
+		<div class="popup_header pb_24 mb_24 displayFlex justifycontent_space_bw align_item_Center">
+			<div>
+				<h2 mat-dialog-title class="mb-0">Card Details</h2>
+			</div>
+			<div>
+				<span class="close" (click)="close()">
+					<img src="../../../assets/images/icon_close.svg">
+				</span>
+			</div>
+		</div>
+		<form [formGroup]="form" class="popup_body">
+			<div class="form_group mb_24">
+				<input type="text" placeholder="Name" formControlName="holderName" class="form-control" />
+			</div>
+			<div class="form_group mb_24">
+				<input type="number" class="form-control" formControlName="cardNumber" placeholder="Card No" />
+			</div>
+			<div class="form_group mb_24">
+				<input type="number" class="form-control" formControlName="CVV" placeholder="CVV" />
+			</div>
+			<div class="form_group mb_24">
+				<input type="text" class="form-control" formControlName="expiryDate" placeholder="Expiry Date">
+			</div>
+			<div class="flex_end">
+				<button type="submit" (click)="submit()" class="btn small_main_btn"> Save </button>
+			</div>
+		</form>
+	</div>
+</ng-template>

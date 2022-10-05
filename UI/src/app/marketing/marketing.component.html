@@ -1,0 +1,52 @@
+<div class="WhiteBg pt_35_pb_24 plr_16 mb_24">
+  <h3 class="dash_heading mb_24">Email Templates</h3>
+  <div class="row">
+    <div class="col-lg-6 col-md-12 mob_space_mb_24" *ngFor="let document of data">
+      <div class="email_templates">
+        <ul class="rightTab_bar">
+          <li>
+            <a (click)="editdata(document.id)" [routerLink]="['/edittemplates']"><span>Edit </span><img
+                src="../../../assets/images/edit_tab.svg" /></a>
+          </li>
+          <li>
+            <a data-toggle="modal" data-target="#deleteModal" class="close_Bg"><img
+                src="../../../assets/images/close_icon.svg" /></a>
+
+            <!-- Delete Modal -->
+            <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalTitle"
+              aria-hidden="true">
+              <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title">Confirm Delete</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div class="modal-body">
+                    Are you sure you want to delete?
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal"
+                      (click)="deleteItem(document.id)">Delete</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </li>
+        </ul>
+        <div class="media" data-toggle="modal" [attr.data-target]="'#modal-preview-' + document.id">
+          <img [src]="document.thumbnail" alt="Generic placeholder image" />
+          <div class="media-body">
+            <h5 class="mt-0">{{ document.title }}</h5>
+            <p>
+              {{ document.description }}
+            </p>
+          </div>
+        </div>
+      </div>
+      <document-preview [id]="document.id" [src]="document.documentUrl"></document-preview>
+    </div>
+  </div>
+</div>

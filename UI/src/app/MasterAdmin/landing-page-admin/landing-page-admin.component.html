@@ -1,0 +1,142 @@
+<div class="WhiteBg plr_16_ptb_24 mb_24">
+  <div class="table_header">
+    <div>
+      <h3 class="dash_heading">Landing Page Admin</h3>
+    </div>
+    <div>
+      <button class="btn main_btn width_206" (click)="addPage()">
+        <img src="../../../assets/images/add_icon.svg" />Add Landing Page
+      </button>
+    </div>
+  </div>
+  <div class="table_wrapper table_responsive">
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Used By</th>
+          <th>Status</th>
+          <th>Use in random</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of pages | paginate: { itemsPerPage: 5, currentPage: landingPage, id: 'list-short' }">
+          <td>{{item.name}}</td>
+          <td>{{item.usedBy}}</td>
+          <td *ngIf="item.status === 'Active'" class="active_status_clr fw_bold">{{item.status}}</td>
+          <td *ngIf="item.status !== 'Active'" class="inactive_status_clr fw_bold">{{item.status}}</td>
+          <td>
+            <div class="Use_in_random">
+              <input type="checkbox" class="inputField form-control" disabled [checked]="item.random" />
+              <label for="one"></label>
+            </div>
+          </td>
+          <td>
+            <ul class="empty_list">
+              <li class="mr_32">
+                <span *ngIf="item.status === 'Active'"><img src='../../../assets/images/show_eye.svg' /></span>
+                <span *ngIf="item.status !== 'Active'"><img src='../../../assets/images/show_eye_disabled.svg' /></span>
+              </li>
+              <li>
+                <a *ngIf="item.status === 'Active'" class="status-action activate" (click)="toggleActive(item)">
+                  {{item.display}}
+                </a>
+                <a *ngIf="item.status !== 'Active'" class="status-action deactivate" (click)="toggleActive(item)">
+                  {{item.display}}
+                </a>
+              </li>
+            </ul>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="pagination_control flex_end">
+    <pagination-controls id="list-short" (pageChange)="landingPage = $event"></pagination-controls>
+  </div>
+</div>
+
+<div class="WhiteBg ptb_40 plr_16">
+  <h3 class="dash_heading mb_24">Audience Overview</h3>
+  <div class="flex_end align_item_Center mb_16">
+    <button (click)="picker.open()" class="calendar_bg mr_80 flex_end align_item_Center">
+      <img class="mr_10" src="../../../assets/images/calendar_icon.svg" />
+      <p>{{rangeForm.controls.start.value | date: 'dd/MM/yyyy'}} - {{rangeForm.controls.end.value | date: 'dd/MM/yyyy'}}
+      </p>
+      <mat-form-field class="date-range">
+        <mat-date-range-input [formGroup]="rangeForm" class="date-picker" [rangePicker]="picker">
+          <input formControlName="start" matStartDate placeholder="Start date">
+          <input formControlName="end" matEndDate placeholder="End date">
+        </mat-date-range-input>
+        <mat-date-range-picker #picker></mat-date-range-picker>
+      </mat-form-field>
+    </button>
+    <div class="overall">
+      <span>Sort by:</span>
+      <select [(ngModel)]="sortBy">
+        <option>Name</option>
+        <option>Used by</option>
+      </select>
+    </div>
+  </div>
+  <div *ngIf="!pages || pages?.length === 0" class="information_box mb_16">
+    <p>
+      There is still no data processed for the date range specified. Please
+      specify a different date range
+    </p>
+  </div>
+  <div class="audience-row row mb_32">
+    <div *ngFor="let page of audiencePages 
+      | landingDateFilter: rangeForm.controls.start.value: rangeForm.controls.end.value 
+      | sortLanding: sortBy 
+      | paginate: { itemsPerPage: 5, currentPage: audiencePage, id: 'list-audience' }"
+      class="col-lg-6 col-md-12 audience-container">
+      <div class="Audience_Overview">
+        <ul class="rightTab_bar">
+          <li>
+            <span (click)="editPage(page)">Edit <img src="../../../assets/images/edit_tab.svg" /></span>
+          </li>
+          <li>
+            <span (click)="toggleActive(page)" title="Deactivate" *ngIf="page.status === 'Active'"
+              class="web_bg active">
+              <img src="../../../assets/images/web_icon.svg" />
+            </span>
+            <span (click)="toggleActive(page)" title="Activate" *ngIf="page.status !== 'Active'" class="web_bg">
+              <img src="../../../assets/images/web_icon.svg" />
+            </span>
+          </li>
+        </ul>
+        <div class="media">
+          <img class="mr_16" [src]="page.thumbnailURL" />
+          <div class="media-body">
+            <h5 class="mt-0">Landing Page</h5>
+            <h4 class="landing-name">{{page.name}}</h4>
+            <hr />
+            <label>Direct Conversation <span>0</span></label>
+            <label>Random Conversation <span>0%</span></label>
+            <label>Direct Visits <span>0</span></label>
+            <label>Form completion <span>0</span></label>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-6 col-md-12 add-form-container">
+      <div class="add_lading_page">
+        <div class="media">
+          <div class="mr_24">
+            <img src="../../../assets/images/add_landing_page.svg" />
+          </div>
+          <div (click)="addPage()" class="media-body">
+            <h5>Add Landing Page</h5>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="pagination_control flex_end">
+    <pagination-controls id="list-audience" (pageBoundsCorrection)="audiencePage = $event"
+      (pageChange)="audiencePage = $event">
+    </pagination-controls>
+  </div>
+  <landing-page-form #landingForm [onSubmit]="loadPages"></landing-page-form>

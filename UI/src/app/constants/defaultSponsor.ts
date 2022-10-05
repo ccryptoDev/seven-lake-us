@@ -1,0 +1,1 @@
+export const DEFAULT_SPONSOR = "1001"

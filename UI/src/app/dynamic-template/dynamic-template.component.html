@@ -1,0 +1,13 @@
+<div *ngIf="dynamicurl ; else dynamicerror">
+<div style="height: 100vh;width: 96vw;overflow: hidden !important;padding: 0 !important;position: absolute;"  scrolling="no">
+    <iframe [src]="urlMap" width="100%" height="100%" frameborder="0" style="border:0" allowfullscreen></iframe>
+</div>
+</div>
+<ng-template  #dynamicerror>
+    <div style="height: 100vh;width: 96vw;overflow: hidden !important;padding: 0 !important;">
+        <marquee class="marq" bgcolor="#42ddf5" direction = "left" loop="" >        
+           <div class="marqtxt"> You are not authorized to view this page </div>
+        </marquee>
+    </div>
+
+</ng-template>

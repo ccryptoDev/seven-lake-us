@@ -1,0 +1,118 @@
+<div class="WhiteBg plr_16_ptb_24 mb_24">
+  <div class="table_header">
+    <div>
+      <h3 class="dash_heading">URL Manager</h3>
+    </div>
+    <div>
+      <button class="btn main_btn width_206" [routerLink]="['/urlFormManager']">
+        <img src="../../../assets/images/add_icon.svg" />Add URL
+      </button>
+    </div>
+  </div>
+
+  <hr class="horizontal_border mb_16" />
+
+  <div class="displayFlex align_item_Center justifycontent_space_bw mb_16">
+    <div class="search_header">
+      <div class="input-group">
+        <div class="input-group-prepend">
+          <span class="input-group-text"><i class="far fa-search"></i></span>
+        </div>
+        <input class="form-control" type="text" placeholder="Search" aria-label="Search" />
+      </div>
+    </div>
+    <div class="overall">
+      <span>Sort by:</span>
+      <select>
+        <option>URL</option>
+      </select>
+    </div>
+  </div>
+  <div class="information_box mb_16">
+    <p>
+      A 3rd party URL will not be available to choose on the dropdown for Pro
+      and Executive agents, it must be assigned from this page. *N/A = Already
+      expired (available for purchase) or unable to automatically determine
+      the expiration date.
+    </p>
+  </div>
+
+  <div class="table_wrapper table_responsive">
+    <table>
+      <thead>
+        <tr>
+          <th>URL</th>
+          <th>3rd. Party</th>
+          <th>Status</th>
+          <th>Name</th>
+          <th>ID</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+
+        <tr *ngFor="let data of urls | paginate: { itemsPerPage: 5, currentPage: currentPage }">
+          <td>
+            <url-select-managed 
+              [onUpdate]="updateURL" 
+              [urlId]="data.id" 
+              [values]="data.urls"
+              >
+            </url-select-managed>
+          </td>
+          <td>{{ data.thirdParty }}</td>
+          <td>{{ data.isActive ? 'Active' : 'Deactivated' }}</td>
+          <td>{{ data.name }}</td>
+          <td>{{ data.ID }}</td>
+          <td>
+            <ul class="empty_list">
+              <li class="mr_16" *ngIf="data.owner =='Owned by FA'">
+                <a href="#" class="clear_action">Clear</a>
+              </li>
+              <li class="mr_16" *ngIf="data.owner == 'Hold for Branding'">
+                <a href="#" class="clear_action">Assign</a>
+              </li>
+              <li class="mr_16">
+                <form class="action_dropdown">
+                  <select #select
+                    (change)="changeCategory($event,data.id,dataSource.filteredData.indexOf(data))">
+                    <option *ngFor="let category of ownerOptions;" [selected]="category === data.owner ? true : false">
+                      {{category}}
+                    </option>
+                  </select>
+                </form>
+              </li>
+              <li data-toggle="modal" data-target="#exampleModalCenter" *ngIf="data.owner =='Hold for Branding'">
+                <a class="DeleteBtn">
+                  <span>Delete</span>
+                  <img src="../../../assets/images/circle_close_icon.svg" />
+                </a>
+                <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
+                  aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                  <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLongTitle">Confirm Delete</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                      </div>
+                      <div class="modal-body">
+                        Are you sure you want to delete?
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-danger" data-dismiss="modal"
+                          (click)="deleteURL(data.id)">Delete</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

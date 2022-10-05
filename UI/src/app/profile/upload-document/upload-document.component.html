@@ -1,0 +1,62 @@
+ 
+  <div class="WhiteBg plr_48 ptb_40 mb_24">
+      <h3>Upload Documents</h3>
+    <p class="sub_paragraph_text mb_24"> Upload Documents for Payment Information</p>
+    <form [formGroup]="uploadDocument" (ngSubmit)="uploadDocuments(uploadDocument.value)">
+  
+      <div class="multi_document_upload dropzone" appInput (fileDropped)="onFileDropped($event)">
+        <div class="drag_content">
+          <img src="../../assets/images/upload_icon.svg">
+          <input type="file" id="FileUploader" #fileUploader formControlName="file" (change)="onFileChanged($event.target.files)" class="form-control" multiple hidden>
+  
+          <h4>Click or Drag a File here</h4>
+          <h4>Max Upload per file is 20 mb</h4>
+        </div>
+      </div>
+  
+      <mat-card style="margin-top: 10px;" *ngFor="let selected of fileList;let i = index">
+        <div class="col-md-12">
+          <div class="row">
+            <div class="col-md-2" style="text-align: right;margin-top: 5px;">
+              <i class="fa fa-2x fa-solid fa-upload"></i>
+            </div>
+            <div class="col-md-10">
+              <p>{{selected?.name}}</p>
+  
+              <!-- <div class="progress"  > -->
+                <div class="progress-cont">
+                    <div class="progress" [style.width]="progress + '%'">
+                    </div>
+                  </div>
+              <!-- <div class="progress-bar" [style.width]="progress + '%'">{{progress}}%</div>                         -->
+            </div>
+            <!-- <p>	{{ formatBytes(file?.size) }}</p> -->
+            <!-- </div> -->
+          </div>
+        </div>
+      </mat-card>
+      <mat-card style="margin-top: 10px;" *ngFor="let selected of fileList;let i = index">
+        <div class="col-md-12">
+          <div class="row">
+            <div class="col-md-2 " style="text-align: right;margin-top: 5px;">
+              <i class="fa fa-2x fa-solid fa-upload"></i>
+            </div>
+            <div class="col-md-9">
+              <p>{{selected.name}}</p>
+            </div>
+            <div class="col-md-1" (click)="resetFileUploader(i)">
+              <p class="size">
+                <!-- {{ formatBytes(selected?.size) }} -->
+              </p>
+              <i class="fa fa-solid fa-trash" style="float: right;"></i>
+            </div>
+          </div>
+        </div>
+      </mat-card>
+      <button class="btn main_btn width_411 mt_32"  type="submit">Submit</button>
+      <!-- <div class="files">
+  
+        <input type="text" class="form-control" multiple="" />
+      </div> -->
+    </form>
+  </div>

@@ -1,0 +1,107 @@
+/*.main-content__page-title {
+  font-size: 1.6rem;
+  margin-left: 2rem;
+  margin-top: 1rem;
+  margin-bottom: 3rem;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+  font-size: 1em;
+  line-height: 1.2;
+  margin: 0;
+}
+.navigation {
+  flex: 1 0 10rem;
+  padding-bottom: 1.5em;
+  padding-right: calc(1.5em - 0.6em);
+  padding-top: 1.5em;
+}
+article,
+aside,
+footer,
+header,
+nav,
+section {
+  display: block;
+}
+
+.main-content__header,
+.main-content__body {
+  padding: 1rem 2rem;
+}*/
+
+label {
+  // display: block;
+  font-weight: normal;
+  //   margin-left: 2rem;
+}
+.navigation__link:not(:last-of-type) {
+  margin-bottom: 0.75em;
+}
+.navigation__link--active {
+  font-weight: 700;
+}
+.navigation__link {
+  background-color: transparent;
+  color: #293f54;
+  display: block;
+  line-height: 1;
+  margin-left: -0.6em;
+  padding: 0.6em;
+  transition: background-color 250ms ease-in-out, color 250ms ease-in-out;
+}
+* {
+  box-sizing: inherit;
+}
+/*
+.btn {
+  margin-left: 2rem;
+  margin-top: 2rem;
+}
+.invalid-feedback {
+}
+
+h1 {
+  display: block;
+  font-size: 2em;
+  margin-block-start: 0.67em;
+  margin-block-end: 0.67em;
+  margin-inline-start: 0px;
+  margin-inline-end: 0px;
+  font-weight: bold;
+}
+.main-content__page-title {
+  font-size: 1.6em;
+  margin-right: auto;
+  margin-left: 2rem;
+}
+
+.main-content {
+  background-color: #fff;
+  border-radius: 4px;
+  box-shadow: 0 0 2px 0 rgba(0, 0, 0, 0.2), 0 2px 2px rgba(0, 0, 0, 0.2);
+  padding-bottom: 10vh;
+  width: 98%;
+}
+.tileContainer {
+  background: #f7f7f7;
+}
+table {
+  width: 100%;
+}
+.contentBlock {
+  overflow: auto;
+  padding-bottom: 130px;
+}
+
+.leadBlock table tr td:nth-child(5) {
+  color: #7b7b7b;
+}
+*/

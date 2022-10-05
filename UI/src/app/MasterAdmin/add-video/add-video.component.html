@@ -1,0 +1,104 @@
+<ul class="wvu-breadcrumbs mb_16">
+    <li><a [routerLink]="['/training/sale']">Training</a></li>
+    <li><span class="current">Add Video</span></li>
+</ul>
+
+<h1 class="heading_one mb_51">Add Video</h1>
+
+<a class="back_to_page mb_48" [routerLink]="['/training/sale']"><img src="../../assets/images/back_page.svg"><span>Back
+        to overview</span></a>
+<div class="WhiteBg plr_48 ptb_40">
+    <form [formGroup]="form" (ngSubmit)="onSubmit()" novalidate>
+        <h3 class="dash_heading pb_25">Add Video</h3>
+        <div class="document_dragdrop" fileDropInput (fileDropped)="onFileDropped($event)">
+            <img class="mb_20" src="../../../assets/images/video_uploadIcon.svg">
+            <input type="file" id="add_video" #fileUploader (change)="onFileChanged($event)" accept="video/*"
+                formControlName="video" class="form-control" multiple hidden>
+            <label for="add_video">Click or Drag a Video, or Browse</label>
+            <div *ngIf="getControl.video?.touched && getControl.video?.invalid" class="text-danger">
+                <div *ngIf="getControl.video.errors.required">video is required.</div>
+            </div>
+            <h6 class="Filename">{{video?.name || ''}}</h6>
+        </div>
+        <div class="upload_flex mb_40">
+            <div class="view_upload upload_image_only  mr_32">
+                <input id="onlyImg" type="file" name="onlyImages" formControlName="thumbnail"
+                    accept="image/png, image/gif, image/jpeg" (change)="onThumbnailChange($event)" hidden>
+                <label for="onlyImg">
+                    <img src="../../assets/images/photo_upload_icon.svg" />
+                </label>
+                <div *ngIf="getControl.thumbnail?.touched && getControl.thumbnail?.invalid" class="text-danger">
+                    <div *ngIf="getControl.thumbnail.errors.required">Image is required.</div>
+                </div>
+                <img [src]="url" *ngIf="format==='image' && url" class="dynamic_img">
+            </div>
+
+            <div>
+                <p class="sub_paragraph_text pb_16">Upload Thumbnail Image</p>
+                <h6 class="Filename">{{thumbnail?.name || ''}}</h6>
+            </div>
+        </div>
+        <p class="sub_paragraph_text pb_16">Upload your video. </p>
+
+        <div class="form-group">
+            <input type="text" class="form-control" formControlName="title" id='title' placeholder="Title">
+            <div *ngIf="getControl.title?.touched && getControl.title?.invalid" class="text-danger">
+                <div *ngIf="getControl.title.errors.required">title is required.</div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group col-md-5">
+                <select class="form-control" (change)="changeCategory($event)" formControlName="category">
+                    <option value="">Choose your category</option>
+                    <option *ngFor="let option of categories" [ngValue]="option">{{option}}</option>
+                </select>
+                <div class="invalid-feedback" *ngIf="isSubmitted && getControl.category?.invalid">
+                    <sup>*</sup>Please enter category
+                </div>
+            </div>
+            <div class="form-group col-md-3 Flex_center">
+                <a class="add_file">Add category</a>
+            </div>
+            <div class="form-group col-md-4">
+                <input type="text" class="form-control" formControlName="order" id='order' placeholder="Order">
+                <div *ngIf="getControl.order?.touched && getControl.order?.invalid" class="text-danger">
+                    <div *ngIf="getControl.order.errors.required">order is required.</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mb_40">
+            <div class="col-md-5 mob_space_mb_24">
+                <input type="number" class="form-control" formControlName="price" id='price' placeholder="Price">
+                <div *ngIf="getControl.price?.touched && getControl.price?.invalid" class="text-danger">
+                    <div *ngIf="getControl.price.errors.required">price is required.</div>
+                </div>
+            </div>
+        </div>
+
+        <p class="sub_paragraph_text pb_16">Tags</p>
+
+        <div class="formgroup mb_16 tag-row form-control">
+            <input (input)="onChange($event)" pattern="[^\,]" #tagInput type="string" id='tag' formControlName="tag"
+                placeholder="Tag">
+            <button (click)="addTag()" type="button" class="btn main_btn">Add</button>
+        </div>
+
+        <ul class="emptyList mb_40">
+            <li *ngFor="let tag of tags; let i = index">
+                <span (click)="removeTag(i)" class="optional_btn">
+                    {{tag}}<img src="../../../assets/images/graycircle_close.svg">
+                </span>
+            </li>
+        </ul>
+
+
+        <div class="mb_40">
+            <p class="sub_paragraph_text pb_16">Description</p>
+            <textarea type="text-area" class="textarea" formControlName="description" id='description'
+                placeholder="Your Text"></textarea>
+        </div>
+        <button class="btn main_btn width_411" type="submit">SUBMIT</button>
+
+    </form>
+</div>

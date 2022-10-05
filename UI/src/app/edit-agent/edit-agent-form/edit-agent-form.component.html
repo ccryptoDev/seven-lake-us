@@ -1,0 +1,324 @@
+<form [formGroup]="ProfileForm" class="myForm" (ngSubmit)="onSubmit()" novalidate>
+  <div class="row">
+    <div class="col-md-6" *ngIf="passType == 'ADMIN'">
+      <div class="form-group row">
+        <label for="staticEmail" class="col-md-4 label_title Flex_center">Password</label>
+        <div class="col-md-8">
+          <input type="text" class="form-control" [(ngModel)]="getSingleAgent.Zoho_Password"
+            formControlName="Zoho_Password" placeholder="Password" />
+          <div *ngIf="
+              getControl.Zoho_Password?.touched &&
+              getControl.Zoho_Password?.invalid
+            " class="text-danger">
+            <div *ngIf="getControl.Zoho_Password.errors.required">
+              Password is required.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="form-group row">
+        <label class="col-md-4 label_title Flex_center">Phone Number</label>
+        <div class="col-md-8">
+          <input type="text" class="form-control" formControlName="Mobile_Phone"
+            [(ngModel)]="getSingleAgent.Mobile_Phone" placeholder="Phone No" />
+          <div *ngIf="
+              getControl.Mobile_Phone?.touched &&
+              getControl.Mobile_Phone?.invalid
+            " class="text-danger">
+            <div *ngIf="getControl.Mobile_Phone.errors.required">
+              Phone is required.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <div class="form-group row">
+        <label class="col-md-4 label_title Flex_center">Company Name</label>
+        <div class="col-md-8">
+          <input type="text" class="form-control" formControlName="Company" [(ngModel)]="getSingleAgent.Company"
+            placeholder="Company Name" />
+          <div *ngIf="getControl.Company?.touched && getControl.Company?.invalid" class="text-danger">
+            <div *ngIf="getControl.Company.errors.required">
+              Company Name is required.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-6">
+      <div class="form-group row">
+        <label class="col-md-4 label_title Flex_center">AAM</label>
+        <div class="col-md-8">
+          <input type="text" class="form-control" formControlName="AAM_Notes" [(ngModel)]="getSingleAgent.AAM_Notes"
+            placeholder="Company Name" />
+          <div *ngIf="getControl.AAM_Notes?.touched && getControl.aam?.invalid" class="text-danger">
+            <div *ngIf="getControl.AAM_Notes.errors.required">
+              AAM Notes Name is required.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <div class="form-group row">
+        <label class="col-md-4 label_title Flex_center">First Name</label>
+        <div class="col-md-8">
+          <input type="text" class="form-control" formControlName="Agent_First" placeholder="First Name"
+            [(ngModel)]="getSingleAgent.Agent_First" />
+          <div *ngIf="
+              getControl.Agent_First?.touched && getControl.Agent_First?.invalid
+            " class="text-danger">
+            <div *ngIf="getControl.Agent_First.errors.required">
+              First Na me is required.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6">
+
+      <div class="form-group row">
+        <label class="col-md-4 label_title Flex_center">Office</label>
+        <div class="col-md-8">
+          <select class="form-control" [(ngModel)]="agentOffice" formControlName="Office">
+            <option [selected]="!agentOffice" value="">Choose your Office</option>
+            <option *ngFor="let category of SelectedPageDefaultEmail; let i = index" [value]="category"
+              [selected]="category === agentOffice">
+              {{ category }}
+            </option>
+          </select>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <div class="form-group row">
+        <label class="col-md-4 label_title Flex_center">Last Name</label>
+        <div class="col-md-8">
+          <input type="text" class="form-control" formControlName="Agent_Last" [(ngModel)]="getSingleAgent.Agent_Last"
+            placeholder="Last Name" />
+          <div *ngIf="
+              getControl.Agent_Last?.touched && getControl.Agent_Last?.invalid
+            " class="text-danger">
+            <div *ngIf="getControl.Agent_Last.errors.required">
+              Last Name is required.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="form-group row">
+        <label class="col-md-4 label_title Flex_center">Status</label>
+        <div class="col-md-8">
+          <select class="form-control" [(ngModel)]="StatusChart" formControlName="Status">
+            <option value="">Choose your Status</option>
+            <option *ngFor="let category of Status; let i = index" [value]="category.value"
+              [attr.selected]="category.value==StatusChart?true:false">
+              {{ category.value }}
+            </option>
+          </select>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <div class="form-group row">
+        <label class="col-md-4 label_title Flex_center">Email</label>
+        <div class="col-md-8">
+          <input type="text" class="form-control" formControlName="Email" [(ngModel)]="getSingleAgent.Email"
+            placeholder="Email" />
+
+          <a href="#" class="smallBlue_color mt_8">Add additional email addresses</a>
+          <div *ngIf="getControl.Email?.touched && getControl.Email?.invalid" class="text-danger">
+            <div *ngIf="getControl.Email.errors.required">
+              Email is required.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="form-group row">
+        <label class="col-md-4 label_title Flex_center">Payable To</label>
+        <div class="input-group col-md-8">
+          <input type="text" class="form-control" formControlName="Checks_Payable_To"
+            [(ngModel)]="getSingleAgent.Checks_Payable_To" placeholder="Payable To" />
+          <div *ngIf="
+              getControl.Checks_Payable_To?.touched &&
+              getControl.Checks_Payable_To?.invalid
+            " class="text-danger">
+            <div *ngIf="getControl.Checks_Payable_To.errors.required">
+              payableTo is required.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <div class="form-group mb_0 row">
+        <label class="col-md-4 label_title Flex_center">URL</label>
+        <div class="input-group col-md-8">
+          <input type="text" class="form-control" formControlName="Source_URL" [(ngModel)]="getSingleAgent.Source_URL"
+            placeholder="Source URL" />
+        </div>
+        <div *ngIf="
+            getControl.Source_URL?.touched && getControl.Source_URL?.invalid
+          " class="text-danger">
+          <div *ngIf="getControl.Source_URL.errors.required">
+            Url is required.
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6"></div>
+  </div>
+  <hr class="horizontal_border mt_32 mb_32" />
+
+  <div class="row">
+    <div class="col-md-6">
+      <div class="form-group row">
+        <label class="col-md-4 label_title Flex_center">Street Address</label>
+        <div class="input-group col-md-8">
+          <input type="text" class="form-control" formControlName="Street" [(ngModel)]="getSingleAgent.Street"
+            placeholder="Street Address" />
+        </div>
+        <div *ngIf="getControl.Street?.touched && getControl.Street?.invalid" class="text-danger">
+          <div *ngIf="getControl.Street.errors.required">
+            Street is required.
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6 form-group">
+      <div class="row displayFlex align_item_Center h100per">
+        <div class="col-md-4">
+          <label class="label_title"> Subscription ID</label>
+        </div>
+        <div class="col-md-8">
+          <h5 class="value_Text">1414890</h5>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <div class="form-group row">
+        <label class="col-md-4 label_title Flex_center">City</label>
+        <div class="input-group col-md-8">
+          <input type="text" class="form-control" formControlName="City" [(ngModel)]="getSingleAgent.City"
+            placeholder="City" />
+        </div>
+        <div *ngIf="getControl.City?.touched && getControl.City?.invalid" class="text-danger">
+          <div *ngIf="getControl.City.errors.required">City is required.</div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6"></div>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <div class="form-group row">
+        <label class="col-md-4 label_title Flex_center">State</label>
+        <div class="input-group col-md-8">
+          <input type="text" class="form-control" formControlName="State" [(ngModel)]="getSingleAgent.State"
+            placeholder="State" />
+          <div *ngIf="getControl.State?.touched && getControl.State?.invalid" class="text-danger">
+            <div *ngIf="getControl.State.errors.required">
+              State is required.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="form-group row">
+        <label class="col-md-4 label_title Flex_center">Zip Code</label>
+        <div class="input-group col-md-8">
+          <input type="text" class="form-control" formControlName="Zip_Code" [(ngModel)]="getSingleAgent.Zip_Code"
+            placeholder="Zip Code" />
+          <div *ngIf="getControl.Zip_Code?.touched && getControl.Zip_Code?.invalid" class="text-danger">
+            <div *ngIf="getControl.Zip_Code.errors.required">
+              zipCode is required.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <div class="form-group row">
+        <label class="col-md-4 label_title Flex_center">BFS Email</label>
+        <div class="input-group col-md-8">
+          <input type="text" class="form-control" formControlName="Secondary_Email" placeholder="BFS Email" />
+          <div *ngIf="
+              getControl.Secondary_Email?.touched &&
+              getControl.Secondary_Email?.invalid
+            " class="text-danger">
+            <div *ngIf="getControl.Secondary_Email.errors.required">
+              bfs Email is required.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="form-group row">
+        <label class="col-md-4 label_title Flex_center">BFS Phone</label>
+        <div class="input-group col-md-8">
+          <input type="text" class="form-control" formControlName="FA_Phone" placeholder="BFS Phone" />
+          <div *ngIf="getControl.FA_Phone?.touched && getControl.FA_Phone?.invalid" class="text-danger">
+            <div *ngIf="getControl.FA_Phone.errors.required">
+              bfs Phone is required.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <div class="form-group row mb_0">
+        <label class="col-md-4 label_title Flex_center">Finance Agent Level</label>
+        <div class="input-group col-md-8">
+          <select class="form-control" formControlName="Account_Type" style="width: 450px" [(ngModel)]="selectedLevel">
+            <option *ngFor="let c of levels; let i = index" [value]="c.name" [attr.selected]="i == 0 ? true : null">
+              {{ c.name }}
+            </option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-6">
+      <div class="form-group row mb_0">
+        <label class="col-md-4 label_title Flex_center">Redirect To</label>
+        <div class="input-group col-md-8">
+          <select class="form-control">
+            <option>Two Page</option>
+            <option>Three Page</option>
+          </select>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <hr class="horizontal_border mt_32 mb_32" />
+
+  <button class="btn main_btn width_490 mt_40" type="submit">
+    Save Changes
+  </button>
+</form>

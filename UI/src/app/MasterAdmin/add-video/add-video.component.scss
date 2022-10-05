@@ -1,0 +1,44 @@
+.tag-row {
+	display: grid;
+	grid-template-columns: 3fr 1fr;
+	padding: 0px;
+	border: unset;
+
+	input,
+	button {
+		width: 100%;
+		height: 100%;
+		padding: 8px 16px;
+		border-radius: inherit;
+	}
+
+	button {
+		text-transform: uppercase;
+		text-align: left;
+		border-top-left-radius: 0px;
+		border-bottom-left-radius: 0px;
+	}
+
+	input {
+		background: var(--input-color);
+		color: var(--primary-color);
+		outline: none;
+		border: 1px solid var(--input-border-color);
+		border-right: 0px;
+		border-top-right-radius: 0px;
+		border-bottom-right-radius: 0px;
+	}
+}
+
+.emptyList {
+	gap: 10px;
+	flex-wrap: wrap;
+}
+
+div.document_dragdrop {
+	&.fileover {
+		label {
+			text-decoration: underline;
+		}
+	}
+}

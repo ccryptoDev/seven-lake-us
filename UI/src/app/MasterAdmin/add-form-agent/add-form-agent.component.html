@@ -1,0 +1,97 @@
+<h1 class="heading_one mb_51" *ngIf="(data =='' || data == undefined)">Add Agent Form</h1>
+<h1 class="heading_one mb_51" *ngIf="(data !='' && data != undefined)">Edit Agent Form</h1>
+
+<a class="back_to_page mb_48" (click)="back()"><img src="../../assets/images/back_page.svg" /><span>Back to
+    overview</span></a>
+
+<div class="WhiteBg plr_48 ptb_40">
+  <h3 class="dash_heading pb_24">Lead Form</h3>
+
+  <form [formGroup]="formdata" (ngSubmit)="onClickSubmit()">
+    <div class="row">
+      <div class="col-md-6">
+        <div class="form-group">
+          <input type="text" class="form-control" placeholder="First name" name="name" formControlName="name" />
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="form-group">
+          <input type="text" placeholder="Agent Id" class="form-control" formControlName="agentId" />
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-6">
+        <div class="form-group">
+          <input type="text" class="fortextbox" class="form-control" placeholder="Sub Id" formControlName="subId" />
+        </div>
+      </div>
+      <div class="col-md-6">
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-6">
+        <div class="form-group">
+          <input type="text" class="form-control" placeholder="First name" name="firstName"
+            formControlName="firstName" />
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="form-group">
+          <input type="text" placeholder="Last Name" class="form-control" formControlName="lastName" />
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-6">
+        <div class="form-group">
+          <input type="email" class="form-control" placeholder="Email" name="Email" formControlName="email" />
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="form-group">
+          <input type="tel" class="fortextbox" class="form-control" [textMask]="numberMask" placeholder="Phone Number"
+            formControlName="phone" />
+        </div>
+      </div>
+    </div>
+    <textarea class="textarea mb_29" type="text" placeholder="description" formControlName="description"></textarea>
+
+    <div class="row">
+      <div class="col-md-6">
+        <div class="form-group">
+          <input placeholder="Category" type="text" class="form-control" name="formManagerDropdow"
+            formControlName="formManagerDropdow" />
+        </div>
+      </div>
+    </div>
+    <div class="row mb_60">
+      <div class="col-md-6 mob_space_mb_24">
+        <div class="label_title">
+          <p>Receive drip emails:</p>
+        </div>
+        <div class="prefer_method">
+          <input type="radio" id="receiveDripsTrue" value="Yes" checked formControlName="receiveDrips" />
+          <label for="receiveDripsTrue"> Yes </label>
+          <input type="radio" id="receiveDripsFalse" value="No" formControlName="receiveDrips" />
+          <label for="receiveDripsFalse"> No </label>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="label_title">
+          <p>Receive newsletter emails:</p>
+        </div>
+
+        <div class="prefer_method">
+          <input type="radio" id="receiveLettersTrue" value="Yes" checked formControlName="receiveLetters" />
+          <label for="receiveLettersTrue"> Yes </label>
+          <input type="radio" id="receiveLettersFalse" value="No" formControlName="receiveLetters" />
+          <label for="receiveLettersFalse"> No </label>
+        </div>
+      </div>
+    </div>
+    <button class="btn main_btn width_411 mt_48" type="submit">
+      Save Form
+    </button>
+  </form>
+</div>

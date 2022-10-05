@@ -1,0 +1,287 @@
+<div class="row mb_24">
+  <div class="col-lg-6 col-12 mob_space_mb_24 mb_24">
+    <div class="marketing_Links p16  height_100per">
+      <h3 class="dash_heading pb_16">Your funding and commissions</h3>
+      <div>
+        <select class="ddDetails" [(ngModel)]="selectedDetails" (change)="ChangeDetails()">
+          <option *ngFor="let c of ddDetails; let i = index" [value]="c" [attr.selected]="c === marketingDomain">
+            {{c}}
+          </option>
+        </select>
+      </div>
+
+      <ul class="breadcrumb_page mt_22 mb_24">
+        <li (click)="selectTab(1)" [class.active]="isGeneral">
+          <a class="breadcrumb_item">
+            <div class="crumb_bg">
+              <img src="../../assets/images/akar_icons_edit.svg" />
+            </div>
+            <div class="crumb_text" [class.active]="isGeneral">General</div>
+          </a>
+        </li>
+        <li (click)="selectTab(2)">
+          <a class="breadcrumb_item" [class.active]="isFunding">
+            <div class="crumb_bg">
+              <img src="../../assets/images/akar_icons_edit.svg" />
+            </div>
+            <div class="crumb_text" [class.active]="isFunding">Funding</div>
+          </a>
+        </li>
+        <li (click)="selectTab(3)">
+          <a class="breadcrumb_item" [class.active]="isCommission">
+            <div class="crumb_bg">
+              <img src="../../assets/images/akar_icons_edit.svg" />
+            </div>
+            <div class="crumb_text" [class.active]="isCommission">Commission</div>
+          </a>
+        </li>
+      </ul>
+
+      <div *ngIf="isGeneral">
+        <div id="divChart">
+          <canvas id="myChart" style="height: 300px; width: 100%;"></canvas>
+        </div>
+        <ng-template #noGeneral>
+          <div style="height: 300px; display: flex;justify-content: center;align-items: center;">
+            <p class="no_document_available "> No data found in General</p>
+          </div>
+        </ng-template>
+      </div>
+      <div *ngIf="isFunding">
+        <div id="divChart" *ngIf="(fundingCount > 0);else noFunding">
+          <canvas id="funChart" style="height: 300px; width: 100%;"></canvas>
+        </div>
+        <ng-template #noFunding>
+          <div style="height: 300px; display: flex;justify-content: center;align-items: center;">
+            <p class="no_document_available "> No data found in Funding </p>
+          </div>
+        </ng-template>
+      </div>
+      <div *ngIf="isCommission">
+        <div id="divChart" *ngIf="(fundingCount > 0);else nocommssion">
+          <canvas id="commChart" style="height: 300px; width: 100%;"></canvas>
+        </div>
+        <ng-template #nocommssion>
+          <div style="height: 300px; display: flex;justify-content: center;align-items: center;">
+            <p class="no_document_available "> No data found in Commission </p>
+          </div>
+        </ng-template>
+      </div>
+      <div class="">
+        <table>
+          <thead>
+            <tr>
+              <th>Created Time</th>
+              <th>Values = $</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-6">
+    <div class="landing_pages">
+      <h3 class="dash_heading pb_16">Landing Pages</h3>
+      <p class="sub_paragraph_text pb_20">
+        Select a landing page you prefer to use
+      </p>
+      <div class="row gap_16">
+        <div class="col-md-6" *ngFor="let page of landingPages">
+          <div class="land_img">
+            <img class="card-img-top" [src]="page.thumbnailURL" (click)="openconfirmationpopup(page)"
+              data-toggle="modal" data-target="#exampleModalCenter">
+          </div>
+          <div class="modal fade commonPopup" id="exampleModalCenter" tabindex="-1" role="dialog"
+            aria-labelledby="exampleModalCenterTitle" aria-hidden="true" *ngIf="isShowModel">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+              <div class="modal-content">
+                <div class="popup_header pb_16 displayFlex justifycontent_space_bw align_item_Center">
+                  <div>
+                    <h2 class="mb-0">101 - LP Steps</h2>
+                  </div>
+                  <div data-dismiss="modal">
+                    <a href="javascript:void(0)" class="CLose_icon">
+                      <img src="../../../assets/images/icon_close.svg">
+                    </a>
+                  </div>
+                </div>
+                <div class="modal-body">
+                  <img class="card-img-top" [src]="currentPage.previewURL || currentPage.thumbnailURL">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="row">
+  <div class="col-md-6 mob_space_mb_24">
+    <div class="marketing_Links">
+      <div class="p16">
+        <h3 class="dash_heading pb_16">Marketing Links</h3>
+        <p class="sub_paragraph_text">
+          Sign up leads & new agents with these links to get paid
+        </p>
+      </div>
+
+      <div *ngIf="!domainSelected" class="plr_16 mb_24">
+        <select [disabled]="domainSelected" [value]="marketingDomain" #select (change)="updateDomain()"
+          class="form-control">
+          <option *ngFor="let domain of domains" [selected]="domain.value === marketingDomain" [value]="domain.value">
+            {{domain.name}}</option>
+        </select>
+      </div>
+
+      <div class="marketing_links table_responsive">
+        <table>
+          <tr>
+            <th>
+              <div class="media">
+                <img src="../assets/images/link.svg" alt="Generic placeholder image" />
+                <div class="media-body">
+                  <h5 class="mt-0">Send to possible Leads</h5>
+                  <a href="#">{{marketingDomain}}{{memberNumber}}</a>
+                </div>
+              </div>
+            </th>
+            <td>
+              <a (click)="copyMessage(marketingDomain+memberNumber)">Copy link <img
+                  src="../assets/images/arrow_right.svg" /></a>
+            </td>
+          </tr>
+          <tr>
+            <th>
+              <div class="media">
+                <img src="../assets/images/link.svg" alt="Generic placeholder image" />
+                <div class="media-body">
+                  <h5 class="mt-0">Send to possible Leads</h5>
+                  <a href="#">{{marketingDomain}}agent/{{memberNumber}}</a>
+                </div>
+              </div>
+            </th>
+            <td>
+              <a (click)="copyMessage(marketingDomain+'agent/'+memberNumber)">Copy link <img
+                  src="../assets/images/arrow_right.svg" /></a>
+            </td>
+          </tr>
+          <tr>
+            <th>
+              <div class="media">
+                <img src="../assets/images/link.svg" alt="Generic placeholder image" />
+                <div class="media-body">
+                  <h5 class="mt-0">Send to possible Leads</h5>
+                  <a href="#">https://merchantprocessingpro.com/{{memberNumber}}</a>
+                </div>
+              </div>
+            </th>
+            <td>
+              <a (click)="copyMessage('https://merchantprocessingpro.com/'+memberNumber)">Copy link <img
+                  src="../assets/images/arrow_right.svg" /></a>
+            </td>
+          </tr>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-md-6">
+    <div class="agents">
+      <h3 class="pb_17">Agents</h3>
+      <div class="row agents-top-row">
+        <div class="col-lg-6 col-sm-12">
+          <div class="media mob_space_mb_16">
+            <div class="val_box">{{currentMonthTeam}}</div>
+            <div class="media-body">
+              <h5 class="mt-0">Agents Created</h5>
+              <p>This months {{currentMonthTeam}} / {{myAllInviteAgnet}}</p>
+            </div>
+          </div>
+          <span>{{currentMonthTeam}}</span>
+          <div class="progress">
+            <div class="progress-bar" [style.width]="AgentPerValue" role="progressbar">
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-6 col-sm-12">
+          <div class="media mob_space_mb_16">
+            <div class="val_box">{{currentMonthLead}}</div>
+            <div class="media-body">
+              <h5 class="mt-0">Leads Created</h5>
+              <p>This months</p>
+            </div>
+          </div>
+          <span>{{currentMonthLead}}</span>
+          <div class="progress">
+            <div class="progress-bar" role="progressbar" style="width: 2%">
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row agents-bottom-row">
+        <div class="col-lg-6 col-sm-12">
+          <div class="media mob_space_mb_16">
+            <div class="val_box">{{allAgents}}</div>
+            <div class="media-body">
+              <h5 class="mt-0">Agents Created</h5>
+              <p>For the lifetime</p>
+            </div>
+          </div>
+          <span>{{myAllInviteAgnet}}</span>
+          <div class="progress">
+            <div class="progress-bar" role="progressbar" style="width: 87%">
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-6 col-sm-12">
+          <div class="media mob_space_mb_16">
+            <div class="val_box">{{allZohoValues}}</div>
+            <div class="media-body">
+              <h5 class="mt-0">Leads Created</h5>
+              <p>For the lifetime</p>
+            </div>
+          </div>
+          <span>{{myTotalLead}}</span>
+          <div class="progress">
+            <div class="progress-bar" role="progressbar" style="width: 14%">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<ng-template #confirmationPopup>
+  <div class="confirmationPopup">
+    <div class="popup_header pb_24 mb_24 displayFlex justifycontent_space_bw align_item_Center">
+      <div>
+        <h2 mat-dialog-title class="mb-0">Confirmation Popup</h2>
+      </div>
+      <div>
+        <a href="javascript:void(0)" (click)="closeSelectTemplate()">
+          <img src="../../../assets/images/icon_close.svg">
+        </a>
+      </div>
+    </div>
+    <div class="popup_body mb_24">
+      <p class="paragraph_text">Are you sure to select this landing page?</p>
+    </div>
+    <div class="flex_end">
+      <div>
+        <button class="btn small_main_btn mr_16" (click)="onSelectTemplate()">Yes</button>
+        <button class="btn small_main_hover_btn" (click)="closeSelectTemplate()">No</button>
+      </div>
+    </div>
+  </div>
+</ng-template>

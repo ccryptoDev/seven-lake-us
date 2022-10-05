@@ -1,0 +1,45 @@
+.example-card {
+    margin-top: 20px;
+    max-width: 100%;
+    margin-bottom: 8px;
+}
+.profile{
+    float: right;
+}
+.profiledetails {
+    margin-top: 0;
+    padding: 0;
+    margin-left: 20px; 
+    margin-right: 20px;   
+}
+.img {
+    width: 40px;
+    height: 40px;
+    max-height: 40px;
+    max-width: 40px;
+    border-radius: 50%;
+}
+// .input-icons i {
+//     position: absolute;
+// }
+  
+// .input-icons {
+//     width: 100%;
+//     margin-bottom: 10px;
+// }
+
+.has-search .form-control {
+    padding-left: 2.375rem;
+}
+
+.has-search .form-control-feedback {
+    position: absolute;
+    z-index: 2;
+    display: block;
+    width: 2.375rem;
+    height: 2.375rem;
+    line-height: 2.375rem;
+    text-align: center;
+    pointer-events: none;
+    color: #aaa;
+}

@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<style>
+		.text {
+			font-family: Arial, sans-serif;
+			font-size: 16px;
+			line-height: 24px;
+			margin-top: 0px;
+			margin-bottom: 16px;
+			color: #000;
+		}
+
+		body {
+			margin: 0px;
+			padding: 0px
+		}
+
+		table.parent-table {
+			width: 100%;
+			border: 0;
+			border-spacing: 0;
+			background: #ffffff
+		}
+
+		table.table-info {
+			border: 1px solid #a9a9a9;
+			border-spacing: 0px;
+			width: 50%;
+		}
+
+		table.inner-table {
+			width: 100%;
+			border-spacing: 0px 10px;
+			padding: 30px;
+		}
+
+		td.parent-cell {
+			padding: 0
+		}
+
+		td.logo-cell {
+			text-align: center;
+			padding-bottom: 30px;
+		}
+
+		td.logo-cell>img {
+			width: 200px;
+		}
+
+		td.info-cell {
+			padding-bottom: 30px;
+		}
+
+		td.invited-cell {
+			text-align: center;
+			padding-bottom: 30px;
+		}
+
+		.invited {
+			font-family: Arial, sans-serif;
+			font-size: 28px;
+			line-height: 30px;
+		}
+
+		.invited-start {
+			margin-top: 0px;
+			margin-bottom: 5px;
+			color: #000;
+			font-weight: 500;
+		}
+
+		.invited-end {
+			margin: 0px;
+			color: #000;
+			font-weight: 500;
+		}
+
+		.details {
+			font-family: Arial, sans-serif;
+			font-size: 16px;
+			line-height: 24px;
+			color: #000;
+		}
+
+		.details-to {
+			padding: 10px;
+			border-right: 1px solid #a9a9a9;
+			border-bottom: 1px solid #a9a9a9;
+		}
+
+		.details-from {
+			padding: 10px;
+			border-bottom: 1px solid #a9a9a9;
+		}
+
+		.details-agent {
+			padding: 10px;
+			border-right: 1px solid #a9a9a9;
+		}
+
+		.details-office {
+			padding: 10px;
+		}
+	</style>
+</head>
+
+<body>
+	<table class="parent-table">
+		<tbody>
+			<tr>
+				<td class="parent-cell" align="center">
+					<table class="inner-table">
+						<tr>
+							<td class="logo-cell">
+								<img src="cid:logo">
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<p class="text">
+									Agent Invite (from another agent inside portal)</p>
+								<p class="text">
+									Subject: <span>
+										<%= agentName %>
+									</span> Thought You’d Be a Good Finance Agent</p>
+							</td>
+						</tr>
+						<tr>
+							<td class="info-cell">
+								<table class="table-info">
+									<tr>
+										<th class="details details-to">
+											To</th>
+										<th class="details details-from">
+											From</th>
+									</tr>
+									<tr>
+										<td class="details details-agent">
+											Potential Agent</td>
+										<td class="details details-office">
+											<span>
+												<%= office %>
+											</span>
+										</td>
+									</tr>
+								</table>
+							</td>
+						</tr>
+						<tr>
+							<td class="invited-cell">
+								<h4 class="invited invited-start">
+									You’ve been invited to </h4>
+								<h4 class="invited invited-end">
+									join the <span>
+										<%= office %>
+									</span> Family </h4>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<p class="text">
+									Hi, <%= firstName %>
+								</p>
+								<p class="text">
+									<span>
+										<%= agentName %>
+									</span> has invited you to join us at <span>
+										<%= office %>
+									</span> helping people get
+									access to money to start and grow their business. To create your account and get started just click on
+									the button below.
+								</p>
+								<p class="text">
+									<span><a href="<%= inviteUrl %>">[Get Started Now]</a></span>
+								</p>
+								<p class="text">
+									Sign up is free and there’s no obligation. In fact, we pay YOU for successfully funded clients.</p>
+								<p class="text">
+									If you are not interested you can ignore this email. </p>
+								<p class="text">
+									I look forward to working with you. </p>
+								<p class="text">
+									<span>
+										<%= office %>/<%= agentName %>
+									</span>
+								</p>
+								<p class="text">
+									By clicking you are confirming your email address and agreeing to our [Terms of Service] </p>
+							</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+</body>
+
+</html>

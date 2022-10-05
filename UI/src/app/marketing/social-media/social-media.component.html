@@ -1,0 +1,34 @@
+<div class="WhiteBg pt_35_pb_24 plr_16 mb_24">
+  <h3 class="dash_heading mb_24">Social Media</h3>
+
+  <div class="row">
+    <div class="col-lg-6 col-md-12 mob_space_mb_24" *ngFor="let document of data">
+      <div class="documents_application">
+        <ul class="rightTab_bar">
+          <li>
+            <a (click)="editdata(document.id)" [routerLink]="['/edittemplates']">Edit <img
+                src="../../../assets/images/edit_tab.svg" /></a>
+          </li>
+          <li (click)="downloadFile(document.Document_Link,document.id)">
+            <a class="download_bg"><img src="../../../assets/images/application_download.svg" /></a>
+          </li>
+        </ul>
+        <div class="media" data-toggle="modal" [attr.data-target]="'#modal-preview-' + document.id">
+          <img [src]="document.thumbnail" />
+          <div class="media-body">
+            <h5 class="mt-0"> {{ document.title }}</h5>
+            <p>
+              {{ document.description }}
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Modal -->
+      <document-preview [id]="document.id" [src]="document.documentUrl"></document-preview>
+    </div>
+  </div>
+</div>
+
+<confirm-payment message="You will be charged {{ gettingPrice| currency:'USD' }}. Are you sure you want to continue?" [onConfirm]="onYes"></confirm-payment>
+<card-modal [onSubmit]="onSubmit"></card-modal>

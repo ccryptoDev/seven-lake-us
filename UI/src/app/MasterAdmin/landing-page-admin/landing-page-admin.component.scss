@@ -1,0 +1,65 @@
+.audience-container {
+	margin-bottom: 36px;
+}
+
+.Audience_Overview {
+	position: relative;
+	height: 100%;
+	
+	.media {
+		box-sizing: border-box;
+	}
+
+	box-shadow: 0px 0.25px 1px rgba(0, 0, 0, 0.039), 0px 0.85px 3px rgba(0, 0, 0, 0.19);
+	transition: 0.2s ease box-shadow;
+
+	&:hover {
+		box-shadow: 0px 9px 12px rgba(0, 0, 0, 0.14), 0px 3px 16px rgba(0, 0, 0, 0.12);
+	}
+}
+
+.add-form-container {
+	margin-bottom: 36px;
+}
+
+.add_lading_page {
+	min-height: 140px;
+}
+
+ul.rightTab_bar {
+	right: 0px;
+	top: 0px;
+}
+
+.calendar_bg {
+	outline: none;
+	border: none;
+	transition: 0.2s ease box-shadow;
+	position: relative;
+
+	&:hover {
+		box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.14), 0px 3px 5px rgba(0, 0, 0, 0.12);
+	}
+
+	.date-range {
+		position: absolute;
+		top: 0;
+		left: 0;
+		visibility: hidden;
+		width: 100%;
+		height: 0;
+		z-index: -1;
+	}
+}
+
+.landing-name {
+	text-overflow: ellipsis;
+	overflow: hidden;
+	max-width: 80%;
+}
+
+.web_bg {
+	&.active {
+		background: var(--main-color);
+	}
+}

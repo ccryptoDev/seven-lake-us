@@ -1,0 +1,22 @@
+<ng-template #confirmationPopupManual>
+	<div class="confirmationPopup">
+		<div class="popup_header pb_24 mb_24 displayFlex justifycontent_space_bw align_item_Center">
+			<div>
+				<h2 mat-dialog-title class="mb-0">Payment Confirmation</h2>
+			</div>
+
+			<div>
+				<span (click)="close()">
+					<img src="../../../assets/images/icon_close.svg">
+				</span>
+			</div>
+		</div>
+		<div class="popup_body mb_24">
+			<p class="paragraph_text">{{message}}</p>
+		</div>
+			<div class="flex_end">
+				<button class="btn small_main_btn mr_16" (click)="confirm()">Yes</button>
+				<button class="btn btn small_main_hover_btn" (click)="close()">No</button>
+			</div>
+	</div>
+</ng-template>

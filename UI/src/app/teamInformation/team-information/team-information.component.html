@@ -1,0 +1,165 @@
+<div class="WhiteBg plr_16_ptb_24">
+  <div class="table_header">
+    <div>
+      <h3 class="dash_heading">Agents Information</h3>
+    </div>
+    <div class="overall">
+      <span>Sort by:</span>
+      <select [(ngModel)]="sortBy">
+        <option>Name</option>
+        <option>Member Number</option>
+      </select>
+    </div>
+  </div>
+  <div class="Div_table">
+    <div class="row ">
+      <div class="col-md-12 col-sm-12">
+        <div class="table_responsive">
+          <table class="table rounded">
+            <thead>
+              <tr class="table-header table-row">
+                <th class="td"></th>
+                <th class="td">Agent Name</th>
+                <th class="td">Company Name</th>
+                <th class="td">Leads Last 30 Days</th>
+                <th class="td">Total Leads</th>
+                <th class="td"># of Contract</th>
+                <th class="td">Member#</th>
+                <th class="td">Status</th>
+                <th class="td"></th>
+              </tr>
+            </thead>
+            <tbody>
+              <ng-container *ngFor="let row of activeUsers | sortZohoAgents: sortBy; let rowIndex = index">
+                <tr class="table-row table_body" [class.clickable]="isRowClickable(rowIndex)"
+                  (click)="onClick(rowIndex, row.id)">
+                  <td class="td">
+                    <span *ngIf="isRowClickable(rowIndex)">
+                      <span *ngIf="expanded[row.id]">-</span>
+                      <span *ngIf="!expanded[row.id]">+</span>
+                    </span>
+                  </td>
+                  <td class="td">{{ row?.Name }}</td>
+                  <td class="td">{{ row?.Company }}</td>
+                  <td class="td">{{ row.currentMonthteam }}</td>
+                  <td class="td">{{ row?.children?.length || 0 }}</td>
+                  <td class="td">{{ row?.children?.length || 0 }}</td>
+                  <td class="td">{{ row?.Member_Number }}</td>
+                  <td class="td status-cell">
+                    <span class="status-action deactivate">
+                      Active
+                    </span>
+                  </td>
+                  <td class="td actions-cell">
+                    <div>
+                      <button (click)="openNotesModal($event, row.id)"
+                        class="btn btn-primary btn-sm action-button">Notes</button>
+                      <button (click)="openMessageModal($event, row.id)"
+                        class="btn btn-primary btn-sm action-button message-button">Message</button>
+                    </div>
+                  </td>
+                </tr>
+                <ng-container>
+                  <tr [ngClass]="{'expanded': expanded[row.id]}" class="table-row table-header child sub-row">
+                    <td class="td">
+                      <div></div>
+                    </td>
+                    <td class="td">
+                      <div>Name</div>
+                    </td>
+                    <td class="td">
+                      <div>Email</div>
+                    </td>
+                    <td class="td">
+                      <div>Company</div>
+                    </td>
+                    <td class="td" colspan="5">
+                      <div>Created Date</div>
+                    </td>
+                  </tr>
+                  <tr [ngClass]="{'expanded': expanded[row.id]}" class="table-row table_body child-row sub-row"
+                    *ngFor="let childrow of row.children">
+                    <td class="td">
+                      <div></div>
+                    </td>
+                    <td class="td">
+                      <div>{{ childrow?.Full_Name }}</div>
+                    </td>
+                    <td class="td">
+                      <div>{{ childrow?.Email }}</div>
+                    </td>
+                    <td class="td">
+                      <div>{{ childrow?.Company }}</div>
+                    </td>
+                    <td class="td" colspan="5">
+                      <div>{{ childrow?.Created_Time | date: 'dd-MMM-yyy' }}</div>
+                    </td>
+                  </tr>
+                </ng-container>
+              </ng-container>
+              <tr class="table-row table_body" *ngFor="let row of inactiveUsers | sortAgents: sortBy;">
+                <td class="td"></td>
+                <td class="td">{{ [row.firstName, row.lastName].join(' ') }}</td>
+                <td class="td"></td>
+                <td class="td">0</td>
+                <td class="td">0</td>
+                <td class="td">0</td>
+                <td class="td">{{ row.memberNumber }}</td>
+                <td class="td status-cell">
+                  <span class="status-action activate">
+                    Pending
+                  </span>
+                </td>
+                <td></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+  <ng-template #agentNotes>
+    <div class="confirmationPopup" id="notesModal">
+      <div class="popup_header pb_24 mb_24 displayFlex justifycontent_space_bw align_item_Center">
+        <div>
+          <h2 mat-dialog-title class="mb-0">Agent Notes</h2>
+        </div>
+        <div>
+          <span class="close" (click)="closeNotesModal()" data-dismiss="modal" aria-label="Close">
+            <img src="../../../assets/images/icon_close.svg">
+          </span>
+        </div>
+      </div>
+      <div class="popup_body mb_24">
+        <textarea class="form-control note-control" placeholder="Note" type="text" [(ngModel)]="note"></textarea>
+      </div>
+      <div class="flex_end">
+        <div>
+          <button class="btn small_main_hover_btn" (click)="updateNote()">Update</button>
+        </div>
+      </div>
+    </div>
+  </ng-template>
+  <ng-template #agentMessage>
+    <div class="confirmationPopup" id="messageModal">
+      <div class="popup_header pb_24 mb_24 displayFlex justifycontent_space_bw align_item_Center">
+        <div>
+          <h2 mat-dialog-title class="mb-0">Send Message To Agent</h2>
+        </div>
+        <div>
+          <span class="close" (click)="closeMessageModal()" data-dismiss="modal" aria-label="Close">
+            <img src="../../../assets/images/icon_close.svg">
+          </span>
+        </div>
+      </div>
+      <div class="popup_body mb_24">
+        <textarea class="form-control message-control" placeholder="Message" type="text" [(ngModel)]="message"></textarea>
+      </div>
+      <div class="flex_end">
+        <div>
+          <button (click)="sendMessage()" [disabled]="!message" class="btn small_main_hover_btn">Send message</button>
+        </div>
+      </div>
+    </div>
+  </ng-template>
+</div>

@@ -1,0 +1,60 @@
+<div class="WhiteBg plr_16_ptb_24">
+  <div class="table_header">
+    <div>
+      <h3 class="dash_heading">Agents Manager</h3>
+    </div>
+    <div></div>
+  </div>
+  <hr class="horizontal_border mb_16" />
+  <div class="displayFlex align_item_Center justifycontent_space_bw mb_16">
+    <div class="search_header width_424">
+      <div class="input-group">
+        <div class="input-group-prepend">
+          <span class="input-group-text"><i class="far fa-search"></i></span>
+        </div>
+        <input type="text" class="form-control" placeholder="Search" [(ngModel)]="searchText" #input>
+      </div>
+    </div>
+    <div class="overall">
+      <span>Sort by:</span>
+      <select>
+        <option>Last Action</option>
+      </select>
+    </div>
+  </div>
+  <div class="table_wrapper table_responsive">
+    <table>
+      <thead>
+        <tr>
+          <th>First Name</th>
+          <th>Last Name</th>
+          <th>Email</th>
+          <th>Member ID</th>
+          <th>Company</th>
+          <th>URL</th>
+          <th>Last Action</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let agent of agents  | filter:searchText  | paginate: { itemsPerPage: 5, currentPage: page }">
+          <td>{{agent.Agent_First}}</td>
+          <td>{{agent.Agent_Last}}</td>
+          <td>{{agent.Email}}</td>
+          <td>{{agent.Member_Number}}</td>
+          <td>{{agent.Company}}</td>
+          <td><a class="agent-link" [href]="agent.Website">{{agent.Website}}</a></td>
+          <td>{{agent.Last_Activity_Time | date: 'dd/MM/yyyy'}}</td>
+          <td>
+            <a class="editBtn" (click)="editAgent(agent)">Edit <img src="../../../assets/images/edit_tab.svg" /></a>
+          </td>
+        </tr>
+      </tbody>
+
+    </table>
+
+  </div>
+  <div class="pagination_control flex_end">
+    <pagination-controls (pageChange)="page = $event"></pagination-controls>
+  </div>
+</div>

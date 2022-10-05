@@ -1,0 +1,207 @@
+
+<h1 class="heading_one mb_51" >Edit Lead Information</h1>
+<!-- *ngIf="(data !='' || data != undefined)" -->
+<a class="back_to_page mb_48" (click)="back()"
+  ><img src="../../assets/images/back_page.svg" /><span
+    >Back to overview</span
+  ></a
+>
+
+<div class="WhiteBg plr_48 ptb_40">
+  <h3 class="dash_heading pb_24">Lead Form</h3>
+  <p class="sub_paragraph_text mb_24">Edit Lead Information</p>
+
+  <form [formGroup]="formdata"  >
+    <div class="row">
+      <div class="col-md-6">
+        <div class="form-group">
+          <input
+            type="text"
+            class="form-control"
+            placeholder="Name"
+            name="Name"
+            formControlName="First_Name"
+            readonly
+          />
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="form-group">
+          <input
+            type="text"
+            placeholder="Company"
+            class="form-control"
+            formControlName="Company"
+            readonly
+          />
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-6">
+        <div class="form-group">
+          <input
+            type="text"
+            class="form-control"
+            placeholder="Email"
+            name="Email"
+            formControlName="Email"
+            readonly
+          />
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="form-group">
+          <input
+            type="tel"
+            [textMask]="numberMask"
+            placeholder="Phone"
+            class="form-control"
+            formControlName="Phone"
+            readonly
+          />
+        </div>
+      </div>
+    </div>
+      <!-- <div class="row">
+        <div class="col-md-6">
+          <div class="form-group mb_0">
+            <select class="form-control" [(ngModel)]="selectedLevelLead" formControlName="Lead_Status" readonly>
+              <option value="">Choose your Category</option>
+              <option *ngFor="let category of SelectedPageDefaultEmail; let i = index" [value]="category.name"
+              [attr.selected]="i == 0 ? true : null">
+                {{ category.name }}
+              </option>
+            </select>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="form-group">
+            <input
+              type="text"
+              class="form-control"
+              placeholder="Credit Line"
+              formControlName="Credit_Lines_Obtained"
+              readonly
+            />
+          </div>
+        </div>
+    </div> -->
+
+    
+    <!-- <div class="row">
+      
+      <div class="col-md-6">
+        <div class="form-group">
+          <input
+            type="text"
+            class="form-control"
+            placeholder="Retirement"
+            formControlName="Retirement_Rating"
+            readonly
+          />
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="form-group">
+          <input
+            type="text"
+           
+            class="form-control"
+            placeholder="Revenue Based"
+            formControlName="Revenue_Based_Rating"
+            readonly
+          />
+        </div>
+      </div>
+    </div> -->
+    <!-- <div class="row">  
+      <div class="col-md-6">
+      <div class="form-group">
+        <input
+          type="text"
+          class="form-control"
+          placeholder="Equipment"
+          formControlName="Equipment_Rating"
+          readonly
+        /></div>
+      </div>
+      <div class="col-md-6">
+        <div class="form-group">
+          <input
+            type="text"
+            class="form-control"
+            placeholder="Sales Rep"
+            formControlName="SBA_Loan_Offer"
+            readonly
+          />
+        </div>
+      </div>
+    </div> -->
+      
+      <div class="form-group">
+        <input
+          type="text"
+          class="form-control"
+          placeholder="Underwriting Notes"
+          formControlName="Underwriter_Notes"
+          readonly
+        /></div>
+
+        <div class="form-group">
+          <input
+            type="text"
+            class="form-control"
+            placeholder="Description"
+            formControlName="Description"
+            readonly
+          />
+        </div>
+  
+        <div class="form-group">
+          <textarea  type="text"
+          class="textarea"
+          placeholder="Comments"
+          formControlName="comments">
+
+          </textarea>
+        </div>
+            <div class="document_dragdrop" type="file" (click)="importData()">
+
+              <img src="../.././assets/images/add_documents.svg" class="pb_16">
+         <label> Add Files</label>
+
+          <h6 class="Filename" >{{files}}</h6>
+            </div>
+           
+
+          <!-- <div class="col-md-3" >
+            <h6 class="Filename" style="margin-top:10px ;">{{files}}</h6>
+            
+          </div> -->
+
+<div class="row mt_48">
+  <div class="col-md-6">            
+            <button class="btn main_btn w100per" type="submit" (click)="onClickSubmit()">
+              Submit
+            </button>
+            </div>
+              <div class="col-md-6"> 
+            <button class="btn main_hover_btn w100per"(click)="editLeadsbyEmail()" type="submit">
+              Request Update
+            </button>
+</div>
+</div>
+
+
+
+  </form>
+</div>
+<!-- <div class="WhiteBg plr_48 ptb_40">
+  <p class="sub_paragraph_text mb_24">Personal Information</p>
+  <form [formGroup]="formdata" (ngSubmit)="onClickSubmit()">
+   
+  </form>
+</div> -->
+
+<!-- ending form end -->

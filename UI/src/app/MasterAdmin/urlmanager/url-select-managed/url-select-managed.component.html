@@ -1,0 +1,11 @@
+<div #parent class="dropdown-check-list">
+	<div (click)="onContainerClick($event)" class="anchor">URL</div>
+	<ul #body class="items">
+		<li *ngFor="let option of options">
+			<label>
+				<input type="checkbox" [checked]="values.includes(option)" (change)="onSelect($event)"
+					value="{{option}}" />{{option}}
+			</label>
+		</li>
+	</ul>
+</div>

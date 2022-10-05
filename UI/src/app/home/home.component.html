@@ -1,0 +1,168 @@
+
+<div class="loaderBlock" *ngIf="loading">
+  <div class="loader">
+    <span>l</span>
+    <span>o</span>
+    <span>a</span>
+    <span>d</span>
+    <span>i</span>
+    <span>n</span>
+    <span>g</span>
+  </div>
+</div>
+<div></div>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-12 col-sm-12 col-md-12">
+      <div class="mainBanner">
+      <h5 class="card-title cursorPointer">Welcome</h5> 
+
+        <!-- <img src="../../assets/images/final-fce.png" /> -->
+      </div>
+    </div>
+  </div>
+</div>
+<div class=" ">
+  <!-- /.col -->
+
+  <!-- /.col -->
+  <!-- fix for small devices only -->
+  <div class="clearfix hidden-md-up"></div>
+
+  <!-- /.col -->
+
+  <!-- /.col -->
+</div>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-7">
+      <div class="card">
+        <div class="card-header">
+          <!-- <h5 class="card-title cursorPointer">Welcome</h5> -->
+        </div>
+        <!-- <div class="card-body" *ngIf="spotlightExpand != false">
+          <div class="row">
+            <div class="col-md-4 textAlignCenter">
+              <input
+                *ngIf="currentUser.role == 'superadmin'"
+                type="file"
+                id="customerSpotLight"
+                (change)="onSelectImageFile($event, 'customerSpotLight')"
+                style="display: none"
+              />
+              <label for="customerSpotLight" class="personalImage">
+                <img [src]="customerSpotLightContent.image_url" />
+              </label>
+            </div>
+            <div
+              class="customerSpotLightNameContent col-md-8 plrnone"
+              style="text-align: center"
+              *ngIf="currentUser.role == 'superadmin'"
+              [froalaEditor]="options"
+              [(froalaModel)]="customerSpotLightContent.description"
+            ></div>
+            <div
+              class="col-md-7"
+              id="customerSpotLightContent"
+              *ngIf="currentUser.role != 'superadmin'"
+              [innerHtml]="customerSpotLightContent.description | safeHtml"
+            ></div>
+          </div>
+
+        </div> -->
+        <!-- /.row -->
+      </div>
+    </div>
+    <!-- <div class="col-md-5">
+      <div class="card">
+        <div class="card-header">
+          <h5 class="card-title">GROWTH MINDSET</h5>
+          <div class="card-tools">
+            <i
+              class="fa fa-minus cursorPointer"
+              (click)="comingUpExpand = !comingUpExpand"
+              *ngIf="comingUpExpand != false"
+              aria-hidden="true"
+            ></i>
+            <i
+              class="fa fa-plus cursorPointer"
+              (click)="comingUpExpand = !comingUpExpand"
+              *ngIf="comingUpExpand != true"
+              aria-hidden="true"
+            ></i>
+          </div>
+        </div>
+        <div class="card-body minHeight200" *ngIf="comingUpExpand != false">
+          <div class="row">
+            <div
+              class="comeUpNameContent col-md-12 plrnone"
+              style="text-align: center"
+              *ngIf="currentUser.role == 'superadmin'"
+              [froalaEditor]="options"
+              [(froalaModel)]="comeUpContent.description"
+            ></div>
+            <div
+              class="col-md-12"
+              id="comeUpContent"
+              [innerHtml]="comeUpContent.description | safeHtml"
+              *ngIf="currentUser.role != 'superadmin'"
+            ></div>
+          </div>
+        </div>
+
+      </div>
+    </div> -->
+    <!-- <div class="col-md-12">
+      <div class="card">
+        <div class="card-header">
+          <h5 class="card-title cursorPointer">WEEKLY TRAINING ACCESS</h5>
+          <div class="card-tools">
+            <i
+              class="fa fa-minus cursorPointer"
+              (click)="teaserExpand = !teaserExpand"
+              *ngIf="teaserExpand != false"
+              aria-hidden="true"
+            ></i>
+            <i
+              class="fa fa-plus cursorPointer"
+              (click)="teaserExpand = !teaserExpand"
+              *ngIf="teaserExpand != true"
+              aria-hidden="true"
+            ></i>
+          </div>
+        </div>
+        <div class="card-body" *ngIf="teaserExpand != false">
+          <div class="row">
+            <div
+              class="col-md-9 affiliateNameContent plrnone"
+              style="text-align: center"
+              *ngIf="currentUser.role == 'superadmin'"
+              [froalaEditor]="options"
+              [(froalaModel)]="affiliateContent.description"
+            ></div>
+            <div
+              class="col-md-9 plrnone"
+              id="affiliateContent"
+              [innerHtml]="affiliateContent.description | safeHtml"
+              *ngIf="currentUser.role != 'superadmin'"
+            ></div>
+            <div class="col-md-3 textAlignCenter">
+              <input
+                *ngIf="currentUser.role == 'superadmin'"
+                type="file"
+                id="affiliate"
+                (change)="onSelectImageFile($event, 'affiliate')"
+                style="display: none"
+              />
+              <label for="affiliate" class="personalImage2 mtop20">
+                <img [src]="affiliateContent.image_url" />
+              </label>
+              
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div> -->
+  </div>
+</div>

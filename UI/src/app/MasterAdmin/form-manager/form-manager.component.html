@@ -1,0 +1,70 @@
+<!-- form -->
+
+<!-- form manager -->
+
+<div class="WhiteBg plr_16_ptb_24 mb_24">
+  <div class="table_header">
+    <div>
+      <h3 class="dash_heading">Form Manager</h3>
+    </div>
+    <div>
+      <button class="btn main_btn width_206" [routerLink]="['/addformmanager']">
+        <img src="../../../assets/images/add_icon.svg" />Agent Form
+      </button>
+    </div>
+  </div>
+  <hr class="horizontal_border mb_16" />
+  <div class="table_wrapper table_responsive">
+    <table>
+      <thead>
+        <tr>
+          <th>S.no</th>
+          <th>Name</th>
+          <th>Agent Id</th>
+          <th>Sub Id</th>
+          <th>Action</th>
+          <th></th>
+          <!-- <th></th> -->
+        </tr>
+      </thead>
+      <tbody *ngFor="let item of agentGetData; let i = index">
+        <tr>
+          <td>{{ i + 1 }}</td>
+          <td>{{ item.name }}</td>
+          <td>{{ item.agentId }}</td>
+          <td>{{ item.subId }}</td>
+          <td>
+            <ul class="empty_list">
+              <li class="mr_32">   <a
+              class="editBtn"
+              [routerLink]="['/addformmanager']"
+              (click)="editdata(item.id)"
+              >Edit <img src="../../../assets/images/edit_tab.svg"
+            /></a></li>
+             <li>
+             <a class="editBtn" (click)="DeleteSingleFormManagerData(item.id)"
+              >Delete <img src="../../../assets/images/edit_tab.svg"
+            /></a>
+         </li>
+            </ul>
+        
+          
+          </td>
+          <td><button>Copy</button></td>
+          <!-- <td><button>Delete</button></td> -->
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- <label class="form-check-label">
+    <input type="checkbox" class="form-check-input" name="optionChecked" formControlName="optionChecked" />
+    Receive drip emails
+</label>
+<br />
+
+<label class="form-check-label">
+    <input type="checkbox" class="form-check-input" name="optionChecked" formControlName="newsChecked" />
+    Receive newsletter emails
+</label> -->

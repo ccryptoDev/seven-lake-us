@@ -1,0 +1,40 @@
+<div class="WhiteBg plr_16_ptb_24 mb_24">
+  <div class="table_header">
+    <div>
+      <h3 class="dash_heading">Offices</h3>
+    </div>
+    <div>
+      <button class="btn main_btn width_206" [routerLink]="['/addOffice']">
+        <img src="../../../assets/images/add_icon.svg" />Add Office
+      </button>
+    </div>
+  </div>
+
+  <div class="table_wrapper table_responsive">
+    <table>
+      <thead>
+        <tr>
+          <th>Logo</th>
+          <th>Name</th>
+          <th>AAM</th>
+          <th>Landing page</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody *ngFor="let item of example1;let i = index">
+        <tr>
+          <td>
+            <img class="officelogo" [src]="item.thumbnail" />
+          </td>
+          <td>{{item.Name}}</td>
+          <td>{{item.AAMDefault}}</td>
+          <td>{{item.LandingPageDefault}}</td>
+          <td>
+            <a class="editBtn" [routerLink]="['/addOffice']" [queryParams]="{officeId: item.id}">Edit <img
+                src="../../../assets/images/edit_tab.svg" /></a>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

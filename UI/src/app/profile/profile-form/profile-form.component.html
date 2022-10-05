@@ -1,0 +1,367 @@
+<form [formGroup]="ProfileForm" (ngSubmit)="onSubmit()" novalidate>
+    <div class="form-group row">
+      <div class="col-md-6">
+        <input
+          type="text"
+          class="form-control"
+          formControlName="Email"
+          id="email"
+        />
+      </div>
+      <!-- <button type="button" class="btn btn-sm btn-link beautyofedit beautyofedit" (click)="email()" >Edit <i class="fa fa-pencil" aria-hidden="true"></i></button> -->
+    </div>
+    <div
+      *ngIf="getControl.email?.touched && getControl.email?.invalid"
+      class="text-danger"
+    >
+      <div *ngIf="getControl.email.errors.required">Email is required.</div>
+    </div>
+  
+    <div class="form-group row">
+      <div class="col-md-6 mob_space_mb_24">
+        <input type="text" class="form-control" formControlName="Agent_First" />
+      </div>
+      <div class="col-md-6 displayFlex align_item_Center">
+        <button type="button" class="btn editBtn" (click)="firstName()">
+          Edit <img src="../../../assets/images/edit_tab.svg" />
+        </button>
+      </div>
+    </div>
+    <div
+      *ngIf="getControl.firstName?.touched && getControl.firstName?.invalid"
+      class="text-danger"
+    >
+      <div *ngIf="getControl.firstName.errors.required">
+        First Name is required.
+      </div>
+      <!-- <div *ngIf="getControl.firstName.errors?.minlength">Minimum 4 character are required.</div> -->
+    </div>
+  
+    <div class="form-group row">
+      <div class="col-md-6 mob_space_mb_24">
+        <input type="text" class="form-control" formControlName="Agent_Last" />
+      </div>
+      <div class="col-md-6 displayFlex align_item_Center">
+        <button type="button" class="btn editBtn" (click)="lastName()">
+          Edit <img src="../../../assets/images/edit_tab.svg" />
+        </button>
+      </div>
+    </div>
+    <div
+      *ngIf="getControl.lastName?.touched && getControl.lastName?.invalid"
+      class="text-danger"
+    >
+      <div *ngIf="getControl.lastName.errors.required">
+        Last Name is required.
+      </div>
+    </div>
+  
+    <div class="form-group row">
+      <div class="col-md-6 mob_space_mb_24">
+        <input
+          type="text"
+          class="form-control"
+          placeholder="Payable To"
+          formControlName="Payable_To"
+          value="payableTo"
+        />
+      </div>
+      <div class="col-md-6 displayFlex align_item_Center">
+        <button type="button" class="btn editBtn" (click)="payableTo()">
+          Edit <img src="../../../assets/images/edit_tab.svg" />
+        </button>
+      </div>
+    </div>
+    <div
+      *ngIf="getControl.payableTo?.touched && getControl.payableTo?.invalid"
+      class="text-danger"
+    >
+      <div *ngIf="getControl.payableTo.errors.required">Payable is required.</div>
+    </div>
+    <div class="form-group row">
+      <div class="col-md-6 mob_space_mb_24">
+        <input
+          type="text"
+          class="form-control"
+          placeholder="Additional Address"
+          formControlName="Additional_Address"
+          value="Additional Address"
+        />
+        <div
+          *ngIf="
+            getControl.additionalAddress?.touched &&
+            getControl.additionalAddress?.invalid
+          "
+          class="text-danger"
+        >
+          <div *ngIf="getControl.additionalAddress.errors.required">
+            Additional Address is required.
+          </div>
+        </div>
+      </div>
+      <div class="col mob_space_mb_24 displayFlex align_item_Center">
+        <button type="button" class="btn editBtn" (click)="additionalAddress()">
+          Edit <img src="../../../assets/images/edit_tab.svg" />
+        </button>
+      </div>
+      <div class="col-md-3 mob_space_mb_24">
+        <input
+          type="text"
+          class="form-control"
+          placeholder="State"
+          formControlName="State"
+          value="State"
+        />
+        <div
+          *ngIf="getControl.state?.touched && getControl.state?.invalid"
+          class="text-danger"
+        >
+          <div *ngIf="getControl.state.errors.required">State is required.</div>
+        </div>
+      </div>
+      <div class="col displayFlex align_item_Center">
+        <button type="button" class="btn editBtn" (click)="state()">
+          Edit <img src="../../../assets/images/edit_tab.svg" />
+        </button> 
+      </div>
+    </div>
+  
+    <div class="form-group row">
+      <div class="col-md-6 mob_space_mb_24">
+        <input
+          type="text"
+          class="form-control"
+          formControlName="Website"
+          placeholder="Website URL"
+        />
+      </div>
+    </div>
+    <div
+      *ngIf="
+        getControl.linkinProfileUrl?.touched &&
+        getControl.linkinProfileUrl?.invalid
+      "
+      class="text-danger"
+    >
+      <div *ngIf="getControl.linkinProfileUrl.errors.required">
+        Website Url is required.
+      </div>
+      <button type="button" class="btn editBtn" (click)="linkinProfileUrl()">
+        Edit <img src="../../../assets/images/edit_tab.svg" />
+      </button>
+    </div>
+    <hr class="horizontal_border mt_32 mb_32" />
+    <!-- <div formGroupName='businessInformation'> -->
+    <p class="sub_paragraph_text pb_12">Business Information</p>
+    <div class="form-group row">
+      <div class="col-md-6 mob_space_mb_24">
+        <input type="text" class="form-control" formControlName="Mobile_Phone" />
+        <div
+          *ngIf="getControl.phoneNo?.touched && getControl.phoneNo?.invalid"
+          class="text-danger"
+        >
+          <div *ngIf="getControl.phoneNo.errors.required">Name is required.</div>
+        </div>
+      </div>
+      <div class="col-md-6 displayFlex align_item_Center">
+        <button type="button" class="btn editBtn" (click)="phoneNo()">
+          Edit <img src="../../../assets/images/edit_tab.svg" />
+        </button>
+      </div>
+    </div>
+  
+    <div class="form-group row">
+      <div class="col-md-6 mob_space_mb_24">
+        <input
+          type="text"
+          class="form-control"
+          formControlName="Company"
+          placeholder="Company Name"
+        />
+        <div
+          *ngIf="
+            getControl.companyName?.touched && getControl.companyName?.invalid
+          "
+          class="text-danger"
+        >
+          <div *ngIf="getControl.companyName.errors.required">
+            Name is required.
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6 displayFlex align_item_Center">
+        <button type="button" class="btn editBtn" (click)="companyName()">
+          Edit <img src="../../../assets/images/edit_tab.svg" />
+        </button>
+      </div>
+    </div>
+  
+    <div class="form-group row">
+      <div class="col-md-6 mob_space_mb_24">
+        <input
+          type="text"
+          class="form-control"
+          formControlName="Street"
+          placeholder="Street Address"
+        />
+        <div
+          *ngIf="
+            getControl.streetAddress?.touched && getControl.streetAddress?.invalid
+          "
+          class="text-danger"
+        >
+          <div *ngIf="getControl.streetAddress.errors.required">
+            streetAddress is required.
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6 displayFlex align_item_Center">
+        <button type="button" class="btn editBtn" (click)="streetAddress()">
+          Edit <img src="../../../assets/images/edit_tab.svg" />
+        </button>
+      </div>
+    </div>
+  
+    <div class="form-group row">
+      <div class="col-md-6 mob_space_mb_24">
+        <input
+          type="text"
+          class="form-control"
+          formControlName="City"
+          placeholder="City"
+        />
+        <div
+          *ngIf="getControl.city?.touched && getControl.city?.invalid"
+          class="text-danger"
+        >
+          <div *ngIf="getControl.city.errors.required">
+            streetAddress is required.
+          </div>
+        </div>
+      </div>
+      <div class="col mob_space_mb_24 displayFlex align_item_Center">
+        <button type="button" class="btn editBtn" (click)="city()">
+          Edit <img src="../../../assets/images/edit_tab.svg" />
+        </button>
+      </div>
+      <div class="col-md-3 mob_space_mb_24">
+        <input
+          type="text"
+          class="form-control"
+          formControlName="StateZip_Code"
+          placeholder="Zip Code"
+        />
+        <div
+          *ngIf="getControl.zipCode?.touched && getControl.zipCode?.invalid"
+          class="text-danger"
+        >
+          <div *ngIf="getControl.zipCode.errors.required">
+            streetAddress is required.
+          </div>
+        </div>
+      </div>
+      <div class="col displayFlex align_item_Center">
+        <button type="button" class="btn editBtn" (click)="zipCode()">
+          Edit <img src="../../../assets/images/edit_tab.svg" />
+        </button>
+      </div>
+    </div>
+  
+    <div class="form-group row">
+      <div class="col-md-6 mob_space_mb_24">
+        
+	   <select class="form-control"  formControlName="Account_Type" disabled  [(ngModel)]="selectedLevel">
+		
+                <option *ngFor="let c of levels; let i = index"   [value]="c.name" [attr.selected]="i==0?true:null ">
+			{{c.name}}		</option>
+	    </select>	
+        <div
+          *ngIf="getControl.admin?.touched && getControl.admin?.invalid"
+          class="text-danger"
+        >
+          <div *ngIf="getControl.admin.errors.required">
+            streetAddress is required.
+          </div>
+        </div>
+      </div>
+      <!-- <div class="col-md-6 displayFlex align_item_Center">
+        <button type="button" class="btn editBtn" (click)="admin()">
+          Edit <img src="../../../assets/images/edit_tab.svg" />
+        </button>
+      </div> -->
+    </div>
+    <!-- </div> -->
+    <div formGroupName="Password">
+      <hr class="horizontal_border mt_32 mb_32" />
+      <p class="sub_paragraph_text pb_12">Password</p>
+      <div class="row">
+        <div class="col-md-6">
+          <div class="form-group">
+            <input
+              type="text"
+              class="form-control"
+              formControlName="password"
+              placeholder="Password"
+              [(ngModel)]="selectedPassword"
+            />
+          </div>
+          <div
+            *ngIf="getControl.password?.touched && getControl.password?.invalid"
+            class="text-danger"
+          >
+            <div *ngIf="getControl.password.errors.required">
+              Password is required.
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="form-group">
+            <input
+              type="text"
+              class="form-control"
+              formControlName="confirmPassword"
+              placeholder="Confirm Password"
+              [(ngModel)]="selectedCurPassword"
+            />
+          </div>
+          <div
+            *ngIf="
+              getControl.confirmPassword?.touched &&
+              getControl.confirmPassword?.invalid
+            "
+            class="text-danger"
+          >
+            <div *ngIf="getControl.confirmPassword.errors.required">
+              Confirm Password is required.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="label_title">
+      <p>Daily updates Email</p>
+    </div>
+  
+    <div class="prefer_method mb_48">
+      <input
+        id="Yes"
+        type="radio"
+        value="Yes"
+        name="update"
+        formControlName="update"
+      />
+      <label for="Yes">Yes</label>
+      <input
+        id="No"
+        type="radio"
+        checked
+        value="No"
+        name="update"
+        formControlName="update"
+      />
+      <label for="No">No</label>
+    </div>
+  
+    <button class="btn main_btn width_411" type="submit">Save Changes</button>
+  </form>
+  

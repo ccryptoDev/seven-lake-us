@@ -1,0 +1,78 @@
+<ul class="wvu-breadcrumbs mb_16">
+  <li><a href="#">Management</a></li>
+  <li><a href="#">Document Admin</a></li>
+  <li><a href="#">Add Document</a></li>
+  <li><a href="#" class="current">Current Page</a></li>
+</ul>
+<h1 class="heading_one mb_51" *ngIf="(data == '' || data == undefined)">Add Document</h1>
+<h1 class="heading_one mb_51" *ngIf="(data != '' && data != undefined)">Edit Document</h1>
+<a class="back_to_page mb_48" (click)="back()"><img src="../../assets/images/back_page.svg" /><span>Back to
+    overview</span></a>
+<div class="WhiteBg plr_48 ptb_40">
+  <form [formGroup]="AddDocuments" (ngSubmit)="onSubmit()" novalidate>
+    <h3 class="dash_heading pb_25">Add Document</h3>
+    <div class="document_dragdrop" fileDropInput (fileDropped)="onFileDropped($event)">
+      <img class="pb_16" src="../.././assets/images/add_documents.svg" />
+      <input type="file" #fileUploader (change)="onFileChanged($event)" formControlName="file" accept="application/pdf"
+        multiple hidden id="add_documents" />
+      <label for="add_documents">Click or Drag the PDF File, or Browse</label>
+      <h6 class="Filename">{{pdfName}}</h6>
+    </div>
+    <div class="upload_flex mb_40">
+      <div class="upload_image_only view_upload mb_24 mr_32">
+        <img [src]="imageUrl || '../.././assets/images/upload-placeholder.png'" class="dynamic_img"/>
+        <input type="file" name="onlyImages" formControlName="thumbnail" accept="image/png, image/gif, image/jpeg"
+          (change)="onimageChanged($event)" id="only_images" hidden />
+        <label for="only_images"><img src="../../assets/images/photo_upload_icon.svg" /></label>
+      </div>
+      <div>
+        <h6 class="Filename">{{imageName}}</h6>
+      </div>
+    </div>
+    <p class="sub_paragraph_text pb_28">Upload Thumbnail Image</p>
+    <hr class="horizontal_border mb_32" />
+    <div class="form-group">
+      <input type="text" class="form-control" formControlName="title" id="title" placeholder="Title" />
+      <div *ngIf="getControl.title?.touched && getControl.title?.invalid" class="text-danger">
+        <div *ngIf="getControl.title.errors.required">title is required.</div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="form-group col-md-5">
+        <select class="form-control" [(ngModel)]="defaultcategory " formControlName="category">
+          <option value="">Choose your Category</option>
+          <option *ngFor="let category of category; let i = index" [value]="category.value"
+            [attr.selected]="i == 0 ? true : null">
+            {{ category.viewValue }}
+          </option>
+        </select>
+        <div *ngIf="getControl.category?.touched && getControl.category?.invalid" class="text-danger">
+          <div *ngIf="getControl.category.errors.required">
+            category is required.
+          </div>
+        </div>
+      </div>
+      <div class="form-group col-md-3 Flex_center">
+        <a class="add_file">Add category</a>
+      </div>
+    </div>
+    <div class="row mb_40">
+      <div class="form-group col-md-5 mob_space_mb_24">
+        <input type="number" class="form-control" formControlName="price" id="price" placeholder="price" />
+        <div *ngIf="getControl.price?.touched && getControl.price?.invalid" class="text-danger">
+          <div *ngIf="getControl.price.errors.required">price is required.</div>
+        </div>
+      </div>
+    </div>
+    <p class="sub_paragraph_text pb_16">Tags</p>
+    <div class="form-group">
+      <input type="string" class="form-control" formControlName="tag" id="tag" placeholder="Tag" />
+    </div>
+    <div class="form-group">
+      <p class="sub_paragraph_text pb_16">Description</p>
+      <textarea type="text-area" class="textarea" formControlName="description" id="description"
+        placeholder="Description"></textarea>
+    </div>
+    <button class="btn main_btn width_411" type="submit">SUBMIT</button>
+  </form>
+</div>

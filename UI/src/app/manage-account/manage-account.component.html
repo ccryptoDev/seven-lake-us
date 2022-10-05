@@ -1,0 +1,196 @@
+<section class="WhiteBg ptb_40 plr_16">
+  <h2 class="White_heading">Choose your plan</h2>
+  <div class="choose_offer">
+    <div class="row plans-container">
+      <div class="Desk_pr_0 mob_space_mb_24">
+        <div class="offer_item active">
+          <div class="Offer_header">
+            <h2 class="mb_10">FREE</h2>
+            <h4>STANDARD</h4>
+          </div>
+          <div class="plr_20 pb_37">
+            <h4><span>10%</span> Commission</h4>
+            <div class="ManageAccount_radio mb_10">
+              <input type="radio" checked />
+              <label>Marketing Link</label>
+            </div>
+            <div class="ManageAccount_radio mb_10">
+              <input type="radio" checked />
+              <label>Digital Lead Input</label>
+            </div>
+            <div class="ManageAccount_radio mb_10">
+              <input type="radio" checked />
+              <label>Lead Management Tools</label>
+            </div>
+            <div class="ManageAccount_radio mb_10">
+              <input type="radio" checked />
+              <label>Sales Support</label>
+            </div>
+            <div class="ManageAccount_radio mb_10">
+              <input type="radio" checked style="margin-right: 30px" />
+              <label>Training Manual</label>
+            </div>
+          </div>
+          <div class="textAlignCenter plr_20 pb_37">
+            <button class="btn main_btn w100per" type="button">
+              FREE
+            </button>
+          </div>
+        </div>
+      </div>
+      <div class="Desk_pr_0 mob_space_mb_24">
+        <div class="offer_item">
+          <div class="Offer_header">
+            <h2 class="mb_10">$994 <span>AND</span></h2>
+            <h4>$19.99/month</h4>
+            <h4>RECRUITER</h4>
+          </div>
+
+          <div class="plr_20 pb_37">
+            <h4><span>15%</span> Commission</h4>
+            <div class="ManageAccount_radio mb_10">
+              <input type="radio" checked />
+              <label>Standard Plus:</label>
+            </div>
+            <div class="ManageAccount_radio mb_10">
+              <input type="radio" checked />
+              <label>Dedicated, Custom URL – No more Affiliate Number!</label>
+            </div>
+            <div class="ManageAccount_radio mb_10">
+              <input type="radio" checked />
+              <label>Marketing Documents</label>
+            </div>
+            <div class="ManageAccount_radio mb_10">
+              <input type="radio" checked />
+              <label>Sponsored Agent Statistics</label>
+            </div>
+            <div class="ManageAccount_radio mb_10">
+              <input type="radio" checked style="margin-right: 30px" />
+              <label>Recruiting Email Templates</label>
+            </div>
+            <div class="ManageAccount_radio mb_10">
+              <input type="radio" checked />
+              <label>Exclusive Recruiting Webinars</label>
+            </div>
+            <div class="ManageAccount_radio mb_10">
+              <input type="radio" checked />
+              <label>Business Card Templates</label>
+            </div>
+          </div>
+          <div class="textAlignCenter plr_20 pb_37">
+            <button mat-raised-button class="btn main_btn w100per" (click)="selectPlan(PaymentRole.Recruiter)"
+              type="button" aria-expanded="false">
+              Invest Now
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="Desk_pr_0 mob_space_mb_24">
+        <div class="offer_item">
+          <div class="Offer_header">
+            <h2 class="mb_10">$25,000 <span>AND</span></h2>
+            <h4>$197/month</h4>
+            <h4>Member Office</h4>
+          </div>
+
+          <div class="plr_20 pb_37">
+            <h4><span>40%</span> Commission</h4>
+            <div class="ManageAccount_radio mb_10">
+              <input type="radio" checked />
+              <label>Branded affiliate platform</label>
+            </div>
+            <div class="ManageAccount_radio mb_10">
+              <input type="radio" checked />
+              <label>Web/Brand Development</label>
+            </div>
+            <div class="ManageAccount_radio mb_10">
+              <input type="radio" checked />
+              <label>Leads provided the initial 60 days</label>
+            </div>
+            <div class="ManageAccount_radio mb_10">
+              <input type="radio" checked />
+              <label>Affiliates provided the initial 60 days</label>
+            </div>
+            <div class="ManageAccount_radio mb_10">
+              <input type="radio" checked style="margin-right: 30px" />
+              <label>Customized CRM</label>
+            </div>
+            <div class="ManageAccount_radio mb_10">
+              <input type="radio" checked />
+              <label>Direct Access to all Internal Specialists</label>
+            </div>
+            <div class="ManageAccount_radio mb_10">
+              <input type="radio" checked />
+              <label>3 Users in Learning Management System</label>
+            </div>
+            <div class="ManageAccount_radio mb_10">
+              <input type="radio" checked />
+              <label>Assigned, Dedicated Partnership Manager</label>
+            </div>
+            <div class="ManageAccount_radio mb_10">
+              <input type="radio" checked />
+              <label>Support staff - no payroll expense!</label>
+            </div>
+            <div class="ManageAccount_radio mb_10">
+              <input type="radio" checked />
+              <label> Closing call support</label>
+            </div>
+            <div class="ManageAccount_radio mb_10">
+              <input type="radio" checked style="margin-right: 30px" />
+              <label>
+                Ongoing training with Exclusive Member Office Only Calls</label>
+            </div>
+            <div class="ManageAccount_radio mb_10">
+              <input type="radio" checked />
+              <label> Marketing support</label>
+            </div>
+          </div>
+          <div class="textAlignCenter plr_20 pb_37">
+            <button mat-raised-button class="btn main_btn w100per" (click)="selectManualPlan(PaymentRole.Office)"
+              type="button" aria-expanded="false">
+              Invest Now
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <div class="offer_item">
+          <div class="Offer_header">
+            <h2 class="mb_10">$32,500 <span>AND</span></h2>
+            <h4>$247/month</h4>
+            <h4>Elite</h4>
+          </div>
+          <div class="plr_20 pb_37">
+            <div class="ManageAccount_radio mb_10">
+              <input type="radio" checked />
+              <label>Member Office Plus:</label>
+            </div>
+            <div class="ManageAccount_radio mb_10">
+              <input type="radio" checked />
+              <label>1 week in-person training at corporate offices.</label>
+            </div>
+            <div class="ManageAccount_radio mb_10">
+              <input type="radio" checked />
+              <label>Leads provided for initial 6 months.</label>
+            </div>
+            <div class="ManageAccount_radio mb_10">
+              <input type="radio" checked />
+              <label>Affiliates provided the initial 6 months. </label>
+            </div>
+          </div>
+          <div class="textAlignCenter plr_20 pb_37">
+            <button mat-raised-button class="btn main_btn w100per" (click)="selectManualPlan(PaymentRole.Elite)"
+              type="button" aria-expanded="false">
+              Invest Now
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <confirm-payment [onConfirm]="confirmPayment"></confirm-payment>
+  <manual-modal [planType]="planType"></manual-modal>
+  <card-modal [onSubmit]="onSubmit"></card-modal>
+</section>

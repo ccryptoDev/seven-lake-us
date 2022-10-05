@@ -1,0 +1,551 @@
+<div class="theme_material" *ngIf="passType == 'ADMIN' || passType == 'Office'">
+  <button class="btn toggle_settings" (click)="toggleSidebar()">
+    <img src="../assets/images/theme_setting.svg" />
+  </button>
+</div>
+
+<div id="main">
+  <div class="page-wrapper">
+    <app-sidebar [officeName]="officeName" [curOffice]="curOffice" [dash_heading]="dash_heading" isExpanded="isExpanded"
+      [memberSelect]="memberSelect"></app-sidebar>
+
+    <div class="page-content">
+      <div class="mobile_header">
+        <div class="sidebar_brand" id="sidebarImage" *ngIf="officeName == null">
+          <a href="javascript:void(0)">
+            <img src="../../assets/images/logo.svg" />
+          </a>
+        </div>
+        <div class="expandorcollaps">
+          <button type="button" id="sidebarCollapse " (click)="openNav()" class="btn btn-secondary">
+            <i class="fas fa-align-left"></i>
+          </button>
+        </div>
+      </div>
+
+      <div class="top_header" *ngIf="currentUser != null && whiteBanner">
+        <div class="search_header">
+          <div class="input-group width_351">
+            <div class="input-group-prepend">
+              <span class="input-group-text"><i class="far fa-search"></i></span>
+            </div>
+            <input class="form-control" #MainsearchTag type="text" (click)="MainSearchBar(MainsearchTag)"
+              placeholder="Search" aria-label="Search" />
+          </div>
+        </div>
+        <div class="user_settings">
+          <ul>
+            <li>
+              <a class="circle_notify">
+                <img src="../assets/images/sub_way.svg" /></a>
+            </li>
+            <li>
+              <a class="circle_notify"><img src="../assets/images/notification.svg" /></a>
+            </li>
+            <li>
+              <div class="user_profile media" mat-icon-button [matMenuTriggerFor]="profilemenu">
+                <img class="mr-3" src="../assets/images/dp.svg" alt="Generic placeholder image" />
+                <div class="media-body">
+                  <span>Welcome Back</span>
+                  <h5 class="mt-0">{{ nameUser }}</h5>
+                </div>
+                <mat-menu #profilemenu="matMenu">
+                  <button (click)="logout()" mat-menu-item>
+                    <mat-icon>logout </mat-icon>
+                    <b><span>Sign out</span></b>
+                  </button>
+                </mat-menu>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="HeaderBanner" id="HeaderBanner" *ngIf="currentUser !== null && !whiteBanner">
+        <div class="displayFlex align_item_Center justifycontent_space_bw mb_20">
+          <div class="search_header">
+            <div class="input-group width_598">
+              <div class="input-group-prepend">
+                <span class="input-group-text"><i class="far fa-search"></i></span>
+              </div>
+              <input class="form-control" #MainsearchTag (keyup.enter)="MainSearchBar(MainsearchTag)" type="text"
+                placeholder="Search" aria-label="Search" />
+            </div>
+          </div>
+          <div>
+            <div class="user_settings">
+              <ul>
+                <li>
+                  <div class="theme-switch">
+                    <a class="notification_circle dark_bg" (click)="switchTheme(toggleSwitchchecked)">
+                      <img src="../assets/images/sub_way.svg" />
+                    </a>
+                  </div>
+                </li>
+                <li>
+                  <a class="notification_circle circle_bg dark_bg" (click)="logout()">
+                    <img src="../assets/images/logout_icon.svg" /></a>
+                </li>
+
+                <li>
+                  <div class="user_profile">
+                    <!-- <img class="mr-3" src="../assets/images/dp.svg" alt="Generic placeholder image" /> -->
+                    <div>
+                      <h5 class="mb_8">Welcome Back</h5>
+
+                      <h5 class="mb_8">{{nameUser}}</h5>
+                      <!-- <p>Phone: 9497775960</p> -->
+                    </div>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- Dashboard -->
+
+        <div *ngIf="currentUrl.includes('home')" [ngClass]="setHeaderColor" class="media align_item_Center mb_8">
+          <img class="mr_8" src="../assets/images/dash_titleIcon.svg" />
+          <div class="media-body">
+            <h2 class="banner_Title" [ngStyle]="{'color':dash_heading}">Have questions? Contact</h2>
+            <p class="banner_row">Name: {{ownerName}}</p>
+            <p class="banner_row">Email: {{ownerEmail}}</p>
+            <p class="banner_row">Phone No: {{Phone}}</p>
+          </div>
+        </div>
+
+        <div class="sidenav" [class.visible]="isNavOpen">
+          <!-- #themecolors -->
+          <div class="themesetting_header">
+            <div class="displayFlex justifycontent_space_bw">
+              <div>
+                <h5>Theme Settings</h5>
+              </div>
+              <div>
+                <span class='close-nav' (click)="toggleSidebar(false)">
+                  <img src="../assets/images/setting_close.svg">
+                </span>
+              </div>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-md-4 label_title Flex_center">Office</label>
+            <div class="col-md-8">
+              <select class="form-control" #select (change)="dropChangeVal()" [(ngModel)]="selectedLevelForEmail">
+                <option value="">Choose your Category</option>
+                <option *ngFor="let category of SelectedPageDefaultEmail; let i = index" [value]="category"
+                  [selected]="category==selectedLevelForEmail?true:false">
+                  {{ category }}
+                </option>
+              </select>
+            </div>
+          </div>
+          <form>
+            <div class="themesetting_content">
+              <p class="sidebarSettingTitle">Left Sidebar Color Options</p>
+              <ul>
+                <li class="theme_color">
+                  <a (click)="changeAnchorColorsOne()" href="javascript:void(0)" class="gradientwinter">
+                  </a>
+                </li>
+                <li class="theme_color">
+                  <a (click)="changeAnchorColorsTwo()" href="javascript:void(0)" class="gradientladylip">
+                  </a>
+                </li>
+                <li class="theme_color">
+                  <a href="javascript:void(0)">
+                    <input type="color" (change)="changeAnchorColorThird($event.target.value)"
+                      placeholder="LPStep Color" />
+                  </a>
+                </li>
+              </ul>
+              <p class="sidebarSettingTitle">Header color</p>
+              <ul>
+                <li class="theme_color">
+                  <a class="gradientwinter" (click)="changeHeaderColors1()" href="javascript:void(0)">
+                  </a>
+                </li>
+                <li class="theme_color">
+                  <a class="gradientladylip" (click)="changeHeaderColors2()" href="javascript:void(0)">
+                  </a>
+                </li>
+                <li class="theme_color">
+                  <a href="javascript:void(0)">
+                    <span>
+                      <input type="color" (change)="changeHeaderColors3($event.target.value)"
+                        placeholder="LPStep Color" />
+                    </span>
+                  </a>
+                </li>
+              </ul>
+              <p class="sidebarSettingTitle">Header Brand color</p>
+              <ul>
+                <li class="theme_color">
+                  <a class="gradientwinter" href="javascript:void(0)" (click)="topHeaderBrand1()">
+                    <!-- <span class="head"></span> -->
+                  </a>
+                </li>
+                <li class="theme_color">
+                  <a (click)="topHeaderBrand2()" href="javascript:void(0)" class="gradientladylip">
+                    <!-- <span class="head"></span> -->
+                  </a>
+                </li>
+                <li class="theme_color">
+                  <a href="javascript:void(0)">
+                    <span>
+                      <input type="color" (change)="topHeaderBrand3($event.target.value)" placeholder="LPStep Color" />
+                    </span>
+                  </a>
+                </li>
+              </ul>
+
+
+              <button class="btn btn-primary" (click)="StoreColorCode()">
+                Store Color Code
+              </button>
+            </div>
+          </form>
+        </div>
+
+        <!-- Leads -->
+        <div *ngIf="
+            currentUrl.includes('input-leads') ||
+            currentUrl.includes('InformationLead')
+          " class="media align_item_Center mb_8">
+          <img class="mr_8" src="../assets/images/leads__titleIcon.svg" />
+          <div class="media-body">
+            <h2 class="banner_Title">Leads</h2>
+          </div>
+        </div>
+
+        <p *ngIf="
+            currentUrl.includes('input-leads') ||
+            currentUrl.includes('InformationLead')
+          " class="banner_text">
+          Know people who need funding?
+        </p>
+
+        <ul *ngIf="
+            currentUrl.includes('input-leads') ||
+            currentUrl.includes('InformationLead')
+          " class="breadcrumb_page mt_22">
+          <li>
+            <a class="breadcrumb_item" routerLinkActive="active" [routerLink]="['/input-leads']">
+              <div class="crumb_bg">
+                <img src="../../assets/images/akar_icons_edit.svg" />
+              </div>
+              <div class="crumb_text">Input</div>
+            </a>
+          </li>
+          <li>
+            <a class="breadcrumb_item" routerLinkActive="active" [routerLink]="['/lead/InformationLead']">
+              <div class="crumb_bg">
+                <img src="../../assets/images/info_circle.svg" />
+              </div>
+              <div class="crumb_text">Information</div>
+            </a>
+          </li>
+        </ul>
+
+        <!-- Agents  -->
+
+        <div *ngIf="
+            currentUrl.includes('invite-agent') ||
+            currentUrl.includes('teaminformation')
+          " class="media align_item_Center mb_8">
+          <img class="mr_8" src="../assets/images/Agents_titleIcon.svg" />
+          <div class="media-body">
+            <h2 class="banner_Title">Agents</h2>
+          </div>
+        </div>
+
+        <p *ngIf="
+            currentUrl.includes('invite-agent') ||
+            currentUrl.includes('teaminformation')
+          " class="banner_text">
+          Know other people who would make great Finance Agents?
+        </p>
+        <ul *ngIf="
+            currentUrl.includes('invite-agent') ||
+            currentUrl.includes('teaminformation')
+          " class="breadcrumb_page mt_22">
+          <li>
+            <a class="breadcrumb_item" routerLinkActive="active" [routerLink]="['/invite-agent']">
+              <div class="crumb_bg">
+                <img src="../../assets/images/akar_icons_edit.svg" />
+              </div>
+              <div class="crumb_text">Invite</div>
+            </a>
+          </li>
+          <li>
+            <a class="breadcrumb_item" routerLinkActive="active" [routerLink]="['/teaminformation']">
+              <div class="crumb_bg">
+                <img src="../../assets/images/info_circle.svg" />
+              </div>
+              <div class="crumb_text">Information</div>
+            </a>
+          </li>
+        </ul>
+
+        <!-- Documents -->
+        <div *ngIf="currentUrl.includes('documents')" class="media align_item_Center mb_8">
+          <img class="mr_8" src="../assets/images/documents_titleIcon.svg" />
+          <div class="media-body">
+            <h2 class="banner_Title">Documents</h2>
+          </div>
+        </div>
+
+        <p *ngIf="currentUrl.includes('documents')" class="banner_text">
+          Manage your documents
+        </p>
+
+        <ul *ngIf="currentUrl.includes('documents')" class="breadcrumb_page mt_22">
+          <li>
+            <a class="breadcrumb_item">
+              <div class="crumb_bg">
+                <img src="../../assets/images/application_img.svg" />
+              </div>
+              <div class="crumb_text" routerLinkActive="active" [routerLink]="['/documents/application']">
+                Application
+              </div>
+            </a>
+          </li>
+          <li>
+            <a class="breadcrumb_item">
+              <div class="crumb_bg">
+                <img src="../../assets/images/manual_img.svg" />
+              </div>
+              <div class="crumb_text" routerLinkActive="active" [routerLink]="['/documents/manualDocument']">
+                Manual
+              </div>
+            </a>
+          </li>
+          <li>
+            <a class="breadcrumb_item">
+              <div class="crumb_bg">
+                <img src="../../assets/images/crm_icon.svg" />
+              </div>
+              <div class="crumb_text" routerLinkActive="active" [routerLink]="['/documents/member']">
+                Member Office
+              </div>
+            </a>
+          </li>
+        </ul>
+        <!-- Marketing -->
+
+        <div *ngIf="currentUrl.includes('marketing')" class="media align_item_Center mb_8">
+          <img class="mr_8" src="../assets/images/Marketing_titleIcon.svg" />
+          <div class="media-body">
+            <h2 class="banner_Title">Marketing</h2>
+          </div>
+        </div>
+
+        <p *ngIf="currentUrl.includes('marketing')" class="banner_text">
+        </p>
+        <ul *ngIf="currentUrl.includes('marketing')" class="breadcrumb_page mt_22">
+          <li class="breadcrumb_item" routerLinkActive="active" [routerLink]="['/marketing/EmailTemplates']">
+            <div class="crumb_bg">
+              <img src="../../assets/images/email_Template.svg" />
+            </div>
+            <div class="crumb_text">Email Templates</div>
+          </li>
+          <li class="breadcrumb_item" routerLinkActive="active" [routerLink]="['/marketing/SocialMedia']">
+            <div class="crumb_bg">
+              <img src="../../assets/images/Social_mediaicon.svg" />
+            </div>
+            <div class="crumb_text">Social Media</div>
+          </li>
+          <li class="breadcrumb_item" routerLinkActive="active" [routerLink]="['/marketing/Flyers']">
+            <div class="crumb_bg">
+              <img src="../../assets/images/Flyers_icon.svg" />
+            </div>
+            <div class="crumb_text">Flyers</div>
+          </li>
+          <li class="breadcrumb_item" routerLinkActive="active" [routerLink]="['/marketing/MemberOffice']">
+            <div class="crumb_bg">
+              <img src="../../assets/images/Flyers_icon.svg" />
+            </div>
+            <div class="crumb_text">Member Office</div>
+          </li>
+        </ul>
+
+        <!-- Training -->
+
+        <div *ngIf="currentUrl.includes('training')" class="media align_item_Center mb_8">
+          <img class="mr_8" src="../assets/images/Training_titleIcon.svg" />
+          <div class="media-body">
+            <h2 class="banner_Title">Training</h2>
+          </div>
+        </div>
+        <ul *ngIf="currentUrl.includes('training')" class="breadcrumb_page mt_32">
+          <li [routerLink]="['/training/sale']" routerLinkActive="active">
+            <a class="breadcrumb_item">
+              <div class="crumb_bg">
+                <img src="../../assets/images/crumb_sales.svg" />
+              </div>
+              <div class="crumb_text">Sales</div>
+            </a>
+          </li>
+          <li [routerLink]="['/training/fundingprogram']" routerLinkActive="active">
+            <a class="breadcrumb_item">
+              <div class="crumb_bg">
+                <img src="../../assets/images/funding_program_crumb.svg" />
+              </div>
+              <div class="crumb_text">Funding programs</div>
+            </a>
+          </li>
+          <li [routerLink]="['/training/crm']" routerLinkActive="active">
+            <a class="breadcrumb_item">
+              <div class="crumb_bg">
+                <img src="../../assets/images/crm_crumb.svg" />
+              </div>
+              <div class="crumb_text">CRM</div>
+            </a>
+          </li>
+          <li [routerLink]="['/training/MemberOffice']" routerLinkActive="active">
+            <a class="breadcrumb_item">
+              <div class="crumb_bg">
+                <img src="../../assets/images/crm_crumb.svg" />
+              </div>
+              <div class="crumb_text">Member Office</div>
+            </a>
+          </li>
+          <li [routerLink]="['/training/ManageAccount']" routerLinkActive="active">
+            <a class="breadcrumb_item">
+              <div class="crumb_bg">
+                <img src="../../assets/images/crm_crumb.svg" />
+              </div>
+              <div class="crumb_text">Manage Account</div>
+            </a>
+          </li>
+        </ul>
+
+        <!-- Management -->
+
+        <div *ngIf="
+            currentUrl.includes('agentmanager') ||
+            currentUrl.includes('formmanager') ||
+            currentUrl.includes('leadpageAdmin') ||
+            currentUrl.includes('officeManager') ||
+            currentUrl.includes('urlmanager') ||
+            currentUrl.includes('ListOfDocument')
+          " class="media align_item_Center mb_8">
+          <img class="mr_8" src="../assets/images/management_titleIcon.svg" />
+          <div class="media-body">
+            <h2 class="banner_Title">Management</h2>
+          </div>
+        </div>
+
+        <ul *ngIf="
+            currentUrl.includes('agentmanager') ||
+            currentUrl.includes('formmanager') ||
+            currentUrl.includes('leadpageAdmin') ||
+            currentUrl.includes('officeManager') ||
+            currentUrl.includes('urlmanager') ||
+            currentUrl.includes('ListOfDocument')
+          " class="breadcrumb_page mt_50">
+          <li>
+            <a class="breadcrumb_item" routerLinkActive="active" [routerLink]="['/MasterAdmin/agentmanager']">
+              <div class="crumb_bg">
+                <img src="../../assets/images/crumb_agent_manager.svg" />
+              </div>
+              <div class="crumb_text">Agents Manager</div>
+            </a>
+          </li>
+          <li>
+            <a class="breadcrumb_item" routerLinkActive="active" [routerLink]="['/MasterAdmin/formmanager']">
+              <div class="crumb_bg">
+                <img src="../../assets/images/crumb_form_manager.svg" />
+              </div>
+              <div class="crumb_text">Form Manager</div>
+            </a>
+          </li>
+          <li>
+            <a class="breadcrumb_item" routerLinkActive="active" [routerLink]="['/MasterAdmin/leadpageAdmin']">
+              <div class="crumb_bg">
+                <img src="../../assets/images/crumb_landing_page.svg" />
+              </div>
+              <div class="crumb_text">Landing Page</div>
+            </a>
+          </li>
+          <li>
+            <a class="breadcrumb_item" routerLinkActive="active" [routerLink]="['/MasterAdmin/officeManager']">
+              <div class="crumb_bg">
+                <img src="../../assets/images/crumb_office_manager.svg" />
+              </div>
+              <div class="crumb_text">Office Manager</div>
+            </a>
+          </li>
+          <li>
+            <a class="breadcrumb_item" routerLinkActive="active" [routerLink]="['/MasterAdmin/urlmanager']">
+              <div class="crumb_bg">
+                <img src="../../assets/images/crumb_url_manager.svg" />
+              </div>
+              <div class="crumb_text">URL Manager</div>
+            </a>
+          </li>
+          <li>
+            <a class="breadcrumb_item" routerLinkActive="active" [routerLink]="['/MasterAdmin/ListOfDocument']">
+              <div class="crumb_bg">
+                <img src="../../assets/images/crumb_document_admin.svg" />
+              </div>
+              <div class="crumb_text">Document Admin</div>
+            </a>
+          </li>
+        </ul>
+        <div *ngIf="
+            currentUrl.includes('profile') ||
+            currentUrl.includes('uploaddocument')
+          " class="media align_item_Center mb_8">
+          <img class="mr_8" src="../assets/images/management_titleIcon.svg" />
+          <div class="media-body">
+            <h2 class="banner_Title">Profile</h2>
+          </div>
+        </div>
+
+        <ul *ngIf="
+            currentUrl.includes('profile') ||
+            currentUrl.includes('uploaddocument')
+          " class="breadcrumb_page mt_50">
+          <li>
+            <a class="breadcrumb_item" routerLinkActive="active" [routerLink]="['profile']">
+              <div class="crumb_bg">
+                <img src="../../assets/images/akar_icons_edit.svg" />
+              </div>
+              <div class="crumb_text">Profile</div>
+            </a>
+          </li>
+          <li>
+            <a class="breadcrumb_item" routerLinkActive="active" [routerLink]="['/adddocument/uploaddocument']">
+              <div class="crumb_bg">
+                <img src="../../assets/images/info_circle.svg" />
+              </div>
+              <div class="crumb_text">Upload Documents</div>
+            </a>
+          </li>
+          <li>
+            <a class="breadcrumb_item">
+              <div class="crumb_bg">
+                <img src="../../assets/images/info_circle.svg" />
+              </div>
+              <div class="crumb_text">Questionnaire</div>
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <div class="main_Container">
+        <div>
+          <!-- [ngClass]="{
+            mainContainerExpand: isExpanded != true,
+            rightSection: currentUser != null,
+            w100per: currentUser == null
+          }" style="margin-bottom: 50px" -->
+          <router-outlet></router-outlet>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<ngx-spinner></ngx-spinner>

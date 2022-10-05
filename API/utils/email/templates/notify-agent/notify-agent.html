@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<style>
+		body {
+			margin: 0px;
+			padding: 0px
+		}
+
+		table.main {
+			width: 100%;
+			border: 0;
+			border-spacing: 0;
+			background: #ffffff
+		}
+
+		td.main {
+			padding: 0;
+		}
+
+		.logo-table {
+			width: 100%;
+			border-spacing: 0px 10px;
+			border: 1px solid #000;
+			padding: 30px;
+		}
+
+		.inner-table {
+			border: 1px solid #a9a9a9;
+			border-spacing: 0px;
+			width: 50%;
+		}
+
+		.logo {
+			width: 200px;
+		}
+
+		.text {
+			font-family: Arial, sans-serif;
+			font-size: 16px;
+			line-height: 24px;
+			margin-top: 0px;
+			margin-bottom: 16px;
+			color: #000;
+		}
+
+		.title {
+			font-family: Arial, sans-serif;
+			font-size: 16px;
+			line-height: 24px;
+			color: #000;
+			padding: 10px;
+		}
+
+		.cell {
+			border-right: 1px solid #a9a9a9;
+		}
+
+		.cell-top {
+			border-bottom: 1px solid #a9a9a9;
+		}
+
+		.image-cell {
+			text-align: center;
+			padding-bottom: 30px;
+		}
+	</style>
+</head>
+
+<body>
+	<table class="mail">
+		<tbody>
+			<tr>
+				<td class="main">
+					<table class="logo-table">
+						<tr>
+							<td class="image-cell">
+								<img class="logo" src="cid:logo">
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<p class="text">
+									Hi, <span>
+										<%= name %>. Don't forget to sign up to become an agent.
+									</span></p>
+								<p class="text">
+									So you want to earn more money helping people get money to start and grow their business? Confirm your
+									email to get started. By clicking you are confirming your email address and agreeing to our
+									<span>[Terms of Service]. To create your account and get started just click on
+									the button below. </span>
+									<p class="text">
+										<span><a href="<%= inviteUrl %>">[Get Started Now]</a></span>
+									</p>
+								</p>
+								<p class="text">You can then log in to your account and get started!</p>
+							</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+</body>
+
+</html>

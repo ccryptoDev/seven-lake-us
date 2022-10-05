@@ -1,0 +1,42 @@
+<ul class="wvu-breadcrumbs mb_16">
+  <li><a href="#">Master Admin</a></li>
+  <li><a href="#" class="current">Add Url Form Manager</a></li>
+</ul>
+<h1 class="heading_one mb_51">Add URL Form Manager</h1>
+<a class="back_to_page mb_48" (click)="back()">
+  <img src="../../assets/images/back_page.svg" />
+  <span>Back to overview</span>
+</a>
+<form [formGroup]="form">
+  <div class="WhiteBg plr_48 ptb_40 mb_24">
+    <h3 class="dash_heading pb_25">Add URL Manager</h3>
+    <div class="row">
+      <div class="col-md-6">
+        <div class="form-group">
+          <input class="form-control" type="text" placeholder="Third Party" formControlName="thirdParty">
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="form-group">
+          <select class="form-control" placeholder="Status" formControlName="status">
+            <option value="Active">Active</option>
+            <option [defaultSelected]="true" value="Active">Deactivated</option>
+          </select>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-6">
+        <div class="form-group mb_0">
+          <input class="form-control" type="text" placeholder="Name" formControlName="name" />
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="form-group">
+          <url-select [onUpdate]="onSelect" [options]="urlOptions"></url-select>
+        </div>
+      </div>
+    </div>
+    <button type="button" (click)="submit()" class="btn main_btn width_411 mt_32">Submit</button>
+  </div>
+</form>

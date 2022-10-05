@@ -1,0 +1,115 @@
+.divTable {
+	display: table;
+	width: 100%;
+}
+
+.divTableRow {
+	display: table-row;
+}
+
+.divTableHeading {
+	background-color: #EEE;
+	display: table-header-group;
+}
+
+.divTableCell,
+.divTableHead {
+	border: 1px solid #999999;
+	display: table-cell;
+	padding: 3px 10px;
+}
+
+.divTableHeading {
+	background-color: #EEE;
+	display: table-header-group;
+	font-weight: bold;
+}
+
+.divTableFoot {
+	background-color: #EEE;
+	display: table-footer-group;
+	font-weight: bold;
+}
+
+.divTableBody {
+	display: table-row-group;
+}
+
+td.td,
+th.td {
+	display: table-cell;
+	padding: 8px !important;
+}
+
+tr.table-row {
+	display: table-row;
+}
+
+tr>th {
+	border-top: none;
+}
+
+td.status-cell {
+	min-width: 100px;
+}
+
+.table-header {
+
+	th:first-of-type {
+		border-radius: 4px 0px 0px 4px !important;
+	}
+
+	th:last-of-type {
+		border-radius: 0px 4px 4px 0px !important;
+	}
+}
+
+.sub-row {
+	transition: all 0.2s ease;
+	transform-origin: top;
+	transform: scale(1, 1);
+
+	&:not(.expanded) {
+		line-height: 0;
+		transform: scale(1, 0);
+		visibility: collapse;
+	}
+}
+
+.status-btn {
+	width: 100%;
+}
+
+td.actions-cell {
+	> div {
+		display: flex;
+		gap: 10px;
+	}
+	span > {
+		display: inline;
+	}
+	> :first-child {
+		margin-right: 20px;
+	}
+}
+
+.action-button {
+	min-width: 60px;
+	height: fit-content;
+
+	&.message-button {
+		min-width: 80px;
+	}
+}
+
+.close:hover {
+	cursor: pointer;
+}
+
+.note-control {
+	height: 80px;
+}
+
+.message-control {
+	height: 80px;
+}

@@ -1,0 +1,344 @@
+@import url('https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Arimo&display=swap');
+
+:root{
+    --heading-font: 'Abril Fatface', cursive;
+    --input-font: 'Arimo', sans-serif;
+}
+
+.bg-brown{
+    background: #e3ac5d!important;
+}
+.bg-darkgray{
+    background: #2e3138;
+}
+.bg-gray{
+    background: #7c747c!important;
+}
+.bg-white{
+    background: white!important;
+}
+.form-container{
+    position: relative;
+    top: 10vh;
+    width: 70%;
+    /* max-height: 100vh;
+    max-width: 95vw; */
+    margin: auto;
+}
+.p10{
+    padding: 10px;
+}
+.relative{
+    position: relative;
+}
+.customShadow{
+    box-shadow:1px 1px 20px -5px #84827b;
+}
+.formBg{
+    /* background-image: url('../img/dummyImg.jpg'); */
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: 50%;
+}
+
+.inputDiv{
+    position: relative;
+    text-align: center;
+    padding: 5px 10px;
+}
+h3{
+    font-family: var(--heading-font);
+}
+.inputDiv h3{
+    font-family: var(--heading-font);
+    padding: 25px 0px;
+    color: #000000;
+}
+.inputDiv .submitBtn{
+    margin: 20px 0px;
+}
+.inputDiv input{
+    border: 1px solid #f6e9da;
+    color: #000000;
+    font-family: var(--input-font);
+    border-radius: 0!important;
+}
+.inputDiv input::placeholder{
+    color: #000000;
+}
+.closeBtn{
+    position: absolute;
+    right: 4px;
+    color: #000000;
+}
+.closeBtn button{
+    border: none;
+    padding: 0px 10px 3px 10px;
+    font-weight: 600;
+    border-radius: 50%;
+    transform: scale(0.9);
+    
+}
+.submitBtn{
+    border: none;
+    color: #000000;
+    padding: 8px 35px;
+    border-radius: 50px;
+    font-size: 13px;
+    font-family: var(--input-font);
+}
+/** template 02 **/
+.boxImgPadding{
+    padding: 15px 15px 15px 30px!important;
+}
+.boxImgPadding .closeBtn{
+    top: 18px;
+    right: 35px;
+}
+.footerForm{
+    padding: 15px 0px 0px 0px;
+}
+.footerForm input{
+    border: 4px solid #f6e9da;
+    color: #000000;
+    font-family: var(--input-font);
+    background: #e3ac5d;
+    padding: 0px 20px;
+}
+.footerForm input::placeholder{
+    color: #000000;
+}
+.footerForm .submitBtn{
+    border-radius: 5px;
+    color: #ffffff;
+    font-size: 18px;
+}
+/** template 03 **/
+.formHeader{
+    position: relative;
+    text-align: center;
+}
+.formHeader h3{
+    padding: 15px 0px;
+}
+.formHeader .closeBtn{
+    top: 4px;
+}
+/** template04 **/
+.floatFormBg{
+    height: auto;
+}
+.floatForm{
+    padding: 25px 20px;
+    background: white;
+    transform: scale(0.9);
+    margin-top: 2%;
+}
+.floatFormBtn{
+    border: none;
+    padding: 0px 6px 3px 6px;
+    font-weight: 600;
+    border-radius: 50%;
+    right: 0px;
+    top: 3px;
+}
+/** template 05 **/
+.form-container-small{
+    position: relative;
+    top: 10vh;
+    width: 50%;
+    /* max-height: 100vh;
+    max-width: 95vw; */
+    margin: auto;
+    padding: 30px;
+}
+.form-container-small .closeBtn{
+    right: -23px;
+    top: -23px;
+}
+/** template 06 **/
+.leftAlign{
+    text-align: left!important;
+}
+/** template 07 **/
+.subHeading h3{
+    padding: 25px 0px 0px 0px;
+}
+/** template08 **/
+.skewImg{
+    z-index: -2;
+}
+.skewDiv::before {
+    content: " ";
+    position: absolute;
+    display: block;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: -141px;
+    z-index: -1;
+    background: white;
+    transform-origin: bottom;
+    -ms-transform: skew(30deg, 0deg);
+    -webkit-transform: skew(30deg, 0deg);
+    transform: skew(-16deg, 0deg);
+}
+.skewDiv h3{
+    padding: 57px 0px 10px 0px;
+}
+/** template 09 **/
+.simpleFormBg{
+    /* background-image: url('../img/circle.webp'); */
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+.simpleForm{
+    padding: 80px 0px;
+}
+.simpleForm .transformTemplate{
+    transform: scale(0.9);
+}
+.simpleForm .closeBtn{
+    top: 4px;
+}
+/** template 10 **/
+.stripedBg{
+    overflow: hidden;
+}
+.stripedBg img{
+    position: absolute;
+    width: 67%;
+    height: 129%;
+    transform: rotate(-27deg);
+    margin-left: -173px;
+    margin-top: -56px;
+}
+.simpleBorder{
+    border: 6px solid #7c747c;
+}
+/** Stripe svg **/
+.stripeSvgInput form{
+    padding:0px 50px;
+}
+.stripeSvg{
+    position: absolute;
+    background: white;
+    width: 22%;
+    right: 0;
+    top: 103px;
+
+}
+.stripeSvg svg{
+    width: 100%;
+}
+@media only screen and (min-width:320px) and (max-width:399px){
+    .stripeSvgInput form{
+        padding: 0px 33px;
+    }
+    .stripeSvg{
+        width: 24%;
+        top: 140px;
+    }
+}
+@media only screen and (min-width:400px) and (max-width:499px){
+    .stripeSvgInput form{
+        padding: 0px 75px;
+    }
+    .stripeSvg{
+        width: 25%;
+        top: 130px;
+    }
+}
+@media only screen and (min-width:500px) and (max-width:766px){
+    .stripeSvgInput form{
+        padding: 0px 100px;
+    }
+    .stripeSvg{
+        width: 25%;
+        top: 120px;
+    }
+}
+@media only screen and (min-width:767px) and (max-width:1000px){
+    .stripeSvgInput form{
+        padding: 0px 80px;
+    }
+    .stripeSvg{
+        width: 20%;
+        top: 115px;
+    }
+}
+@media only screen and (min-width:720px){
+    .form-container{
+        width: 720px;
+    }
+    .leftAlign .form-group{
+        padding-right: 8em!important;
+    }
+    
+}
+@media only screen and (min-width:768px){
+    /** template 07 **/
+    .subHeading .form-group{
+        padding: 0px 10em;
+    }
+}
+@media only screen and (max-width:767px){
+    .formHeader{
+        padding-top: 35px;
+    }
+     /** template 07 **/
+     .subHeading .form-group{
+        padding: 0px 2em;
+    }
+}
+@media only screen and (max-width:500px){
+    .stripedBg img{
+        margin-left: -100px;
+    }
+}
+@media only screen and (max-width:1000px){
+    .form-container{
+        width: 100%;
+    }
+    .formBg{
+        height: 150px;
+    }
+    .closeBtn{
+        right: 20px;
+        top: 4px;
+    }
+    .boxImgPadding{
+        padding: 15px 30px 15px 30px!important;
+    }
+    .floatFormBg .closeBtn{
+        right: 0;
+    }
+    .form-container-small .closeBtn{
+        right: -13px;
+        top: -18px;
+    }
+    .footerForm .row{
+        padding: 0px 35px 10px 35px;
+        text-align: center;
+        display: grid;
+        grid-template-columns: repeat(1, 1fr);
+    }
+    /** template 04 **/
+    /* .floatFormBg{
+        height: 483px;
+    } */
+    .form-container-small{
+        width: 100%;
+    }
+    
+    .leftAlign form button{
+        width: 90%;
+    }
+    .simpleForm .transformTemplate{
+        transform: scale(0.8);
+    }
+}
+

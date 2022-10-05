@@ -1,0 +1,36 @@
+<ul class="wvu-breadcrumbs mb_16">
+  <li><a href="#">Management</a></li>
+  <li><a href="#">Agents Manager</a></li>
+  <li><a href="#" class="current">Edit Agent</a></li>
+</ul>
+<h1 class="heading_one mb_51">Edit Agent</h1>
+
+<a [routerLink]="['/agentmanager']" class="back_to_page mb_48"><img src="../../assets/images/back_page.svg" /><span>Back
+    to overview</span></a>
+
+<div class="WhiteBg p48">
+  <div class="row mb_40">
+    <div class="col-md-6">
+      <div class="media editAgent_profile align_item_Center">
+        <img src="../../assets/images/profile_dp.png" />
+
+        <div class="media-body">
+          <p class="sub_paragraph_text">{{ AgentDetails?.Name }}</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-6">
+      <div class="row displayFlex align_item_Center h100per">
+        <div class="col-md-4">
+          <label class="label_title"> User Name:</label>
+        </div>
+        <div class="col-md-8">
+          <h5 class="value_Text">{{ AgentDetails?.Email }}</h5>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <app-edit-agent-form [getSingleAgent]="AgentDetails"></app-edit-agent-form>
+</div>

@@ -1,0 +1,55 @@
+<div class="WhiteBg plr_16_ptb_24">
+  <div class="table_header">
+    <div>
+      <h3 class="dash_heading">Lead Information</h3>
+    </div>
+    <div class="overall">
+      <span>Sort by:</span>
+      <select>
+        <option>Overall</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="table_wrapper table_responsive mb_24">
+    <table>
+      <thead>
+        <tr>
+          <th>Created Date</th>
+          <th>Name</th>
+          <th>Company</th>
+          <th>Status</th>
+          <th>Revenue Advance</th>
+          <th>Express</th>
+          <th>Retirement</th>
+          <th>Credit Line</th>
+          <th>SBA</th>
+          <th>Equipment</th>
+          <th>Active</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let data of zohoLeadInformation | paginate: { itemsPerPage: 20, currentPage: page }">
+          <td>{{ data.Created_Time | date: 'dd/MM/yyyy h:mm aa'}}</td>
+          <td>{{ data.Full_Name }}</td>
+          <td>{{ data.Company }}</td>
+          <td>{{ data.Lead_Status }}</td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td>
+            <a class="editBtn" [routerLink]="['/edit-leads']" (click)="editLeads(data)  ">Edit <img
+                src="../../../assets/images/edit_tab.svg" /></a>
+          </td>
+        </tr>
+
+      </tbody>
+    </table>
+  </div>
+  <div class="pagination_control flex_end">
+    <pagination-controls (pageChange)="page = $event"></pagination-controls>
+  </div>
+</div>
