@@ -32,42 +32,13 @@
   transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 }
 
-.button.submit {
-  background: #333333;
-  color: white;
-  border: 1px solid transparent;
-
-  font-family: 'Roboto';
-  font-style: normal;
-  font-size: 18px;
-  line-height: 21px;
-  text-transform: uppercase;
-}
-
-.button {
-  outline: 0;
-  border-radius: 5px;
-  display: inline-block;
-  text-align: center;
-  padding: 10px 125px 8px;
-  font-size: 16px;
-  transition: all 0.2s ease;
-  cursor: pointer;
-  background-color: #139ec8 !important;
-}
-
-.button:disabled {
-  cursor: default;
-  opacity: 0.65;
-}
-
 .box {
   position: relative;
   display: flex;
   align-items: center;
   width: 90%;
   max-width: 800px;
-  padding: 220px 20px 20px;
+  padding: 20px;
   overflow: hidden;
   background-color: white;
   border-radius: 5px;
@@ -93,30 +64,6 @@
   text-decoration: none;
 }
 
-@media (min-width: 1200px) {
-  .box {
-    min-height: 500px;
-    padding: 0;
-  }
-
-  .box__toggle:checked+.box__image {
-    left: 400px;
-  }
-}
-
-@media (max-width: 767px) {
-  .box__toggle:checked~.form--register {
-    width: 100%;
-    height: auto;
-    opacity: 1;
-  }
-
-  .box__toggle:checked~.form--login {
-    width: 0;
-    height: 0;
-    opacity: 0;
-  }
-}
 
 .mb32 {
   margin-bottom: 32px !important;
@@ -168,25 +115,10 @@
   margin-bottom: 16px;
 }
 
-@media (min-width: 1200px) {
-  .box__image {
-    width: 400px;
-    height: 100%;
-    object-position: 0 0;
-  }
-}
-
 .form {
   width: 100%;
   text-align: left;
   transition: 0.3s;
-}
-
-@media (min-width: 1200px) {
-  .form {
-    width: 400px;
-    padding: 0 20px;
-  }
 }
 
 .form--login {
@@ -199,14 +131,6 @@
   height: 0;
   opacity: 0;
   transition: opacity 0.5s ease;
-}
-
-@media (min-width: 1200px) {
-  .form--register {
-    width: 400px;
-    height: auto;
-    opacity: 1;
-  }
 }
 
 .form__helper {
@@ -305,19 +229,6 @@ span.form__link {
   font-size: 12px;
 }
 
-@media only screen and (min-device-width: 320px) and (max-device-width: 480px) {
-  .box__image img {
-    margin-top: -80px;
-    width: 100%;
-  }
-}
-
-@media only screen and (min-device-width: 481px) and (max-device-width: 768px) {
-  .box__image img {
-    margin-top: -120px;
-  }
-}
-
 .divider {
   width: 100%;
   height: 1px;
@@ -339,9 +250,8 @@ span.form__link {
 .form-control {
   color: black;
   background: white;
+}
 
-  &:focus {
-    border-color: var(--main-color);
-    box-shadow: 0 0 0 0.2rem rgb(19, 158, 200, 0.25);
-  }
+.input-label {
+  font-size: 12px !important;
 }

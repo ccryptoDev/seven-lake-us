@@ -15,60 +15,48 @@
 </div>
 
 <div class="login-page text-center">
-  <div class="box">
+  <div class="box auth-box">
     <input type="checkbox" id="toggle" class="box__toggle" hidden />
-
-    <div class="box__image img-class">
-      <img src="../../assets/images/final-finance.png" style="background-color: white" />
-    </div>
     <form class="form form--register" action=""></form>
     <form class="form form--login" [formGroup]="loginForm" #Loginform (ngSubmit)="onSubmit()">
-      <h1 class="wlcm-title">
-        <br /><br />
-        Welcome to
+      <h1 class="auth-title">
+        Agent Login
       </h1>
-      <a class="span-tag" [routerLink]="">Finance <span style="font-weight: bold">Agent</span></a>
       <div class="form__helper">
-        <label class="" for="Email">Enter Your Email</label>
-        <input type="text" name="email" id="email" placeholder="Email" formControlName="email"
-          class="form__input form-control" [ngClass]="{ 'is-invalid': submitted && f.email.errors }" />
+        <label class="input-label" for="Email">Email Address</label>
+        <input type="text" name="email" id="email" formControlName="email" class="form-control auth-input"
+          [ngClass]="{ 'is-invalid': submitted && f.email.errors }" />
         <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
           <div *ngIf="f.email.errors.required">Email is required</div>
           <div *ngIf="f.email.errors.pattern">Email is invalid</div>
         </div>
       </div>
-      <div class="form-group">
-        <div class="form__helper">
-          <label class="" for="password">Enter your Password</label>
-          <div class="input-group">
-            <input type="password" [type]="fieldTextType ? 'text' : 'password'" class="form-control"
-              formControlName="password" [ngClass]="{ 'is-invalid': submitted && f.password.errors }" />
-            <div class="input-group-append">
-              <span class="input-group-text">
-                <i class="fa fa-eye-slash" [ngClass]="{
-                      'fa-eye-slash': !fieldTextType,
-                      'fa-eye': fieldTextType
-                    }" (click)="toggleFieldTextType()"></i>
-              </span>
+      <div class="form__helper">
+        <label class="input-label" for="password">Password</label> <label class="required-label">*</label>
+        <div class="input-group">
+          <input type="password" class="form-control auth-input" formControlName="password"
+            [ngClass]="{ 'is-invalid': submitted && f.password.errors }" />
+          <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
+            <div *ngIf="f.password.errors.required">
+              Password is required
             </div>
-            <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
-              <div *ngIf="f.password.errors.required">
-                Password is required
-              </div>
-              <div *ngIf="f.password.errors.minlength">
-                Password should be minimum of 6 characters
-              </div>
+            <div *ngIf="f.password.errors.minlength">
+              Password should be minimum of 6 characters
             </div>
           </div>
         </div>
       </div>
-      <div class="actions" style="display: flex; justify-content: center">
-        <button type="submit" class="button button3">Submit</button>
+      <div class="auth-checkbox">
+        <input id="rememberMe" type="checkbox">
+        <label for="rememberMe">Remember me</label>
       </div>
-      <p style="text-align: center">
-        <span class="password__link" (click)="openPasswordModal()">Forgot Password</span>
-      </p>
-      <div class="hidden" id="notice-container"></div>
+      <div class="actions" style="display: flex; justify-content: center">
+        <button type="submit" class="button auth-btn">LOGIN</button>
+      </div>
+      <span class="subtle-link" (click)="openPasswordModal()">Forgot Password</span>
+      <br />
+      <a class="subtle-link" href="##" [routerLink]="['/register']">Become an agent</a>
+      <br />
     </form>
   </div>
 </div>

@@ -180,13 +180,6 @@ body {
   transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 }
 
-.button.button3 {
-  background: #333333;
-  color: white;
-  border: 1px solid transparent;
-  font-weight: normal;
-}
-
 h2 {
   font-size: 1.25rem;
 }
@@ -206,18 +199,6 @@ h2 {
   padding-left: 10px;
 }
 
-.button {
-  outline: 0;
-  border-radius: 5px;
-  display: inline-block;
-  text-align: center;
-  padding: 10px 125px 8px;
-  font-size: 16px;
-  transition: all 0.2s ease;
-  cursor: pointer;
-  background-color: #139ec8 !important;
-}
-
 .login-page #devise-layout #devise-layout-body .links a {
   font-size: 14px;
   line-height: 16px;
@@ -230,7 +211,7 @@ h2 {
   align-items: center;
   width: 90%;
   max-width: 800px;
-  padding: 220px 20px 20px;
+  padding: 20px;
   overflow: hidden;
   background-color: white;
   border-radius: 5px;
@@ -257,27 +238,6 @@ h2 {
   text-decoration: none;
 }
 
-@media (min-width: 1200px) {
-  .box {
-    min-height: 500px;
-    padding: 0;
-  }
-  .box__toggle:checked + .box__image {
-    left: 400px;
-  }
-}
-@media (max-width: 1200px) {
-  .box__toggle:checked ~ .form--register {
-    width: 100%;
-    height: auto;
-    opacity: 1;
-  }
-  .box__toggle:checked ~ .form--login {
-    width: 0;
-    height: 0;
-    opacity: 0;
-  }
-}
 .box__image {
   position: absolute;
   top: 0;
@@ -302,24 +262,10 @@ h2 {
   font-weight: bold;
 }
 
-@media (min-width: 1200px) {
-  .box__image {
-    width: 400px;
-    height: 100%;
-    object-position: 0 0;
-  }
-}
-
 .form {
   width: 100%;
   text-align: left;
   transition: 0.3s;
-}
-@media (min-width: 1200px) {
-  .form {
-    width: 400px;
-    padding: 0 20px;
-  }
 }
 .form__title {
   margin-bottom: 20px;
@@ -336,13 +282,6 @@ h2 {
   height: 0;
   opacity: 0;
   transition: opacity 0.5s ease;
-}
-@media (min-width: 1200px) {
-  .form--register {
-    width: 400px;
-    height: auto;
-    opacity: 1;
-  }
 }
 .form__helper {
   position: relative;
@@ -364,11 +303,6 @@ h2 {
 .form-control {
   color: black;
   background: white;
-}
-
-.form-control:focus {
-  border-color: var(--main-color);
-  box-shadow: 0 0 0 0.2rem rgb(19, 158, 200, 0.25);
 }
 
 .form__input {
@@ -421,10 +355,6 @@ h2 {
   color: #2e8e79;
   cursor: pointer;
 }
-.form__helper label {
-  margin-bottom: 0;
-  font-size: 12px !important;
-}
 
 .navbar-dark .navbar-nav .nav-link {
   color: #000 !important;
@@ -461,4 +391,8 @@ h2 {
   .box__image img {
     margin-top: -120px;
   }
+}
+
+.auth-box {
+  padding-bottom: 64px;
 }
