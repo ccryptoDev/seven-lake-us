@@ -1,4 +1,4 @@
-<div class="sidebar-wrapper" #sideBar>
+<div class="sidebar-wrapper open" #sideBar>
 	<div class="sidebar_brand" *ngIf="officeName == null">
 		<span>
 			<img src="../../assets/images/logo.svg" />
@@ -11,7 +11,7 @@
 		</span>
 	</div>
 	<div class="sidenavToggler">
-		<span (click)="closeNav()">
+		<span (click)="toggleNav()">
 			<img src="../../assets/images/Sidebar_arrow.svg" />
 		</span>
 	</div>

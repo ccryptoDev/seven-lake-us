@@ -7,7 +7,8 @@ import { AuthenticationService, UserService } from "../_services";
 
 @Component({
 	templateUrl: 'sidebar.component.html',
-	selector: 'app-sidebar'
+	selector: 'app-sidebar',
+	styleUrls: ['./sidebar.component.scss']
 })
 export class SideBarComponent {
 	@Input() currentUser: User;
@@ -160,5 +161,9 @@ export class SideBarComponent {
 
 	closeNav = () => {
 		this.sideBar.nativeElement.classList.remove("open")
+	}
+
+	toggleNav = () => {
+		this.sideBar.nativeElement.classList.toggle("open")
 	}
 }
