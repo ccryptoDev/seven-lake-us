@@ -462,6 +462,7 @@ export class DashboardComponent implements OnInit {
         ],
       },
       options: {
+        aspectRatio: 2,
         scales: {
           A: {
             beginAtZero: true,
