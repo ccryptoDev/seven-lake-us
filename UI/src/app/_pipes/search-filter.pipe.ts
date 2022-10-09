@@ -7,13 +7,18 @@ import { VideoType } from '../types/video.type';
 export class SearchFilterPipe implements PipeTransform {
 
 	transform(list: VideoType[], filterText: string): any {
-		return list ? list.filter(item => {
+		const out = list ? list.filter(item => {
+			if (!filterText) {
+				return true
+			}
 			for (let tag of item.tags) {
-				if (tag.search(new RegExp(filterText, 'i')) > -1)
+				if (tag.search(new RegExp(filterText, 'i')) > -1) {
 					return true
+				}
 			}
 			return false
 		}) : [];
+		return out
 	}
 }
 
