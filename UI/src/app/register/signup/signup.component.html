@@ -1,38 +1,34 @@
 <div class="wrapper">
 	<div class="login-page text-center">
-		<div class="box">
+		<div class="box auth-box">
 			<input type="checkbox" id="toggle" class="box__toggle" hidden />
-			<div class="box__image img-class">
-				<img src="../../assets/images/final-finance.png" style="background-color: white;" />
-			</div>
-			<form class="form form--register" action="">
-			</form>
 			<form class="form form--login" [formGroup]="form" (ngSubmit)="onSubmit()">
-				<h1 class="sign-title">Sign Up Today</h1>
-				<h1 class="personal-title">Personal Information</h1>
+				<h1 class="auth-title">Sign Up Today</h1>
+				<p>
+					<label class="input-label">Name</label>
+				</p>
 				<div class="form__helper split">
 					<div>
-						<label>First Name</label>
-						<input type="text" name="user" placeholder="First name" formControlName="firstName"
-							class="form__input form-control"
+						<input type="text" name="user" formControlName="firstName" class="auth-input form-control bottom-label "
 							[ngClass]="{ 'is-invalid': f.firstName?.touched && f.firstName?.invalid}" />
+						<label class="input-label">First Name</label>
 						<div *ngIf="f.firstName?.touched && f.firstName?.invalid" class="invalid-feedback">
 							<div *ngIf="f.firstName.errors.required">First Name is required</div>
 						</div>
 					</div>
 					<div>
-						<label>Last Name</label>
-						<input type="text" name="user" placeholder="Last Name" formControlName="lastName"
-							class="form__input form-control"
+
+						<input type="text" name="user" formControlName="lastName" class="auth-input form-control bottom-label "
 							[ngClass]="{ 'is-invalid': f.lastName?.touched && f.lastName?.invalid }" />
+						<label class="input-label">Last Name</label>
 						<div *ngIf="f.lastName?.touched && f.lastName?.invalid" class="invalid-feedback">
 							<div *ngIf="f.lastName.errors.required">Last Name is required</div>
 						</div>
 					</div>
 				</div>
 				<div class="form__helper">
-					<label>Enter Your Email</label>
-					<input type="text" name="user" placeholder="Email" formControlName="email" class="form__input form-control"
+					<label class="input-label">Email</label>
+					<input type="text" name="user" formControlName="email" class="auth-input form-control"
 						[ngClass]="{ 'is-invalid': f.email?.touched && f.email?.invalid }" />
 					<div *ngIf="f.email?.touched && f.email?.invalid" class="invalid-feedback">
 						<div *ngIf="f.email.errors?.required">Email is required</div>
@@ -40,47 +36,44 @@
 					</div>
 				</div>
 				<div class="form__helper mb32">
-					<label>Registered Agent Affiliate ID</label>
-					<input type="number" name="AAM" placeholder="Agent Affiliate ID" formControlName="AAM"
-						class="form__input form-control" [ngClass]="{ 'is-invalid': f.AAM?.touched && f.AAM?.invalid }" />
+					<label class="input-label">Registered Agent Affiliate ID</label>
+					<input type="number" name="AAM" formControlName="AAM" class="auth-input form-control"
+						[ngClass]="{ 'is-invalid': f.AAM?.touched && f.AAM?.invalid }" />
 				</div>
-				<h1 class="personal-title">Create Password</h1>
-				<div class="form__helper">
-					<input type="password" name="password" placeholder="Password" class="form__input form-control"
-						formControlName="password" [ngClass]="{ 'is-invalid': f.password?.touched && f.password?.invalid }" />
-					<div *ngIf="f.password?.touched && f.password?.invalid" class="invalid-feedback">
-						<div *ngIf="f.password.errors.required">Password is required</div>
-						<div *ngIf="f.password.errors.minlength">Password should be minimum of 6 characters</div>
+				<p>
+					<label class="input-label">Password</label>
+				</p>
+				<div class="form__helper split">
+					<div>
+						<input type="password" name="password" class="auth-input form-control bottom-label"
+							formControlName="password" [ngClass]="{ 'is-invalid': f.password?.touched && f.password?.invalid }" />
+						<label class="input-label">Enter password</label>
+						<div *ngIf="f.password?.touched && f.password?.invalid" class="invalid-feedback">
+							<div *ngIf="f.password.errors.required">Password is required</div>
+							<div *ngIf="f.password.errors.minlength">Password should be minimum of 6 characters</div>
+						</div>
 					</div>
-				</div>
-				<div class="form__helper">
-					<input type="password" name="password" placeholder="Confirm Password" class="form__input form-control"
-						formControlName="confirm" [ngClass]="{ 'is-invalid': f.confirm?.touched && f.confirm?.invalid }" />
-					<div *ngIf="f.confirm?.touched && f.confirm?.invalid" class="invalid-feedback">
-						<div *ngIf="f.confirm.errors.required">Password confirmation is required</div>
-						<div *ngIf="f.confirm.errors.minlength">Password should be minimum of 6 characters</div>
+					<div>
+						<input type="password" name="password" class="auth-input form-control bottom-label"
+							formControlName="confirm" [ngClass]="{ 'is-invalid': f.confirm?.touched && f.confirm?.invalid }" />
+						<label class="input-label">Confirm password</label>
+						<div *ngIf="f.confirm?.touched && f.confirm?.invalid" class="invalid-feedback">
+							<div *ngIf="f.confirm.errors.required">Password confirmation is required</div>
+							<div *ngIf="f.confirm.errors.minlength">Password should be minimum of 6 characters</div>
+						</div>
 					</div>
-				</div>
-				<div class="form__helper">
-					<label class="terms" for="terms">
-						<input type="checkbox" id="terms" formControlName="hasAccepted">
-						I agree with the <span class="accent">terms of personal data processing</span> in the <span
-							class="accent">privacy policy</span>.
-					</label>
 				</div>
 				<div class="actions" style="display: flex; justify-content: center;">
-					<button [disabled]="!f.hasAccepted.value" type="submit" class="button submit">
-						Register
+					<button type="submit" class="button auth-btn">
+						SUBMIT
 					</button>
 				</div>
-				<p class="form__text text-center">
-					Have an account?
-					<label class="form__link" [routerLink]="['/login']">Log In</label> <br>
-					<span class="password__link" (click)="openPasswordModal()">Forgot Password</span>
-				</p>
-				<p class="form__text text-center">
-					<span (click)="switchView()" class="form__link">Sign up as Agent</span>
-				</p>
+				<span class="subtle-link" (click)="openPasswordModal()">Forgot Password</span>
+				<br />
+				<a class="subtle-link" [routerLink]="['/login']">Log In</a>
+				<br />
+				<span class="subtle-link" (click)="switchView()">Sign up as Agent</span>
+				<br />
 			</form>
 		</div>
 	</div>

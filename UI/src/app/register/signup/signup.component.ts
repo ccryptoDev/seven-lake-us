@@ -12,7 +12,7 @@ import { environment } from "src/environments/environment";
 
 @Component({
 	selector: 'signup',
-	styleUrls: ['../register.component.scss'],
+	styleUrls: ['../register.component.scss', './signup.component.scss'],
 	templateUrl: 'signup.component.html',
 })
 export class SignUpComponent implements OnInit {
@@ -51,7 +51,6 @@ export class SignUpComponent implements OnInit {
 				confirm: ['', [Validators.required, Validators.minLength(6)]],
 				office: [''],
 				AAM: [{ value: sponsor, disabled: true }, []],
-				hasAccepted: new FormControl(false)
 			});
 		} else {
 			this.form = this.formBuilder.group({
@@ -62,7 +61,6 @@ export class SignUpComponent implements OnInit {
 				confirm: ['', [Validators.required, Validators.minLength(6)]],
 				office: [''],
 				AAM: [''],
-				hasAccepted: new FormControl(false)
 			});
 		}
 	}
