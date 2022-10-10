@@ -1,5 +1,5 @@
-import { Component, ElementRef, Input, OnInit, TemplateRef, ViewChild } from '@angular/core';
-import { MatDialog, MatDialogConfig, MatDialogRef } from '@angular/material/dialog';
+import { Component, ElementRef, Input, OnInit, ViewChild, } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { DomSanitizer } from '@angular/platform-browser';
 import { UserService } from 'src/app/_services';
 import { PaymentService } from 'src/app/_services/payment.service';
@@ -15,7 +15,7 @@ import { UserDetails } from 'src/app/types/user-details.type';
   templateUrl: './section.component.html',
   styleUrls: ['./section.component.scss']
 })
-export class SectionTrainingComponent implements OnInit {
+export class SectionTrainingComponent implements OnInit{
   @Input() filterData: Function;
   @Input() sectionName: string = "Sales"
 
@@ -32,6 +32,9 @@ export class SectionTrainingComponent implements OnInit {
   selectedItem: VideoType;
   searchText = '';
   img = 'https://alchemylms-staging.s3.us-west-2.amazonaws.com/Development/seven-lake/frunt.jpg';
+
+  preloadCounter = 0;
+  metadata: Record<string, number> = {};
 
   public startedPlay: boolean = false;
   myVideo = document.createElement("my_video_1");
@@ -57,9 +60,7 @@ export class SectionTrainingComponent implements OnInit {
     }
 
     this.user.getVideosV2().subscribe(res => {
-      this.data = res;
-
-      this.data = this.filterData(this.data)
+      this.data = this.filterData(res)
 
       if (this.data && this.data.length) {
         this.data.forEach((element) => {
@@ -74,9 +75,10 @@ export class SectionTrainingComponent implements OnInit {
     });
   }
 
-  getsingleVideo(id) {
+  selectItem(id: string) {
     this.selectedItem = this.data.find(x => x.id === id);
   }
+
   pdfdownload(fileName: string) {
     this.user.getFiles(fileName).subscribe((blob) => {
       if (blob.msg === 'Fail') {
@@ -122,6 +124,21 @@ export class SectionTrainingComponent implements OnInit {
 
   confirmPayment = () => {
     this.OpenAddCardDetails();
+  }
+
+  onVideoLoad(videoId: string) {
+    const video = document.getElementById(`#player-${videoId}`) as HTMLVideoElement
+    this.metadata[videoId] = Math.floor(video.duration) || 1
+    this.preloadCounter += 1
+  }
+
+  getDuration(videoId: string): string {
+    const padNumber = (n: number) => n.toString().padStart(2, '0')
+
+    const duration = this.metadata[videoId]
+    const minutes = Math.floor(duration / 60)
+    const seconds = duration - minutes * 60
+    return `${padNumber(minutes)}:${padNumber(seconds)}`
   }
 
   onSubmit = () => {

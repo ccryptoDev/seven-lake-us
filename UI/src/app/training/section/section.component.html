@@ -20,54 +20,57 @@
 	</div>
 	<div class="row mb_24">
 		<div class="col-md-3 mb_24" *ngFor="let document of data | searchFilter:searchText">
-			<div class="sales_item">
-
+			<div class="sales_item" >
 				<div class="">
-					<div class="mb_16" data-toggle="modal" data-target="#exampleModalCenter"
-						(mouseover)="getsingleVideo(document.id)">
+					<div class="mb_16" data-toggle="modal" [attr.data-target]="'#modal-' + document.id"
+						(mouseover)="selectItem(document.id)">
 						<img [src]="document.thumbnailURL">
 					</div>
 					<div class="displayFlex align_item_Center justifycontent_space_bw">
 						<div>
 							<h3 class="video_Title">{{ document.title }} </h3>
 						</div>
+						<div *ngIf="preloadCounter === data.length">
+							<p class="video_length">{{getDuration(document.id)}}</p>
+						</div>
 					</div>
 				</div>
 			</div>
-		</div>
-		<div class="Video_popup" *ngIf="selectedItem">
-			<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
-				aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-				<div class="modal-dialog modal-dialog-centered" role="document">
-					<div class="modal-content">
-						<div class="modal-body">
-							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-								<img src="../../../assets/images/icon_close.svg">
-							</button>
-							<div class="textAlignCenter p30" *ngIf="isVideoAllowed == false && !hasPaid">
-								<h3 class="mb_24 dash_heading" *ngIf="isVideoAllowed == false && !hasPaid">Pay To Continue</h3>
-								<button class="btn small_main_btn" *ngIf="isVideoAllowed == false && !hasPaid"
-									(click)="openConfirmationDialog()" data-dismiss="modal">Go To Payment</button>
-							</div>
-							<video [poster]="selectedItem.thumbnailURL" (timeupdate)="setCurrentTime($event)" controls
-								[src]="selectedItem.videoURL" #videoPlayer id="my_video_1" *ngIf='isVideoAllowed || hasPaid'></video>
-							<div class="Video_content">
-								<h2 class="mb_24">{{selectedItem.title}}</h2>
-								<ul class="emptyList mb_24">
-									<li *ngFor="let tag of selectedItem.tags">
-										<span class="optional_btn static">
-											<span>{{tag}}</span>
-											<img src="../../../assets/images/graycircle_close.svg">
-										</span>
-									</li>
-								</ul>
-								<p class="mb_24">{{selectedItem.description}}</p>
+			<div class="Video_popup">
+				<div class="modal fade" [id]="'modal-' + document.id" tabindex="-1" role="dialog" aria-hidden="true">
+					<div class="modal-dialog modal-dialog-centered" role="document">
+						<div class="modal-content">
+							<div class="modal-body">
+								<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+									<img src="../../../assets/images/icon_close.svg">
+								</button>
+								<div class="textAlignCenter p30" *ngIf="isVideoAllowed == false && !hasPaid">
+									<h3 class="mb_24 dash_heading" *ngIf="isVideoAllowed == false && !hasPaid">Pay To Continue</h3>
+									<button class="btn small_main_btn" *ngIf="isVideoAllowed == false && !hasPaid"
+										(click)="openConfirmationDialog()" data-dismiss="modal">Go To Payment</button>
+								</div>
+								<video preload="metadata" (loadedmetadata)="onVideoLoad(document.id)" [poster]="document.thumbnailURL"
+									(timeupdate)="setCurrentTime($event)" controls [src]="document.videoURL" #videoPlayer
+									[id]="'#player-' + document.id" *ngIf='isVideoAllowed || hasPaid'></video>
+								<div class="Video_content">
+									<h2 class="mb_24">{{document.title}}</h2>
+									<ul class="emptyList mb_24">
+										<li *ngFor="let tag of document.tags">
+											<span class="optional_btn static">
+												<span>{{tag}}</span>
+												<img src="../../../assets/images/graycircle_close.svg">
+											</span>
+										</li>
+									</ul>
+									<p class="mb_24">{{document.description}}</p>
+								</div>
 							</div>
 						</div>
 					</div>
 				</div>
 			</div>
 		</div>
+
 	</div>
 	<confirm-payment [onConfirm]="confirmPayment"></confirm-payment>
 	<card-modal [onSubmit]="onSubmit"></card-modal>
