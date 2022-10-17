@@ -67,23 +67,6 @@
           </div>
         </ng-template>
       </div>
-      <div class="">
-        <table>
-          <thead>
-            <tr>
-              <th>Created Time</th>
-              <th>Values = $</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td></td>
-              <td></td>
-              <td></td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
     </div>
   </div>
   <div class="col-md-6">
@@ -104,7 +87,7 @@
               <div class="modal-content">
                 <div class="popup_header pb_16 displayFlex justifycontent_space_bw align_item_Center">
                   <div>
-                    <h2 class="mb-0">101 - LP Steps</h2>
+                    <h2 class="mb-0">{{currentPage.name}}</h2>
                   </div>
                   <div data-dismiss="modal">
                     <a href="javascript:void(0)" class="CLose_icon">
@@ -204,7 +187,7 @@
             <div class="val_box">{{currentMonthTeam}}</div>
             <div class="media-body">
               <h5 class="mt-0">Agents Created</h5>
-              <p>This months {{currentMonthTeam}} / {{myAllInviteAgnet}}</p>
+              <p>This month {{currentMonthTeam}} / {{myAllInviteAgnet}}</p>
             </div>
           </div>
           <span>{{currentMonthTeam}}</span>
@@ -218,7 +201,7 @@
             <div class="val_box">{{currentMonthLead}}</div>
             <div class="media-body">
               <h5 class="mt-0">Leads Created</h5>
-              <p>This months</p>
+              <p>This month</p>
             </div>
           </div>
           <span>{{currentMonthLead}}</span>
@@ -234,7 +217,7 @@
             <div class="val_box">{{allAgents}}</div>
             <div class="media-body">
               <h5 class="mt-0">Agents Created</h5>
-              <p>For the lifetime</p>
+              <p>Lifetime</p>
             </div>
           </div>
           <span>{{myAllInviteAgnet}}</span>
@@ -248,7 +231,7 @@
             <div class="val_box">{{allZohoValues}}</div>
             <div class="media-body">
               <h5 class="mt-0">Leads Created</h5>
-              <p>For the lifetime</p>
+              <p>Lifetime</p>
             </div>
           </div>
           <span>{{myTotalLead}}</span>

@@ -5,8 +5,19 @@
     </div>
     <div class="overall">
       <span>Sort by:</span>
-      <select>
-        <option>Overall</option>
+      <select [(ngModel)]="sortBy">
+        <option>Date Created</option>
+        <option>Date Created (descending)</option>
+        <option>Name (a -> z)</option>
+        <option>Name (z -> a)</option>
+        <option>Company (a -> z)</option>
+        <option>Company (z -> a)</option>
+        <option>Status (a -> z)</option>
+        <option>Status (z -> a)</option>
+        <option>Description (a -> z)</option>
+        <option>Description (z -> a)</option>
+        <option>UW Notes (a -> z)</option>
+        <option>UW Notes (z -> a)</option>
       </select>
     </div>
   </div>
@@ -19,27 +30,19 @@
           <th>Name</th>
           <th>Company</th>
           <th>Status</th>
-          <th>Revenue Advance</th>
-          <th>Express</th>
-          <th>Retirement</th>
-          <th>Credit Line</th>
-          <th>SBA</th>
-          <th>Equipment</th>
+          <th>Description</th>
+          <th>UW Notes</th>
           <th>Active</th>
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let data of zohoLeadInformation | paginate: { itemsPerPage: 20, currentPage: page }">
-          <td>{{ data.Created_Time | date: 'dd/MM/yyyy h:mm aa'}}</td>
+        <tr *ngFor="let data of zohoLeadInformation | sortLeads: sortBy  | paginate: { itemsPerPage: 20, currentPage: page }">
+          <td>{{ data.Created_Time | date: 'dd/MM/yyyy'}}</td>
           <td>{{ data.Full_Name }}</td>
           <td>{{ data.Company }}</td>
           <td>{{ data.Lead_Status }}</td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
+          <td>{{ data.Description || '' }}</td>
+          <td>{{ data.Underwriter_Notes || '' }}</td>
           <td>
             <a class="editBtn" [routerLink]="['/edit-leads']" (click)="editLeads(data)  ">Edit <img
                 src="../../../assets/images/edit_tab.svg" /></a>

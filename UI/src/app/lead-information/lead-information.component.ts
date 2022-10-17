@@ -21,6 +21,9 @@ export class LeadInformationComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
   zohoLeadInformation = [];
+
+  sortBy = 'Date Created'
+
   constructor(
     private activatedRoute: ActivatedRoute,
     private toastr: ToastrService,

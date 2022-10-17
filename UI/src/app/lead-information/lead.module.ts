@@ -10,16 +10,19 @@ import { AgentsManagementComponent } from '../agents-management/agents-managemen
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatSortModule } from '@angular/material/sort';
 import { EditLeadsComponent } from './edit-leads/edit-leads.component';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TextMaskModule } from 'angular2-text-mask';
+import { PipesModule } from '../_pipes/pipes.module';
 @NgModule({
   declarations: [LeadInformationComponent, AgentsManagementComponent, EditLeadsComponent],
   imports: [
     CommonModule,
+    FormsModule,
     MatCardModule,
     MatCheckboxModule,
     MatSortModule,
     NgxPaginationModule,
+    PipesModule,
     NgxPaginationModule,LeadRoutingModule,MatTableModule,MatPaginatorModule,ReactiveFormsModule,TextMaskModule
   ],
   exports:[LeadInformationComponent,MatCheckboxModule,MatTableModule,MatPaginatorModule, AgentsManagementComponent,MatSortModule]
