@@ -2,6 +2,7 @@ const { LandingPageDetails } = require('../models/landingpage')
 const { s3Client, uploadFile } = require('../utils/S3');
 const { GetObjectCommand } = require('@aws-sdk/client-s3');
 const { getSignedUrl } = require('@aws-sdk/s3-request-presigner');
+const { User } = require('../models/userModel');
 
 exports.addLandingPage = async (req, res) => {
   if (!req.files.thumbnail) {
@@ -21,11 +22,25 @@ exports.addLandingPage = async (req, res) => {
   return res.status(201).json(page)
 }
 
+exports.selectPage = async (req, res) => {
+  const { email, pageId: id } = req.body
+  const user = await User.findOne({ where: { email } })
+  const page = await LandingPageDetails.findOne({ where: { id } })
+  if (!user || !page) {
+    throw new Error('Could not select page')
+  }
+  await user.update({ selectedPage: id })
+  return res.status(200).json({'status': 'page selected'})
+}
+
 exports.getLandingPages = async (req, res) => {
   let pages = await LandingPageDetails.findAll({ raw: true });
 
+  let selectedId = ''
   const email = req.query?.email
   if (email) {
+    const user = await User.findOne({ where: { email } })
+    selectedId = user?.selectedPage || ''
     pages = pages.filter((item) => {
       // If not active
       if (item.status !== 'Active') return false
@@ -60,6 +75,9 @@ exports.getLandingPages = async (req, res) => {
         Bucket: bucket,
         Key: `${childFolder}${pages[i].preview}`,
       }))
+    }
+    if (selectedId && selectedId === pages[i].id) {
+      pages[i].selected = true
     }
   }
   res.status(200).json(pages)
