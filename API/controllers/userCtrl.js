@@ -86,7 +86,7 @@
   }
 
   exports.updateAgents = async (req, res, next) => {
-    const { code, id } = req.query;
+    const { code, id, member } = req.query;
     const config = {
       headers: {
         'Authorization': `Zoho-oauthtoken ${code}`,
@@ -96,6 +96,16 @@
       data: [req.body],
       "formruleValue": { "mandatoryInputNeededElem": [], "lrMandatoryElem": [], "LayoutRuleHiddenElem": [] }
     }
+
+    if (req.body?.password) {
+      const hashPassword = await bcrypt.hash(req.body?.password, 10)
+
+      const user = await User.findOne({ where: { memberNumber: member } })
+      if (user) {
+        await user.update({password: hashPassword})
+      }
+    }
+
     axios.put(`https://www.zohoapis.com/crm/v2/agents/${id}`, updateParams, config)
       .then((response) => {
         res.status(201).json({
