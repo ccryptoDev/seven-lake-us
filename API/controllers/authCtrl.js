@@ -473,12 +473,12 @@ exports.sendPassword = async (req, res, next) => {
   const agent = response.data.data?.[0] // CRM user
   if (!agent && !user) { 
     return next(new AppError('user not found', 404))
-  } else if (!user) {
+  } else if (!user && agent) {
     const params = {
-      firstName: agent['Agent_First'] ? agent['Agent_First'].replace(/[ ]/g, ''): '',
-      lastName: agent['Agent_Last'] ? agent['Agent_Last'].replace(/[ ]/g, '') : '',
+      firstName: agent?.['Agent_First'] ? agent['Agent_First'].replace(/[ ]/g, ''): '',
+      lastName: agent?.['Agent_Last'] ? agent['Agent_Last'].replace(/[ ]/g, '') : '',
       email: agent['Email'],
-      mobilePhone: agent['Mobile_Phone'],
+      mobilePhone: agent?.['Mobile_Phone'] || '',
       password: hashPassword,
       passwordExpiresOn,
       memberNumber: agent['Member_Number'],
@@ -486,7 +486,7 @@ exports.sendPassword = async (req, res, next) => {
       status: 'active'
     }
     user = await User.create(params)
-  } else {
+  } else if (user) {
     await user.update({
       password: hashPassword, passwordExpiresOn
     })
@@ -497,7 +497,7 @@ exports.sendPassword = async (req, res, next) => {
       subject: "Password reset"
   }, await sendPasswordTemplate({
     subject: "Password reset",
-    userName: agent['Agent_First'],
+    userName: agent?.['Agent_First'] || user?.firstName || '',
     password,
   }))
 
@@ -589,6 +589,8 @@ exports.inviteAgentEmail = async (req, res, next) => {
     firstName,
     lastName,
     status: 'pending',
+    lastInviteDate: new Date(),
+    invitesSent: 1,
     mobilePhone: phoneNumber,
     Sponsor: sponsor,
   })
