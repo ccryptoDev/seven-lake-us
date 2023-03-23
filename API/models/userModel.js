@@ -1,6 +1,7 @@
 const { DataTypes } = require('sequelize')
 const { sequelize } = require('../config/db')
 const Joi = require('joi')
+const { MAX_INVITES } = require('../utils/constant/maxInvites')
 
 const User = sequelize.define(
   'User',
@@ -48,9 +49,23 @@ const User = sequelize.define(
     oldPasswords: {
       type: DataTypes.ARRAY(DataTypes.STRING),
     },
-    status:{
-      type:DataTypes.STRING
+    status: {
+      type: DataTypes.STRING
     },
+    selectedPage: {
+      type: DataTypes.STRING
+    },
+    invitesSent: {
+      type: DataTypes.INTEGER,
+      defaultValue: MAX_INVITES,
+      // assume that users who were created without
+      // this field have received 3 out of 3 invites
+    },
+    lastInviteDate: {
+      type: DataTypes.DATE,
+      defaultValue: null,
+    },
+
     resetPasswordToken: { type: DataTypes.STRING },
     resetPasswordExpire: { type: DataTypes.DATE },
   }, {
