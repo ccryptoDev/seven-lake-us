@@ -19,9 +19,9 @@ const Note = sequelize.define('note', {
 		type: DataTypes.STRING,
 		allowNull: false,
 	},
-	content: {
-		type: DataTypes.TEXT,
-		defaultValue: ''
+	records: {
+		type: DataTypes.ARRAY(DataTypes.STRING),
+		defaultValue: []
 	}
 })
 
