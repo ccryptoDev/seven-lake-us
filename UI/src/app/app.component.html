@@ -6,8 +6,8 @@
 
 <div id="main">
   <div class="page-wrapper">
-    <app-sidebar [officeName]="officeName" [curOffice]="curOffice" [dash_heading]="dash_heading" isExpanded="isExpanded"
-      [memberSelect]="memberSelect"></app-sidebar>
+    <app-sidebar [officeName]="officeName" [curOffice]="curOffice" [dash_heading]="dash_heading"
+      isExpanded="isExpanded"></app-sidebar>
 
     <div class="page-content">
       <div class="mobile_header">
@@ -303,33 +303,27 @@
 
         <ul *ngIf="currentUrl.includes('documents')" class="breadcrumb_page mt_22">
           <li>
-            <a class="breadcrumb_item">
+            <a class="breadcrumb_item" routerLinkActive="active" [routerLink]="['/documents/application']">
               <div class="crumb_bg">
                 <img src="../../assets/images/application_img.svg" />
               </div>
-              <div class="crumb_text" routerLinkActive="active" [routerLink]="['/documents/application']">
-                Application
-              </div>
+              <div class="crumb_text">Application</div>
             </a>
           </li>
           <li>
-            <a class="breadcrumb_item">
+            <a class="breadcrumb_item" routerLinkActive="active" [routerLink]="['/documents/manualDocument']">
               <div class="crumb_bg">
                 <img src="../../assets/images/manual_img.svg" />
               </div>
-              <div class="crumb_text" routerLinkActive="active" [routerLink]="['/documents/manualDocument']">
-                Manual
-              </div>
+              <div class="crumb_text">Manual</div>
             </a>
           </li>
-          <li>
-            <a class="breadcrumb_item">
+          <li *ngIf="!isDocumentMemberBlocked">
+            <a class="breadcrumb_item" routerLinkActive="active" [routerLink]="['/documents/member']">
               <div class="crumb_bg">
                 <img src="../../assets/images/crm_icon.svg" />
               </div>
-              <div class="crumb_text" routerLinkActive="active" [routerLink]="['/documents/member']">
-                Member Office
-              </div>
+              <div class="crumb_text">Member Office</div>
             </a>
           </li>
         </ul>
@@ -363,7 +357,7 @@
             </div>
             <div class="crumb_text">Flyers</div>
           </li>
-          <li class="breadcrumb_item" routerLinkActive="active" [routerLink]="['/marketing/MemberOffice']">
+          <li class="breadcrumb_item" routerLinkActive="active" [routerLink]="links.marketing">
             <div class="crumb_bg">
               <img src="../../assets/images/Flyers_icon.svg" />
             </div>
@@ -404,7 +398,7 @@
               <div class="crumb_text">CRM</div>
             </a>
           </li>
-          <li [routerLink]="['/training/MemberOffice']" routerLinkActive="active">
+          <li [routerLink]="links.training" routerLinkActive="active">
             <a class="breadcrumb_item">
               <div class="crumb_bg">
                 <img src="../../assets/images/crm_crumb.svg" />
