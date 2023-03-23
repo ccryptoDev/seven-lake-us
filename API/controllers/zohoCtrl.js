@@ -249,7 +249,7 @@ exports.getInvitedAgents = async (req, res, next) => {
 
 exports.updateNote = async (req, res) => {
   const { userId, targetId } = req.body
-  const content = req.body.content || ''
+  const records = req.body.records || []
 
   if (!userId) {
     throw new Error("userId is missing")
@@ -261,9 +261,9 @@ exports.updateNote = async (req, res) => {
   const noteBody = { targetId, ownerId: userId }
   let note = await Note.findOne({ where: noteBody })
   if (!note) {
-    note = await Note.create({ ...noteBody, content })
+    note = await Note.create({ ...noteBody, records })
   } else {
-    await note.update({ content })
+    await note.update({ records })
   }
 
   res.status(200).json(note)
@@ -338,7 +338,7 @@ exports.getTeamAgents = async (req, res) => {
       config
     )
 
-    agent["note"] = note.content
+    agent["notes"] = note.records
     agent["children"] = leadsResponse.data.data || [];
   };
 
