@@ -7,7 +7,7 @@ import { User } from "./_models";
 import { Title } from "@angular/platform-browser";
 import { first } from "rxjs/operators";
 import { UserDetails } from "./types/user-details.type";
-import { isAdmin, isOfficeMember } from "./utils/roleUtils";
+import { isAdmin, isOfficeMember, isRecruiter, isStandard } from "./utils/roleUtils";
 import { SideBarComponent } from "./sidebar/sidebar.component";
 
 @Component({
@@ -576,24 +576,6 @@ export class AppComponent implements OnInit {
     });
   }
 
-  memberSelect() {
-    const user: UserDetails = this.userService.userDetails
-    if (isOfficeMember(user) || isAdmin(user)) {
-      this.router.navigate(["/training/MemberOffice"]);
-    } else {
-      this.router.navigate(["/training/ManageAccount"]);
-    }
-  }
-
-  memberSelectMarketing() {
-    const user: UserDetails = this.userService.userDetails
-    if (isOfficeMember(user) || isAdmin(user)) {
-      this.router.navigate(["/marketing/MemberOffice"]);
-    } else {
-      this.router.navigate(["/marketing/ManageAccount"]);
-    }
-  }
-
   toggleSidebar(value?: boolean) {
     if (value) {
       this.isNavOpen = value;
@@ -608,5 +590,31 @@ export class AppComponent implements OnInit {
 
   closeNav() {
     this.sideBar.closeNav()
+  }
+
+  get links() {
+    const user = this.userService.userDetails
+    const links = {
+      marketing: ['marketing/MemberOffice'],
+			training: ['training/MemberOffice']
+    }
+    if (isRecruiter(user) || isStandard(user)) {
+      Object.assign(links, {
+        marketing: ['manageAccount'],
+        training: ['manageAccount'],
+      })
+    }
+    
+    return links
+  }
+
+  get isDocumentMemberBlocked(): boolean {
+    const user = this.userService.userDetails
+    if (isRecruiter(user) || isStandard(user)) {
+      return true  
+    } else {
+      return false
+    }
+
   }
 }
