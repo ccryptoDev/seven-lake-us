@@ -210,6 +210,10 @@ export class UserService {
         return this.http.put(`${this.Api_url}/api/auth/updatesinup/${id}`, data);
     }
 
+    selectPage(userEmail: string, pageId: string): Observable<any> {
+        return this.http.post(`${this.Api_url}/api/landing/page/select`, {email: userEmail, pageId});
+    }
+
     listInactiveUsers(): Observable<UserDetails[]>{
         return this.http.get <UserDetails[]>(`${this.Api_url}/api/auth/users/inactive`);
     }
@@ -245,8 +249,13 @@ export class UserService {
 
     // Profile update url start
 
-    profileUpdate( data): Observable<any> {
-        return  this.http.put(`${this.Api_url}/api/user/updateAgents?code=${this.token}&id=${this.userDetails.id}`, data);
+    profileUpdate(data): Observable<any> {
+        return this.http.put(`${this.Api_url}/api/user/updateAgents`, data, {
+            params: {
+                id: this.userDetails.id,
+                member: encodeURI(this.userDetails.Member_Number),
+            }
+        });
     }
 
     updateNote(body): Observable<any> {
