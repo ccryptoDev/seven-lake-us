@@ -77,7 +77,8 @@
       </p>
       <div class="row gap_16">
         <div class="col-md-6" *ngFor="let page of landingPages">
-          <div class="land_img">
+          
+          <div class="land_img" [ngClass]="{'active': page.selected}">
             <img class="card-img-top" [src]="page.thumbnailURL" (click)="openconfirmationpopup(page)"
               data-toggle="modal" data-target="#exampleModalCenter">
           </div>
@@ -96,6 +97,7 @@
                   </div>
                 </div>
                 <div class="modal-body">
+                  <button data-dismiss="modal" class="btn main_btn select-page" type="button" (click)="selectPage(currentPage.id)" [disabled]="currentPage.selected">Select page</button>
                   <img class="card-img-top" [src]="currentPage.previewURL || currentPage.thumbnailURL">
                 </div>
               </div>
@@ -118,13 +120,13 @@
         </p>
       </div>
 
-      <div *ngIf="!domainSelected" class="plr_16 mb_24">
-        <select [disabled]="domainSelected" [value]="marketingDomain" #select (change)="updateDomain()"
-          class="form-control">
+      <form (ngSubmit)="submitDomain()" *ngIf="!domainSelected" class="plr_16 mb_24 domain-container">
+        <select [disabled]="domainSelected" [value]="marketingDomain" #select class="form-control">
           <option *ngFor="let domain of domains" [selected]="domain.value === marketingDomain" [value]="domain.value">
             {{domain.name}}</option>
         </select>
-      </div>
+        <button class="btn main_btn" type="submit">Submit</button>
+      </form>
 
       <div class="marketing_links table_responsive">
         <table>
@@ -134,7 +136,7 @@
                 <img src="../assets/images/link.svg" alt="Generic placeholder image" />
                 <div class="media-body">
                   <h5 class="mt-0">Send to possible Leads</h5>
-                  <a href="#">{{marketingDomain}}{{memberNumber}}</a>
+                  <a [href]="'https://' + marketingDomain + memberNumber">{{marketingDomain}}{{memberNumber}}</a>
                 </div>
               </div>
             </th>
@@ -149,7 +151,8 @@
                 <img src="../assets/images/link.svg" alt="Generic placeholder image" />
                 <div class="media-body">
                   <h5 class="mt-0">Send to possible Leads</h5>
-                  <a href="#">{{marketingDomain}}agent/{{memberNumber}}</a>
+                  <a
+                    [href]="'https://' + marketingDomain + 'agent/' + memberNumber">{{marketingDomain}}agent/{{memberNumber}}</a>
                 </div>
               </div>
             </th>
@@ -164,7 +167,8 @@
                 <img src="../assets/images/link.svg" alt="Generic placeholder image" />
                 <div class="media-body">
                   <h5 class="mt-0">Send to possible Leads</h5>
-                  <a href="#">https://merchantprocessingpro.com/{{memberNumber}}</a>
+                  <a
+                    [href]="'https://merchantprocessingpro.com/' + memberNumber">https://merchantprocessingpro.com/{{memberNumber}}</a>
                 </div>
               </div>
             </th>
