@@ -553,6 +553,16 @@ export class DashboardComponent implements OnInit {
     this.currentPage = page;
   }
 
+  selectPage(pageId: string) {
+    this.userService.selectPage(this.userService.userDetails.Email, pageId).subscribe(() => {
+      this.getLandingPageDetails()
+      this.isShowModel = false;
+      this.toastr.success('Page selected')
+    }, () => {
+      this.toastr.error('Could not select page, please try again')
+    })
+  }
+
   openConfirmation() {
     this.openConfirmationDialog();
   }
@@ -610,10 +620,8 @@ export class DashboardComponent implements OnInit {
     }
   }
 
-  updateDomain() {
+  submitDomain() {
     const Website = this.select.nativeElement.value + this.memberNumber;
-
-
     this.userService.updateWebsite(Website).subscribe((res) => {
       this.userService.userDetails.Website = Website
       this.userService.userDetails['Domain_Selected'] = true
