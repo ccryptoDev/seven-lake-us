@@ -22,6 +22,9 @@ export class ManageAccountComponent {
   PaymentRole = PaymentRole // used in template
   planType: PaymentRole;
 
+  monthlyPrice = '';
+  price = ''
+
   @ViewChild(CardModalComponent) cardModal: CardModalComponent
   @ViewChild(ManualModalComponent) manualModal: ManualModalComponent
   @ViewChild(ConfirmPaymentModalComponent) confirmModal: ConfirmPaymentModalComponent
@@ -37,8 +40,26 @@ export class ManageAccountComponent {
     this.manualModal.open();
   }
 
+  get confirmMessage(): string {
+    return `You will be charged today $${this.price}, then a monthly charge of $${this.monthlyPrice}`
+  }
+
+  getPlan(plan: PaymentRole = this.planType): PaymentPlan {
+    switch (plan) {
+      case PaymentRole.Recruiter:
+        return RecruiterPlan
+      case PaymentRole.Office:
+        return OfficePlan
+      case PaymentRole.Elite:
+        return ElitePlan
+    }
+  }
+
   selectPlan = (plan: PaymentRole): void => {
+    const details = this.getPlan(plan)
     this.planType = plan;
+    this.monthlyPrice = details.monthlyPrice
+    this.price = details.price
     this.confirmModal.open()
   }
 
