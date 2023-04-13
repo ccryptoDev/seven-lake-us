@@ -314,3 +314,17 @@ table {
             }
         }
   }
+
+  .domain-container {
+    display: flex;
+    gap: 20px;
+    flex-direction: row;
+  }
+
+  .select-page {
+    margin: 8px 0px;
+  }
+
+  .land_img.active {
+    border-color: var(--main-color);
+  }
