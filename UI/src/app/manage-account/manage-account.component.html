@@ -78,9 +78,9 @@
             </div>
           </div>
           <div class="textAlignCenter plr_20 pb_37">
-            <button mat-raised-button class="btn main_btn w100per" (click)="selectPlan(PaymentRole.Recruiter)"
+            <button class="btn main_btn w100per" (click)="selectPlan(PaymentRole.Recruiter)"
               type="button" aria-expanded="false">
-              Invest Now
+              To learn more, please contact us at (949) 259-6360
             </button>
           </div>
         </div>
@@ -147,9 +147,9 @@
             </div>
           </div>
           <div class="textAlignCenter plr_20 pb_37">
-            <button mat-raised-button class="btn main_btn w100per" (click)="selectManualPlan(PaymentRole.Office)"
+            <button class="btn main_btn w100per" (click)="selectManualPlan(PaymentRole.Office)"
               type="button" aria-expanded="false">
-              Invest Now
+              To learn more, please contact us at (949) 259-6360
             </button>
           </div>
         </div>
@@ -181,16 +181,16 @@
             </div>
           </div>
           <div class="textAlignCenter plr_20 pb_37">
-            <button mat-raised-button class="btn main_btn w100per" (click)="selectManualPlan(PaymentRole.Elite)"
+            <button class="btn main_btn w100per" (click)="selectManualPlan(PaymentRole.Elite)"
               type="button" aria-expanded="false">
-              Invest Now
+              To learn more, please contact us at (949) 259-6360
             </button>
           </div>
         </div>
       </div>
     </div>
   </div>
-  <confirm-payment [onConfirm]="confirmPayment"></confirm-payment>
+  <confirm-payment [message]="confirmMessage" accept="Confirm" decline="Decline" [onConfirm]="confirmPayment"></confirm-payment>
   <manual-modal [planType]="planType"></manual-modal>
   <card-modal [onSubmit]="onSubmit"></card-modal>
 </section>
