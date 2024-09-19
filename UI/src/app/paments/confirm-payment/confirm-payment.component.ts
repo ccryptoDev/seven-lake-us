@@ -9,7 +9,8 @@ import { MatDialog, MatDialogConfig, MatDialogRef } from "@angular/material/dial
 export default class ConfirmPaymentModalComponent {
 
 	@Input() message = 'Are you sure, You want to pay?'
-	
+	@Input() accept = 'Yes'	
+	@Input() decline = 'No'	
 	@Input() onConfirm: Function
 	
 	@ViewChild('confirmationPopupManual') confirmationPopupManual: TemplateRef<any>;
