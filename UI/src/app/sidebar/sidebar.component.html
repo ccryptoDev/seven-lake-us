@@ -23,24 +23,22 @@
 				</a>
 			</li>
 
-			<li class="dropdown" *ngIf="perms.leadVisible">
+			<li class="dropdown">
 				<a class="nav-link dropdown-toggle" role="button"
 					[ngClass]="{ 'open active': isOpen.leads || matchRoute(['input-leads', 'InformationLead']) }"
 					(click)="toggleMenu('leads')">
 					<img src="../assets/images/leads.svg" /><span class="link_text">Leads</span><i class="fa fa-angle-down"></i>
 				</a>
-				<div class="dropdown-menu" [ngClass]="{ show: isOpen.leads || matchRoute(['input-leads', 'InformationLead']) }"
-					*ngIf="perms.leadinputVisible">
+				<div class="dropdown-menu" [ngClass]="{ show: isOpen.leads || matchRoute(['input-leads', 'InformationLead']) }">
 					<a class="dropdown-item" [routerLink]="['/input-leads']" routerLinkActive="active">
 						<img src="../assets/images/input_icon.svg" /><span class="link_text">Input</span>
 					</a>
-					<a class="dropdown-item" [routerLink]="['/lead/InformationLead']" *ngIf="perms.leadinfoVisile"
-						routerLinkActive="active">
+					<a class="dropdown-item" [routerLink]="['/lead/InformationLead']" routerLinkActive="active">
 						<img src="../assets/images/info_circle.svg" /><span class="link_text">Information</span>
 					</a>
 				</div>
 			</li>
-			<li class="dropdown" *ngIf="perms.agentVisible">
+			<li class="dropdown">
 				<a class="nav-link dropdown-toggle" role="button"
 					[ngClass]="{ 'open active': isOpen.agents || matchRoute(['invite-agent', 'teaminformation']) }"
 					(click)="toggleMenu('agents')">
@@ -48,17 +46,15 @@
 				</a>
 				<div class="dropdown-menu"
 					[ngClass]="{ show: isOpen.agents || matchRoute(['invite-agent', 'teaminformation']) }">
-					<a class="dropdown-item" [routerLink]="['invite-agent']" *ngIf="perms.agentInviteVisible"
-						routerLinkActive="active">
+					<a class="dropdown-item" [routerLink]="['invite-agent']" routerLinkActive="active">
 						<img src="../assets/images/input_icon.svg" /><span class="link_text">Invite</span>
 					</a>
-					<a class="dropdown-item" [routerLink]="['teaminformation']" *ngIf="perms.agentInfoVisible"
-						routerLinkActive="active">
+					<a class="dropdown-item" [routerLink]="['teaminformation']" routerLinkActive="active">
 						<img src="../assets/images/info_circle.svg" /><span class="link_text">Information</span>
 					</a>
 				</div>
 			</li>
-			<li class="dropdown" routerLinkActive="active" *ngIf="perms.documentVisible">
+			<li class="dropdown" routerLinkActive="active">
 				<a class="nav-link dropdown-toggle" role="button"
 					[ngClass]="{ 'open active': isOpen.documents || matchRoute(['documents']) }"
 					(click)="toggleMenu('documents')">
@@ -72,13 +68,13 @@
 					<a class="dropdown-item" [routerLink]="['documents/manualDocument']" routerLinkActive="active">
 						<img src="../assets/images/manual_icon.svg" /><span class="link_text">Manual</span>
 					</a>
-					<a *ngIf="perms.documentMemberVisible" class="dropdown-item" [routerLink]="['documents/member']"
+					<a *ngIf="perms.documentsMember" class="dropdown-item" [routerLink]="['documents/member']"
 						routerLinkActive="active">
 						<img src="../assets/images/crm_icon.svg" /><span class="link_text">Member Office</span>
 					</a>
 				</div>
 			</li>
-			<li class="dropdown" *ngIf="perms.marketingVisible">
+			<li class="dropdown">
 				<a class="nav-link dropdown-toggle" role="button"
 					[ngClass]="{ 'open active': isOpen.marketing || matchRoute(['marketing']) }"
 					(click)="toggleMenu('marketing')">
@@ -95,12 +91,13 @@
 					<a class="dropdown-item" [routerLink]="['marketing/Flyers']" routerLinkActive="active">
 						<img src="../assets/images/flyers.svg" /><span class="link_text">Flyers</span>
 					</a>
-					<a class="dropdown-item" [routerLink]="['marketing/MemberOffice']" routerLinkActive="active">
+					<a class="dropdown-item" [routerLink]="perms.marketingMemberLinks"
+						[ngClass]="{ active: matchRoute(['marketing/MemberOffice']) }">
 						<img src="../assets/images/flyers.svg" /><span>Member Office</span>
 					</a>
 				</div>
 			</li>
-			<li class="dropdown" *ngIf="perms.trainingVisible">
+			<li class="dropdown">
 				<a class="nav-link dropdown-toggle" role="button"
 					[ngClass]="{ 'open active': isOpen.training || matchRoute(['training']) }" (click)="toggleMenu('training')">
 					<img src="../assets/images/training.svg" /><span class="link_text">Training</span><i
@@ -116,8 +113,8 @@
 					<a class="dropdown-item" [routerLink]="['training/crm']" routerLinkActive="active">
 						<img src="../assets/images/crm_icon.svg" /><span class="link_text">CRM</span>
 					</a>
-					<a class="dropdown-item" (click)="memberSelect()"
-						[ngClass]="{ active: matchRoute(['MemberOffice', 'ManageAccount']) }">
+					<a class="dropdown-item" [routerLink]="perms.trainingMemberLinks"
+						[ngClass]="{ active: matchRoute(['training/MemberOffice']) }">
 						<img src="../assets/images/crm_icon.svg" /><span class="link_text">Member Office</span>
 					</a>
 				</div>
@@ -127,7 +124,7 @@
 					<img src="../assets/images/dashboard.svg" /><span class="link_text">Manage Account</span>
 				</a>
 			</li>
-			<li class="dropdown" *ngIf="perms.managementVisible">
+			<li class="dropdown" *ngIf="perms.management">
 				<a class="nav-link dropdown-toggle" role="button"
 					[ngClass]="{ 'open active': isOpen.management || matchRoute(['MasterAdmin']) }"
 					(click)="toggleMenu('management')">
@@ -135,32 +132,32 @@
 						class="fa fa-angle-down"></i>
 				</a>
 				<div class="dropdown-menu" [ngClass]="{ show: isOpen.management || matchRoute(['MasterAdmin']) }">
-					<a class="dropdown-item" [routerLink]="['MasterAdmin/agentmanager']" *ngIf="perms.agentManagerVisible"
+					<a class="dropdown-item" [routerLink]="['MasterAdmin/agentmanager']" *ngIf="perms.manageAgents"
 						routerLinkActive="active">
 						<img src="../assets/images/agents_manager.svg" /><span class="link_text">Agents Manager</span>
 					</a>
-					<a class="dropdown-item" [routerLink]="['MasterAdmin/formmanager']" *ngIf="perms.formManagerVisible"
+					<a class="dropdown-item" [routerLink]="['MasterAdmin/formmanager']" *ngIf="perms.manageForms"
 						routerLinkActive="active">
 						<img src="../assets/images/form_manager.svg" /><span class="link_text">Form Manager</span>
 					</a>
-					<a class="dropdown-item" [routerLink]="['MasterAdmin/leadpageAdmin']" *ngIf="perms.landingVisible"
+					<a class="dropdown-item" [routerLink]="['MasterAdmin/leadpageAdmin']" *ngIf="perms.manageLandings"
 						routerLinkActive="active">
 						<img src="../assets/images/landing_page.svg" /><span class="link_text">Landing Page</span>
 					</a>
-					<a class="dropdown-item" [routerLink]="['MasterAdmin/officeManager']" *ngIf="perms.offmanagerVisible"
+					<a class="dropdown-item" [routerLink]="['MasterAdmin/officeManager']" *ngIf="perms.manageOffices"
 						routerLinkActive="active">
 						<img src="../assets/images/office_manager.svg" />
 						<span class="link_text">Office Manager</span>
 					</a>
-					<a class="dropdown-item" [routerLink]="['MasterAdmin/urlmanager']" *ngIf="perms.urlManagerVisible"
+					<a class="dropdown-item" [routerLink]="['MasterAdmin/urlmanager']" *ngIf="perms.manageURLs"
 						routerLinkActive="active">
 						<img src="../assets/images/url_manager.svg" /><span class="link_text">URL Manager</span>
 					</a>
-					<a class="dropdown-item" [routerLink]="['/MasterAdmin/ListOfDocument']" *ngIf="perms.docAdminVisible"
+					<a class="dropdown-item" [routerLink]="['/MasterAdmin/ListOfDocument']" *ngIf="perms.manageDocuments"
 						routerLinkActive="active">
 						<img src="../assets/images/document_admin.svg" /><span class="link_text">Document Admin</span>
 					</a>
-					<a class="dropdown-item" [routerLink]="['MasterAdmin/addVideos']" *ngIf="perms.docAdminVisible"
+					<a class="dropdown-item" [routerLink]="['MasterAdmin/addVideos']" *ngIf="perms.manageDocuments"
 						routerLinkActive="active">
 						<img src="../assets/images/document_admin.svg" /><span>Video Admin</span>
 					</a>
@@ -168,7 +165,7 @@
 			</li>
 		</ul>
 
-		<div class="profile_setting" *ngIf="perms.profileVisible">
+		<div class="profile_setting">
 			<a class="active" [routerLink]="['profile']">
 				<div class="profile_setting_bg">
 					<img src="../assets/images/setting.svg" />

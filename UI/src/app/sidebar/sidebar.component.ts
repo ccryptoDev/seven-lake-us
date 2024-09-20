@@ -1,7 +1,7 @@
 import { Component, ElementRef, Input, ViewChild } from "@angular/core";
 import { Router } from "@angular/router";
 import { UserDetails } from "../types/user-details.type";
-import { isAdmin, isExecutive, isOfficeMember, isRecruiter } from "../utils/roleUtils";
+import { isAAM, isAdmin, isExecutive, isOfficeMember, isRecruiter } from "../utils/roleUtils";
 import { User } from "../_models";
 import { AuthenticationService, UserService } from "../_services";
 
@@ -12,7 +12,6 @@ import { AuthenticationService, UserService } from "../_services";
 })
 export class SideBarComponent {
 	@Input() currentUser: User;
-	@Input() memberSelect: Function;
 	@Input() dash_heading: string;
 	@Input() isExpanded: boolean;
 	@Input() officeName: string;
@@ -52,88 +51,55 @@ export class SideBarComponent {
 
 		// default permissions
 		const values = {
-			MemberOffice: false,
-			leadinputVisible: true,
-			leadinfoVisile: true,
-			leadVisible: true,
-			agentVisible: true,
-			agentInviteVisible: true,
-			agentInfoVisible: false,
-			trainingVisible: false,
-			documentVisible: false,
-			manageAccVisible: false,
-			managementVisible: false,
-			agentManagerVisible: false,
-			formManagerVisible: false,
-			landingVisible: false,
-			offmanagerVisible: false,
-			urlManagerVisible: false,
-			docAdminVisible: false,
-			ManageAccountVisible: false,
-			profileVisible: true,
-			marketingVisible: false,
-			documentMemberVisible: true,
+			documentsMember: true, // Documents - Member Office
+
+			// Management and its categories
+			management: true, 
+			manageAgents: false,
+			manageForms: false,
+			manageLandings: false,
+			manageOffices: false,
+			manageURLs: false,
+			manageDocuments: false,
+
+			marketingMemberLinks: ['marketing/MemberOffice'],
+			trainingMemberLinks: ['training/MemberOffice']
 		}
 
-		if (isExecutive(user)) {
+		if (isRecruiter(user)) {
 			Object.assign(values, {
-				agentInfoVisible: true,
-				documentVisible: true,
-				marketingVisible: true,
-				managementVisible: true,
 				urlManagerVisible: true,
-			})
-		} else if (isRecruiter(user)) {
-			Object.assign(values, {
-				agentInfoVisible: true,
-				managementVisible: true,
-				urlManagerVisible: true,
-				documentVisible: true,
+				management: false,
+				documentsMember: false,
+				trainingMemberLinks: ['manageAccount'],
+				marketingMemberLinks: ['manageAccount'],
 			})
 		} else if (isOfficeMember(user)) {
 			Object.assign(values, {
-				agentInfoVisible: true,
-				documentVisible: true,
-				marketingVisible: true,
 				ManageAccountVisible: true,
-				trainingVisible: true,
-				managementVisible: true,
-				agentManagerVisible: true,
-				MemberOffice: false,
-				offmanagerVisible: true,
-				urlManagerVisible: true,
+				manageAgents: true,
 			})
-		} else if (user?.Account_Type === "AAM Internal") {
+		} else if (isAAM(user)) {
 			Object.assign(values, {
-				agentInfoVisible: true,
-				documentVisible: true,
-				marketingVisible: true,
-				trainingVisible: true,
-				managementVisible: true,
-				agentManagerVisible: true,
-				landingVisible: true,
-				urlManagerVisible: true,
+				manageDocuments: true,
+				manageAgents: true,
+				manageForms: true,
 			})
 		} else if (isAdmin(user)) {
 			Object.assign(values, {
-				agentInfoVisible: true,
-				offmanagerVisible: true,
-				urlManagerVisible: true,
-				docAdminVisible: true,
-				documentVisible: true,
-				marketingVisible: true,
-				trainingVisible: true,
-				managementVisible: true,
-				agentManagerVisible: true,
-				formManagerVisible: true,
-				landingVisible: true,
+				manageAgents: true,
+				manageForms: true,
+				manageLandings: true,
+				manageOffices: true,
+				manageURLs: true,
+				manageDocuments: true,
 			})
 		} else {
 			Object.assign(values, {
-				marketingVisible: true,
-				documentVisible: true,
-				documentMemberVisible: false,
-				trainingVisible: true,
+				documentsMember: false,
+				management: false,
+				trainingMemberLinks: ['manageAccount'],
+				marketingMemberLinks: ['manageAccount'],
 			})
 		}
 		return values
