@@ -4,6 +4,9 @@ const STANDARD_ROLE = 'standard'
 const RECRUITER_ROLE = 'recruiter'
 const OFFICE_MEMBER_ROLE = 'office'
 const ADMIN_ROLE = 'admin'
+const AAM_ROLE = 'aam internal'
+const ADMIN_ROLE_AUXILIARY_WEST = 'admin support-fs west'
+const ADMIN_ROLE_AUXILIARY_EAST = 'admin support-fs east'
 
 // Elite role, does not exist in Zoho
 // Same as executive at the moment
@@ -30,6 +33,11 @@ export function isExecutive(user: UserDetails): boolean {
 	return user?.Account_Type?.toLowerCase() === EXECUTIVE_ROLE
 }
 
+export function isAAM(user: UserDetails): boolean {
+	return user?.Account_Type?.toLowerCase() === AAM_ROLE
+}
+
 export function isAdmin(user: UserDetails): boolean {
-	return user?.Account_Type?.toLowerCase() === ADMIN_ROLE
+	const role = user?.Account_Type?.toLowerCase()
+	return role === ADMIN_ROLE || role === ADMIN_ROLE_AUXILIARY_WEST || role === ADMIN_ROLE_AUXILIARY_EAST
 }
