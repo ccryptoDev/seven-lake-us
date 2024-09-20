@@ -10,4 +10,5 @@ export type LandingPage = {
 	previewURL: string;
 	createdAt: string;
 	updatedAt: string;
+	selected: boolean;
 }
