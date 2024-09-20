@@ -18,5 +18,5 @@ export type UserDetails = {
 	Modified_Time: string,
 	Office: string | null,
 	status: string,
-	note: string
+	notes: string[]
 }
