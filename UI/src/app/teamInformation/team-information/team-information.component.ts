@@ -21,6 +21,7 @@ export class TeamInformationComponent implements OnInit {
   selectedId: string;
   message = '';
   note = '';
+  userNotes: string[] = [];
 
   activeUsers: ActiveUser[] = [];
   inactiveUsers: UserDetails[] = [];
@@ -76,9 +77,20 @@ export class TeamInformationComponent implements OnInit {
     });
   }
 
-  agentNote(agentId = this.selectedId): string {
+  getAgentNotes(agentId = this.selectedId): string[] {
     const agent = this.activeUsers.find(agent => agent.id === agentId)
-    return agent.note || ''
+    return agent.notes
+  }
+
+  removeNote(index: number) {
+    this.userNotes = this.userNotes.filter((note, i) => i !== index)
+  }
+
+  appendNote() {
+    if (this.note) {
+      this.userNotes.push(this.note)
+      this.note = ''
+    }
   }
 
   getConfig(): MatDialogConfig {
@@ -92,7 +104,7 @@ export class TeamInformationComponent implements OnInit {
   openNotesModal(e: Event, agentId: string) {
     e.stopPropagation();
     this.selectedId = agentId;
-    this.note = this.agentNote();
+    this.userNotes = this.getAgentNotes();
     this.notesRef = this.dialog.open(this.notesModal, this.getConfig());
   }
 
@@ -104,12 +116,14 @@ export class TeamInformationComponent implements OnInit {
     const body = {
       userId: this.userService.userDetails.id,
       targetId: this.selectedId,
-      content: this.note
+      records: this.userNotes
     }
 
     this.userService.updateNote(body).subscribe(() => {
       const index = this.activeUsers.findIndex(agent => agent.id === this.selectedId)
-      this.activeUsers[index].note = this.note
+      this.activeUsers[index].notes = this.userNotes
+      this.note = ''
+      this.userNotes = []
       this.closeNotesModal()
       this.toster.success('Note updated')
     }, () => {

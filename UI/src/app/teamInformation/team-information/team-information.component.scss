@@ -81,13 +81,15 @@ td.status-cell {
 }
 
 td.actions-cell {
-	> div {
+	>div {
 		display: flex;
 		gap: 10px;
 	}
-	span > {
+
+	span> {
 		display: inline;
 	}
+
 	> :first-child {
 		margin-right: 20px;
 	}
@@ -112,4 +114,25 @@ td.actions-cell {
 
 .message-control {
 	height: 80px;
+}
+
+.notes-action {
+	gap: 10px;
+}
+
+.notes-list {
+	gap: 10px;
+	align-items: flex-start;
+	flex-direction: column;
+
+	.optional_btn {
+		width: auto;
+		max-width: 100%;
+		height: auto;
+		gap: 5px;
+
+		span {
+			overflow-wrap: anywhere
+		}
+	}
 }

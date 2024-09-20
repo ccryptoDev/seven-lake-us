@@ -133,10 +133,17 @@
       <div class="popup_body mb_24">
         <textarea class="form-control note-control" placeholder="Note" type="text" [(ngModel)]="note"></textarea>
       </div>
-      <div class="flex_end">
-        <div>
-          <button class="btn small_main_hover_btn" (click)="updateNote()">Update</button>
-        </div>
+      <ul class="notes-list emptyList mb_24">
+        <li *ngFor="let item of userNotes; let i = index">
+          <span title="Remove Note" (click)="removeNote(i)" class="optional_btn">
+            <span>{{item}}</span>
+            <img src="../../../assets/images/graycircle_close.svg">
+          </span>
+        </li>
+      </ul>
+      <div class="flex_end notes-action">
+        <button class="btn small_main_hover_btn" (click)="appendNote()">Add</button>
+        <button class="btn small_main_hover_btn" (click)="updateNote()">Update</button>
       </div>
     </div>
   </ng-template>
@@ -153,7 +160,8 @@
         </div>
       </div>
       <div class="popup_body mb_24">
-        <textarea class="form-control message-control" placeholder="Message" type="text" [(ngModel)]="message"></textarea>
+        <textarea class="form-control message-control" placeholder="Message" type="text"
+          [(ngModel)]="message"></textarea>
       </div>
       <div class="flex_end">
         <div>
